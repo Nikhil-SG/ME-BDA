@@ -1,0 +1,30 @@
+1. Go to File -> New  -> Java Project
+
+2. In Create a Java Project
+	Enter the Project Name
+	Make sure that check Box "Use default location" is checked and Locaction is set to "/home/sois/eclipse-workspace/Project name"
+	Press Next and Finish
+
+3. Select the newly created Project -> right click and select New -> Class
+	Give the Name wordFrequency
+	Tick the Check box "public static void main(String[] args)
+	Click Finish
+
+4. Copy mapper class reducer class and main() method to java class you created
+
+5. Select the project right click -> Build Path  -> Configure Build Path
+	Select Libraries and Click Add External Jars
+
+	Select jar file "hadoop-mapreduce-client-core-3.2.1.jar" in path /opt/hadoop/share/hadoop/mapredue and click Open
+
+	Click Add External Jars, select jar file "hadoop-common-3.2.1.jar" in path /opt/hadoop/share/hadoop/common and click Open
+
+	Select both jar files and click Apply and Close.
+
+6. Generate jar file:
+	select the project folder right click -> export 
+
+7. Hadoop jar <jar file name> <class name*> <input file path in HDFS> <output path in HDFS>
+
+* if class is present inside a package then package_name.class_name. If class is inside default package, then only class name.
+

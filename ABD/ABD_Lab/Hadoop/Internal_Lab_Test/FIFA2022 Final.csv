@@ -1,0 +1,127 @@
+Team,Opponent,Shots,Shots on Target,Possession,Passes,Pass accuracy,Fouls,Yellow Cards,Red Cards,OffSides,Corners,Goals For,Goals against,Result,Stage,Extra Time,For Goal Extra,Against Goal Extra,Tie braker
+Portugal,Uruguay,15,3,60,603,83,10,3,0,3,6,2,0,Won,Group,NO,NA,NA,NA
+Uruguay,Portugal,11,3,40,403,73,16,2,0,0,2,0,2,Lost,Group,NO,NA,NA,NA
+Ghana,South Korea,7,3,36,320,79,9,2,0,1,5,3,2,Won,Group,NO,NA,NA,NA
+South Korea,Ghana,22,7,64,528,86,13,2,0,1,12,2,3,Lost,Group,NO,NA,NA,NA
+Camaroon,Serbia,13,8,40,340,71,8,2,0,0,4,3,3,Draw,Group,NO,NA,NA,NA
+Serbia,Camaroon,15,5,60,503,81,13,2,0,4,3,3,3,Draw,Group,NO,NA,NA,NA
+Brazil,Switzerland,13,5,54,550,87,10,1,0,3,8,1,0,Won,Group,NO,NA,NA,NA
+Switzerland,Brazil,6,0,46,482,83,17,1,0,1,3,0,1,Lost,Group,NO,NA,NA,NA
+Qatar,Ecador,5,0,47,434,80,15,5,0,3,1,0,2,Lost,Group,NO,NA,NA,NA
+Ecador,Qatar,6,3,53,486,84,15,2,0,4,3,2,0,Won,Group,NO,NA,NA,NA
+England,Iran,13,7,79,797,89,9,0,0,2,8,6,2,Won,Group,NO,NA,NA,NA
+Iran,England,8,3,21,215,66,14,2,0,2,0,2,6,Lost,Group,NO,NA,NA,NA
+Senegal,Netherlands,15,4,46,385,79,13,2,0,2,6,0,2,Lost,Group,NO,NA,NA,NA
+Netherlands,Senegal,10,3,54,436,81,13,1,0,1,7,2,0,Won,Group,NO,NA,NA,NA
+USA,Wales,6,1,59,567,87,15,4,0,1,5,1,1,Draw,Group,NO,NA,NA,NA
+Wales,USA,7,3,41,403,76,10,2,0,1,3,1,1,Draw,Group,NO,NA,NA,NA
+Argentina,Saudi Arabia,15,6,70,596,85,7,0,0,10,9,1,2,Lost,Group,NO,NA,NA,NA
+Saudi Arabia,Argentina,3,2,30,266,68,21,6,0,1,2,2,1,Won,Group,NO,NA,NA,NA
+Denmark,Tunisia,11,5,62,595,84,9,2,0,1,11,0,0,Draw,Group,NO,NA,NA,NA
+Tunisia,Denmark,13,1,38,374,74,10,1,0,1,9,0,0,Draw,Group,NO,NA,NA,NA
+Mexico,Poland,11,4,61,487,83,14,2,0,3,6,0,0,Draw,Group,NO,NA,NA,NA
+Poland,Mexico,6,2,39,322,70,15,1,0,0,5,0,0,Draw,Group,NO,NA,NA,NA
+France,Australia,23,7,63,723,89,5,0,0,0,8,4,0,Won,Group,NO,NA,NA,NA
+Australia,France,4,1,37,440,83,11,3,0,0,1,0,4,Lost,Group,NO,NA,NA,NA
+Morocco,Croatia,8,2,35,348,78,16,1,0,0,0,0,0,Draw,Group,NO,NA,NA,NA
+Croatia,Morocco,5,2,65,642,85,11,0,0,1,5,0,0,Draw,Group,NO,NA,NA,NA
+Germany,Japan,26,9,74,771,88,6,0,0,4,6,1,2,Lost,Group,NO,NA,NA,NA
+Japan,Germany,12,4,26,269,70,14,0,0,4,6,2,1,Won,Group,NO,NA,NA,NA
+Spain,Costa Rica,17,8,82,1045,93,8,0,0,3,5,7,0,Won,Group,NO,NA,NA,NA
+Costa Rica,Spain,0,0,18,230,71,12,2,0,7,0,0,7,Lost,Group,NO,NA,NA,NA
+Belgium,Cannada,9,3,54,520,83,11,3,0,0,4,1,0,Won,Group,NO,NA,NA,NA
+Cannada,Belgium,22,3,46,429,88,14,2,0,1,4,0,1,Lost,Group,NO,NA,NA,NA
+Switzerland,Camaroon,7,3,51,514,84,12,2,0,2,11,1,0,Won,Group,NO,NA,NA,NA
+Camaroon,Switzerland,8,5,49,494,85,10,1,0,2,5,0,1,Lost,Group,NO,NA,NA,NA
+Uruguay,South Korea,10,1,57,548,81,7,1,0,1,4,0,0,Draw,Group,NO,NA,NA,NA
+South Korea,Uruguay,7,0,43,418,77,10,1,0,0,3,0,0,Draw,Group,NO,NA,NA,NA
+Portugal,Ghana,11,5,62,622,88,14,2,0,1,3,3,2,Won,Group,NO,NA,NA,NA
+Ghana,Portugal,9,3,38,387,81,19,4,0,1,3,2,3,Lost,Group,NO,NA,NA,NA
+Brazil,Serbia,23,9,59,581,86,7,0,0,1,6,2,0,Won,Group,NO,NA,NA,NA
+Serbia,Brazil,5,0,41,406,80,12,3,0,0,4,0,2,Lost,Group,NO,NA,NA,NA
+Wales,Iran,10,3,62,501,77,9,1,1,2,2,0,2,Lost,Group,NO,NA,NA,NA
+Iran,Wales,21,6,38,298,66,10,2,0,2,7,2,0,Won,Group,NO,NA,NA,NA
+Qatar,Senegal,10,3,45,406,83,7,3,0,4,6,1,3,Lost,Group,NO,NA,NA,NA
+Senegal,Qatar,13,5,55,502,86,12,3,0,3,6,3,1,Won,Group,NO,NA,NA,NA
+Netherlands,Ecador,2,1,55,506,82,15,0,0,1,2,1,1,Draw,Group,NO,NA,NA,NA
+Ecador,Netherlands,15,4,45,413,79,12,1,0,4,5,1,1,Draw,Group,NO,NA,NA,NA
+England,USA,8,3,56,541,87,9,0,0,1,3,0,0,Draw,Group,NO,NA,NA,NA
+USA,England,10,1,44,421,83,15,0,0,0,7,0,0,Draw,Group,NO,NA,NA,NA
+Tunisia,Australia,14,4,59,497,76,16,3,0,3,5,0,1,Lost,Group,NO,NA,NA,NA
+Australia,Tunisia,9,2,41,351,68,15,0,0,0,2,1,0,Won,Group,NO,NA,NA,NA
+Poland,Saudi Arabia,9,3,36,297,76,18,3,0,0,4,2,0,Won,Group,NO,NA,NA,NA
+Saudi Arabia,Poland,16,5,64,537,84,15,2,0,0,5,0,2,Lost,Group,NO,NA,NA,NA
+France,Denmark,21,7,48,491,85,4,1,0,1,6,2,1,Won,Group,NO,NA,NA,NA
+Denmark,France,10,2,52,528,86,9,2,0,1,4,1,2,Lost,Group,NO,NA,NA,NA
+Argentina,Mexico,5,2,59,528,84,15,1,0,2,4,2,0,Won,Group,NO,NA,NA,NA
+Mexico,Argentina,4,1,41,370,76,19,4,0,4,2,0,2,Lost,Group,NO,NA,NA,NA
+Japan,Costa Rica,13,3,57,582,86,22,3,0,0,5,0,1,Lost,Group,NO,NA,NA,NA
+Costa Rica,Japan,4,1,43,443,79,8,3,0,2,0,1,0,Won,Group,NO,NA,NA,NA
+Spain,Germany,7,3,65,634,85,13,1,0,2,6,1,1,Draw,Group,NO,NA,NA,NA
+Germany,Spain,11,4,35,344,78,11,3,0,5,5,1,1,Draw,Group,NO,NA,NA,NA
+Camaroon,Serbia,13,8,40,340,71,8,2,0,0,4,3,3,Draw,Group,NO,NA,NA,NA
+Serbia,Camaroon,15,5,60,503,81,13,2,0,4,3,3,3,Draw,Group,NO,NA,NA,NA
+Ecador,Senegal,9,4,62,434,77,23,0,0,0,3,1,2,Lost,Group,NO,NA,NA,NA
+Senegal,Ecador,14,3,38,267,67,11,1,0,3,6,2,1,Won,Group,NO,NA,NA,NA
+Netherlands,Qatar,13,4,63,73,91,19,1,0,5,4,2,0,Won,Group,NO,NA,NA,NA
+Qatar,Netherlands,5,3,37,452,82,9,0,0,0,2,0,2,Lost,Group,NO,NA,NA,NA
+Iran,USA,4,1,49,466,77,14,3,0,2,1,0,1,Lost,Group,NO,NA,NA,NA
+USA,Iran,12,5,51,474,83,10,1,0,1,5,0,1,Won,Group,NO,NA,NA,NA
+Wales,England,7,1,35,329,78,16,2,0,1,1,0,3,Lost,Group,NO,NA,NA,NA
+England,Wales,18,7,65,594,88,9,0,0,1,6,3,0,Won,Group,NO,NA,NA,NA
+Tunisia,France,5,3,34,312,77,14,1,0,3,7,1,0,Won,Group,NO,NA,NA,NA
+France,Tunisia,10,3,66,622,85,6,0,0,2,8,0,1,Lost,Group,NO,NA,NA,NA
+Australia,Denmark,8,4,31,304,64,11,2,0,1,2,1,0,Won,Group,NO,NA,NA,NA
+Denmark,Australia,13,3,69,664,82,10,1,0,3,6,0,1,Lost,Group,NO,NA,NA,NA
+Poland,Argentina,4,0,26,317,77,6,1,0,0,1,0,2,Lost,Group,NO,NA,NA,NA
+Argentina,Poland,23,12,74,868,92,11,1,0,1,9,2,0,Won,Group,NO,NA,NA,NA
+Saudi Arabia,Mexico,10,2,39,287,57,20,6,0,2,1,1,2,Lost,Group,NO,NA,NA,NA
+Mexico,Saudi Arabia,26,11,61,426,75,18,1,0,6,8,2,1,Won,Group,NO,NA,NA,NA
+Croatia,Belgium,11,4,48,554,85,7,0,0,4,2,0,0,Draw,Group,NO,NA,NA,NA
+Belgium,Croatia,16,3,52,593,87,9,1,0,0,4,0,0,Draw,Group,NO,NA,NA,NA
+Cannada,Morocco,5,0,59,524,86,14,4,0,4,6,1,2,Lost,Group,NO,NA,NA,NA
+Morocco,Cannada,6,2,41,373,79,14,0,0,4,2,2,1,Won,Group,NO,NA,NA,NA
+Japan,Spain,6,3,17,228,67,9,3,0,2,0,2,1,Won,Group,NO,NA,NA,NA
+Spain,Japan,12,5,83,1058,91,6,0,0,2,2,1,2,Lost,Group,NO,NA,NA,NA
+Costa Rica,Germany,7,5,31,337,74,3,1,0,4,1,2,4,Lost,Group,NO,NA,NA,NA
+Germany,Costa Rica,32,11,69,713,89,9,0,0,3,14,4,2,Won,Group,NO,NA,NA,NA
+South Korea,Portugal,13,6,38,357,78,9,2,0,1,5,2,1,Won,Group,NO,NA,NA,NA
+Portugal,South Korea,13,6,62,574,87,10,0,0,5,4,1,2,Lost,Group,NO,NA,NA,NA
+Ghana,Uruguay,10,4,51,432,79,18,2,0,2,5,0,2,Lost,Group,NO,NA,NA,NA
+Uruguay,Ghana,12,7,49,433,77,11,5,0,2,2,2,0,Won,Group,NO,NA,NA,NA
+Serbia,Switzerland,12,4,54,466,77,18,7,0,0,2,2,3,Lost,Group,NO,NA,NA,NA
+Switzerland,Serbia,14,7,46,415,76,14,4,0,0,0,3,2,Won,Group,NO,NA,NA,NA
+Camaroon,Brazil,7,3,35,299,77,14,3,1,0,3,1,0,Won,Group,NO,NA,NA,NA
+Brazil,Camaroon,21,7,65,541,87,14,2,0,1,11,0,1,Lost,Group,NO,NA,NA,NA
+Netherlands,USA,11,6,41,414,76,10,2,0,0,4,3,1,Won,R16,NO,NA,NA,NA
+USA,Netherlands,17,8,59,569,83,5,0,0,3,5,1,3,Lost,R16,NO,NA,NA,NA
+Argentina,Australia,14,5,61,695,87,8,0,0,3,1,2,1,Won,R16,NO,NA,NA,NA
+Australia,Argentina,5,1,39,435,82,15,2,0,0,3,1,2,Lost,R16,NO,NA,NA,NA
+France,Poland,16,8,55,551,86,10,1,0,3,7,3,1,Won,R16,NO,NA,NA,NA
+Poland,France,12,3,45,456,82,8,2,0,1,1,1,3,Lost,R16,NO,NA,NA,NA
+England,Senegal,8,4,62,589,85,16,0,0,0,3,3,0,Won,R16,NO,NA,NA,NA
+Senegal,England,10,1,38,369,80,12,1,0,0,3,0,3,Lost,R16,NO,NA,NA,NA
+Japan,Croatia,13,4,41,524,75,13,0,0,3,8,1,1,Lost,R16,YES,0,0,1-3
+Croatia,Japan,17,4,59,725,83,16,2,0,0,5,1,1,Won,R16,YES,0,0,3-1
+Brazil,South Korea,18,9,54,609,89,8,0,0,0,5,4,1,Won,R16,NO,NA,NA,NA
+South Korea,Brazil,8,6,46,530,86,13,1,0,5,4,1,4,Lost,R16,NO,NA,NA,NA
+Portugal,Switzerland,15,9,47,449,82,12,0,0,3,6,6,1,Won,R16,NO,NA,NA,NA
+Switzerland,Portugal,10,3,53,488,84,10,2,0,3,6,1,6,Lost,R16,NO,NA,NA,NA
+Morocco,Spain,6,2,23,305,70,15,1,0,5,0,0,0,Won,R16,YES,0,0,3-0
+Spain,Morocco,13,1,77,1019,90,14,1,0,4,8,0,0,Lost,R16,YES,0,0,0-3
+Croatia,Brazil,9,1,51,694,88,22,2,0,3,3,0,0,Won,QF,YES,1,1,4-2
+Brazil,Croatia,21,11,49,684,89,24,3,0,3,7,0,0,Lost,QF,YES,1,1,2-4
+Netherlands,Argentina,6,2,52,634,83,30,6,1,1,2,2,2,Lost,QF,YES,0,0,3-4
+Argentina,Netherlands,14,5,48,602,82,18,8,0,2,8,2,2,Won,QF,YES,0,0,4-3
+Morocco,Portugal,9,3,26,247,71,15,1,1,2,3,1,0,Won,QF,NO,NA,NA,NA
+Portugal,Morocco,12,3,74,663,85,9,1,0,2,9,1,1,Lost,QF,NO,NA,NA,NA
+England,France,16,8,58,503,87,10,1,0,1,5,1,2,Lost,QF,NO,NA,NA,NA
+France,England,8,5,42,377,81,14,3,0,2,2,2,1,Won,QF,NO,NA,NA,NA
+Argentina,Croatia,9,7,39,399,83,15,2,0,1,2,3,0,Won,SF,NO,NA,NA,NA
+Croatia,Argentina,12,2,61,607,87,8,2,0,0,4,0,3,Lost,SF,NO,NA,NA,NA
+France,Morocco,14,3,38,363,80,11,0,0,4,2,2,0,Won,SF,NO,NA,NA,NA
+Morocco,France,13,3,62,576,86,11,1,0,3,3,0,2,Lost,SF,NO,NA,NA,NA
+Croatia,Morocco,12,4,51,487,84,13,0,0,2,6,2,1,Won,Third,NO,NA,NA,NA
+Morocco,Croatia,9,2,49,472,85,11,2,0,2,3,1,2,Lost,Third,NO,NA,NA,NA
+Argentina,France,20,10,54,635,82,26,5,0,4,6,2,2,Won,F,YES,1,1,4-2
+France,Argentina,10,5,46,532,76,19,3,0,4,5,2,2,Lost,F,YES,1,1,2-4

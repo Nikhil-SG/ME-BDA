@@ -1,0 +1,25 @@
+INDEX VERSION 1.134+/home/sois/eclipse-workspace/Lencount/.metadata/.plugins/org.eclipse.jdt.core
+3539432263.index
+750825975.index
+502732891.index
+813341167.index
+2253745042.index
+3512161136.index
+3530540584.index
+3736824987.index
+925982370.index
+3485262699.index
+821608291.index
+1089239932.index
+2744878784.index
+3066711521.index
+1865797976.index
+643767359.index
+246264339.index
+86550367.index
+1159935248.index
+2359322674.index
+3883508318.index
+2853411151.index
+1628687906.index
+261536288.index

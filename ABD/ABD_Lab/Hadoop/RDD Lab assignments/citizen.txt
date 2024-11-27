@@ -1,0 +1,15 @@
+Ravi Kumar, 1990-07-15, 9876543210, ravi.kumar@example.com, Karnataka
+Ananya Nair, 1985-06-22, 9123456780, ananya.nair@example.com, Kerala
+Karthik Reddy, 1992-12-05, 8765432109, karthik.reddy@example.com, Andhra Pradesh
+Priya Iyer, 1988-03-10, 9988776655, priya.iyer@example.com, Tamil Nadu
+Nikhil Shetty, 1995-01-20, 9191919191, nikhil.shetty@example.com, Telangana
+Deepa Mohan, 1993-09-25, 7654321098, deepa.mohan@example.com, Karnataka
+Vikram Menon, 1980-04-15, 9456781234, vikram.menon@example.com, Kerala
+Srinivas Rao, 1985-11-30, 9988776655, srinivas.rao@example.com, Andhra Pradesh
+Lakshmi Ramesh, 1992-05-17, 9876543210, lakshmi.ramesh@example.com, Tamil Nadu
+Arunachalam S, 1991-09-22, 9123456780, arunachalam.s@example.com, Tamil Nadu
+Meera Krishnan, 1989-02-18, 8765432109, meera.krishnan@example.com, Kerala
+Ganesh Babu, 1994-06-12, 7654321098, ganesh.babu@example.com, Karnataka
+Shalini Pillai, 1993-04-30, 9191919191, shalini.pillai@example.com, Kerala
+Vishnu Prasad, 1987-08-01, 9456781234, vishnu.prasad@example.com, Telangana
+Geetha Menon, 1995-10-14, 8765432100, geetha.menon@example.com, Karnataka

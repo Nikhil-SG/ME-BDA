@@ -1,0 +1,10 @@
+1,Apple,10
+2,Banana,20
+3,Cherry,15
+4,Date,5
+5,Elderberry,12
+6,Fig,8
+7,Grape,30
+8,Honeydew,18
+9,Kiwi,25
+10,Lemon,7

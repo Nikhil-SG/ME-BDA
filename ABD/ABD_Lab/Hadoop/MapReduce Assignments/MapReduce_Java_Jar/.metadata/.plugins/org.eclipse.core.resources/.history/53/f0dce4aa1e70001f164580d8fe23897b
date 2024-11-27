@@ -1,0 +1,95 @@
+import java.io.IOException;	
+import java.util.StringTokenizer;
+
+import org.apache.hadoop.conf.Configuration;
+import org.apache.hadoop.fs.Path;
+import org.apache.hadoop.io.FloatWritable;
+import org.apache.hadoop.io.IntWritable;
+import org.apache.hadoop.io.LongWritable;
+import org.apache.hadoop.io.Text;
+import org.apache.hadoop.mapreduce.Job;
+import org.apache.hadoop.mapreduce.Mapper;
+import org.apache.hadoop.mapreduce.Reducer;
+import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
+import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
+
+
+
+public class Temp {
+	
+	public static class TempMapper extends Mapper<LongWritable, Text, Text, FloatWritable> {
+		public void map(Text key, FloatWritable value, Context context) throws IOException, InterruptedException {
+					String line = value.toString();
+					String[] parts = line.split(" ");
+					if (parts.length >= 3) {
+		                try {
+		                    // Extract the temperature and city
+		                    float temp = Float.parseFloat(parts[1]); // Temperature is in the second position
+		                    String cityName = parts[2]; // City is in the third position
+
+		                    // Set the values for the key and value
+		                    value.set(temp);
+		                    key.set(cityName);
+
+		                    // Write the city and temperature to context
+		                    context.write(city, temperature);
+		                } catch (NumberFormatException e) {
+		                    // Handle cases where temperature is not a valid float
+		                    System.err.println("Skipping invalid record: " + line);
+		                }
+		            } else {
+		                // Handle lines that do not have enough fields
+		                System.err.println("Skipping incomplete record: " + line);
+		            }
+		        }
+		}
+	
+	
+	public static class TempReducer extends Reducer <Text, FloatWritable, Text, FloatWritable > {
+		private FloatWritable maxTemp = new FloatWritable();
+        private FloatWritable minTemp = new FloatWritable();
+		public void reduce(Text key, Iterable<FloatWritable> values, Context context) 
+			throws IOException, InterruptedException {
+			float maxTemperature = Float.MAX_VALUE;
+            float minTemperature = Float.MIN_VALUE;
+
+            for (FloatWritable value : values) {
+                float temp = value.get();
+                if (temp > maxTemperature) {
+                    maxTemperature = temp;
+                }
+                if (temp < minTemperature) {
+                    minTemperature = temp;
+                }
+
+            // Format the output to include both max and min temperatures
+            String result = "Max Temp: " + maxTemperature + ", Min Temp: " + minTemperature;
+            context.write(key, new FloatWritable(result) );
+		}
+		}
+	
+
+
+	public static void main(String[] args) throws Exception {
+		// TODO Auto-generated method stub
+		Configuration conf = new Configuration();
+		
+		Job job = Job.getInstance(conf, "my count");
+
+		job.setJarByClass(Temp.class);
+		job.setMapperClass(Temp.TempMapper.class);
+		job.setReducerClass(Temp.TempReducer.class);
+
+		job.setOutputKeyClass(Text.class);
+		job.setOutputValueClass(IntWritable.class);
+
+		FileInputFormat.addInputPath(job, new Path(args[0]));
+		
+		FileOutputFormat.setOutputPath(job, new Path(args[1]));
+
+		System.exit(job.waitForCompletion(true) ? 0: 1);
+	}
+
+
+	}
+

@@ -1,0 +1,43 @@
+import pyspark
+from pyspark.sql import SparkSession
+spark=SparkSession.builder.appName('Dataset').getOrCreate()
+
+from pyspark.sql.functions import *
+from pyspark.sql.types import *
+import time
+from datetime import datetime
+import json
+import random
+
+
+def generate_accNo():
+    accNo =[]
+    for accno in range(241047001, 241048000):
+        accNo.append(accno)
+    return accNo
+
+
+def generate_transaction():
+    accNo = generate_accNo()
+    trans_type = ['C', 'D']
+
+    count = 20
+    for x in range(0, 10):
+        data = {}
+        readings = []
+        # Running 10 iterations. In each iteration 20 tracsactions are recorded
+        for iter in range(0, 10):
+            for i in range(0, 20):
+                data['Acc No'] = accNo[random.randint(0,998)]
+                data['Transaction'] = trans_type[random.randint(0,1)]
+                data['Time Stamp'] = str(datetime.now())
+                data['Amount'] = random.randint(1,100000)
+                readings.append(data.copy())
+            time.sleep(1)
+        fname = 'trans'+str(count)+'.json'
+        files = open('./data/'+fname, 'w')
+        files.write(json.dumps(readings))
+        files.close()
+        count += 1
+
+generate_transaction()

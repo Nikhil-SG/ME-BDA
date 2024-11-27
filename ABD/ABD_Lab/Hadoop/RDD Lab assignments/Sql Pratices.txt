@@ -1,0 +1,29 @@
+select prgm, amt CASE when amt > 100 then 'Hello', when amt < 100 then 'Hi', else 'Bye' end as statemnyt from students;
+
+select prgm, amt, sum(buy) as total rank() (Mutual Exclusive) dense_rank() (Mutual Exclusive)row_number() (Mutual Exclusive) precent_rank() over(order by sum(buy) desc) as ranked_slaes from student order by buy ;
+
+create view view_name as select name from students where name = 'BDA';
+
+select prgm, amt case when amt > 100 then 'hi', when  amt < 100 then 'hello', else 'bye' end as stateus from students order by amt;
+
+select prm , sum(amt) as total sum, rank() over(oderby sum(amt)) as a tb from students group by prgm;
+
+select s.col_name , c.col_name from std s inner join ctd c on s.stdId = c.stdId where s.year > 18;
+select s.col_name, c.colname from std left join ctd c on s.stdId =c.stdId where c.grow > 10;
+right, full outer union of left and right
+
+select prgm from std where prgm = (select pid from clg where pid == 2410580) ;
+ 
+alter table std remane column old_col_name to new_col_name;
+alter table std modify column id int ;
+alter table std addcolumn id int;
+alter table std Add primary key (id);
+
+drop table table_name;
+
+truncate table table_name;
+
+delete from table_name where name = 'AIML';
+
+update table_name set column_name = 12 where id = 15;
+

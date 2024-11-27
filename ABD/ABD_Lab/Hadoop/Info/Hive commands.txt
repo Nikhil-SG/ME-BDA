@@ -1,0 +1,14 @@
+Hive commands
+
+1. To create Hive Table in HDFS
+	
+create table categories(category_id int, category_department_id int, category_name varchar(45)) row format delimited fields terminated by ',' stored as textfile;
+
+2. Load the data from HDFS into Hive table created
+
+load data inpath '/user/test_table/categories' into table categories;
+
+Note: Here '/user/test_table/categories' is the path in HDFS where data (part files) of table categories is present. Request you to give the HDFS path where data corresponding to requested table is stored.
+
+3. Run SQL commands in hive prompt.
+

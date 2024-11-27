@@ -1,0 +1,76 @@
+import pyspark
+from pyspark.sql import SparkSession
+spark=SparkSession.builder.appName('WindowStreaming').getOrCreate()
+
+from pyspark.sql.functions import *
+from pyspark.sql.types import *
+from pyspark.sql.window import Window
+from time import sleep
+
+
+userSchema = StructType().add("Acc No", "integer").add("Transaction", "string").add("Time Stamp", "string").add("Amount", "integer")
+streaming = spark.readStream.schema(userSchema) \
+    .option('maxFilesPerTrigger', 1)\
+    .json('D:/SparkPrograms/Data Generator/data')
+
+accountDF = streaming.withColumn('Times', to_timestamp(col('Time Stamp'))).drop('Time Stamp')
+
+spark.conf.set("spark.sql.shuffle.partitions", 1)
+
+
+accCount = accountDF.groupBy('Acc No').count()
+accountQuery = accCount.writeStream.queryName('count_accounts')\
+    .format('console')\
+    .outputMode('complete')\
+    .start()
+
+accountQuery.awaitTermination()
+
+
+lessamount = accountDF.select('Acc No', 'Amount').where(col('Amount') < 2000).groupBy('Acc No').count()
+lessquery = lessamount.writeStream.queryName('Min_Amount')\
+    .trigger(processingTime ="20 seconds")\
+    .format('console')\
+    .outputMode('complete')\
+    .start()
+lessquery.awaitTermination()
+
+
+
+lessamount = accountDF.select('Acc No', 'Amount').where(col('Amount') < 2000)
+lessquery = lessamount.writeStream.queryName('Min_Amount')\
+    .trigger(processingTime ="10 seconds")\
+    .format('console')\
+    .outputMode('append')\
+    .start()
+lessquery.awaitTermination()
+
+
+
+windowedCount = accountDF \
+    .withWatermark("Times", "10 minutes") \
+    .groupBy(col('Acc No'),"Times") \
+    .count()
+
+query = windowedCount.writeStream \
+    .format("csv") \
+    .trigger(processingTime="10 seconds") \
+    .option("checkpointLocation", "./checkpoint/") \
+    .option("path", "./outputDir/") \
+    .outputMode("append") \
+    .start() \
+    .awaitTermination()
+
+
+windowedCount = accountDF.select('Acc No', 'Amount', 'Transaction', 'Times').where(col('Amount') > 70000) \
+    .withWatermark("Times", "10 minutes")
+
+query = windowedCount.writeStream \
+    .format("csv") \
+    .trigger(processingTime="10 seconds") \
+    .option("checkpointLocation", "./checkpoint/") \
+    .option("path", "./outputDir/") \
+    .outputMode("append") \
+    .start() \
+    .awaitTermination()
+
