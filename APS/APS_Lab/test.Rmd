@@ -1,0 +1,71 @@
+```{r}
+s1 = c(1,2)
+s2 = c(3:20)
+p1 = c(1/2, 1/2)
+p2 = rep(1/18, 18)
+sp1=c(s1,s2)
+sp2=c(p1,p2)
+sample(sp1 , 1, replace = FALSE,prob = sp2)
+sample
+```
+
+```{r}
+sample(sp1, 1, replace = FALSE,prob = sp2)
+sample
+```
+
+```{r}
+s1 = c(1,2)
+s2 = c(3:20)
+p1 = c(1/2, 1/2)
+p2 = rep(1/18, 18)
+sp1 = sample(s1, 1, replace = FALSE, prob = p1)
+sp1
+sp2 = sample(s2, 1, replace = FALSE, prob = p2)
+sp2
+```
+
+```{r}
+sp = c(sp1,sp2)
+sp
+```
+
+```{r}
+day = function(){
+  sp1 = sample(s1, 1, replace = FALSE, prob = p1)
+  sp2 = sample(s2, 1, replace = FALSE, prob = p2)
+  return(c(sp1,sp2))
+}
+```
+
+
+```{r}
+xx = replicate(1000, day())
+xx
+```
+
+```{r}
+a = c("A1","A2")
+b = c(rep("B1", 10), rep("A3", 8))
+ap = c(1/2, 1/2)
+bp = rep(1/18, 18)
+ap1 = sample(a, 1, replace = FALSE, prob = ap)
+ap1
+bp2 = sample(b, 1, replace = FALSE, prob = bp)
+bp2
+abp = c(ap1,bp2)
+abp
+```
+```{r}
+bottle = function(){
+  ap1 = sample(a, 1, replace = TRUE, prob = ap)
+  bp2 = sample(b, 1, replace = TRUE, prob = bp)
+  return(c(ap1,bp2))
+}
+```
+
+```{r}
+yy = replicate(100, bottle())
+yy
+```
+

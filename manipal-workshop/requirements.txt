@@ -1,0 +1,3 @@
+google-cloud-pubsub
+pybase64
+google-cloud-bigquery

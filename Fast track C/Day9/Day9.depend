@@ -1,0 +1,15 @@
+# depslib dependency file v1.0
+1694080589 source:c:\users\suhas\onedrive\desktop\fast track c\day9\bubblesort.c
+	<stdio.h>
+
+1694080537 source:c:\users\suhas\onedrive\desktop\fast track c\day9\main.c
+	<stdio.h>
+	"header.h"
+
+1694079167 source:c:\users\suhas\onedrive\desktop\fast track c\day9\openfile.c
+
+1694080563 source:c:\users\suhas\onedrive\desktop\fast track c\day9\swap.c
+	<stdio.h>
+
+1694080563 c:\users\suhas\onedrive\desktop\fast track c\day9\header.h
+

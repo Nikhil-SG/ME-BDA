@@ -1,0 +1,87 @@
+---
+title: "R Notebook"
+output: html_notebook
+editor_options: 
+  chunk_output_type: inline
+---
+
+#### Problem-10: sampling spaces and probability vector for the tabet problem part-1
+```{r}
+s1 = c('A1', 'A2') 
+p1 = (1/length(s1))*replicate(length(s1), 1)
+s2 = c(paste0('A', c(3:10)), paste0('B', c(1:10)))
+p2 = (1/length(s2))*replicate(length(s2), 1)
+```
+
+#### Function to simulate the picking one tablet from the 1st bottle and one from the rest of the pile
+```{r}
+simTrialTablet = function(){
+return(c(sample(s1, 1, prob = p1), sample(s2, 1, prob = p2)))
+}
+```
+
+#### Function to check if the person will not overdose
+```{r}
+checkEventTablet = function(data){
+return(sum(grepl('A', data)) == 1)
+}
+```
+
+#### Simulate the person picking one tablet from the 1st bottle and one from the rest of the pile and calculate the probability that they will not overdose
+```{r}
+simulatedData = replicate(10000, simTrialTablet())
+mean(apply(simulatedData, 2, checkEventTablet))
+```
+
+#### Problem-12(a): sampling space and probability vector for rolling a single die
+```{r}
+s = c(1:6)
+p = (1/length(s))*replicate(length(s), 1)
+```
+
+#### Function to simulate the rolling of a single die 4 times
+```{r}
+simTrialDie = function(){
+return(sample(s, 4, replace = T, prob = p))
+}
+```
+
+#### Function to check if any of the 4 rolls is a 6
+```{r}
+checkEventDie = function(data){
+return(6 %in% data)
+}
+```
+
+#### Simulate several times "the rolling of a single die 4 times" and calculate the probability of getting atleast one 6
+```{r}
+simulatedData = replicate(10000, simTrialDie())
+mean(apply(simulatedData, 2, checkEventDie))
+```
+
+#### Problem-12(b): sampling space and probability vector for rolling a pair of dice 
+```{r}
+s = c(1:6)
+p = (1/length(s))*replicate(length(s), 1)
+```
+
+
+#### Function to simulate the rolling of a a pair of dice 24 times
+```{r}
+simTrialDice = function(){
+return(replicate(24, paste0(sample(s, 1, prob = p), sample(s, 1, prob = p))))
+}
+```
+
+#### Function to check if any of the pair of rolls sum to 12
+```{r}
+checkEventDice = function(data){
+return(any(lapply(lapply(strsplit(data, ""), as.numeric), sum) == 12))
+}
+```
+
+#### Simulate several times "the rolling of a pair of dice 24 times" and calculate the prbability of getting at east one 12
+```{r}
+simulatedData = replicate(10000, simTrialDice())
+mean(apply(simulatedData, 2, checkEventDice))
+```
