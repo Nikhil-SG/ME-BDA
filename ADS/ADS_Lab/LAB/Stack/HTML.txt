@@ -1,8 +1,0 @@
-<html>
-    <body>
-        <div>
-            <h2>Nested HTML Example</h2>
-            <p>This is a paragraph inside a div.</p>
-        </div>
-    </body>
-</html>
