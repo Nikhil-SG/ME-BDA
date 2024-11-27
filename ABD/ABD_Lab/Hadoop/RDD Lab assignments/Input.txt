@@ -1,5 +1,0 @@
-Hello world
-This is a sample text file.
-It contains a few words for testing.
-Apache Spark is great for big data processing.
-Have fun with RDDs!

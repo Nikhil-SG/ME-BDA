@@ -1,4 +1,0 @@
-hdfs: This is the command-line interface for Hadoop's distributed file system.
-dfs: This stands for Distributed File System, and it allows you to perform operations on HDFS.
--ls: This is a command option to list the files and directories.
-/: This specifies the root directory in HDFS.

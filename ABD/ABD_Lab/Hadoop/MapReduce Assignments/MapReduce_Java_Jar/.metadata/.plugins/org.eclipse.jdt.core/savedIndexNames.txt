@@ -1,7 +1,0 @@
-INDEX VERSION 1.134+/home/sois/eclipse-workspace/.metadata/.plugins/org.eclipse.jdt.core
-2811303223.index
-3736824987.index
-1865797976.index
-2853411151.index
-261536288.index
-1844981865.index
