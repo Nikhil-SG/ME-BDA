@@ -1,0 +1,84 @@
+class DoublyLinkedList:
+    class Node:
+        def __init__(self, ele):
+            self.data = ele
+            self.next = None
+            self.prev = None
+
+    def __init__(self):
+        self.head = None
+        self.tail = None
+        self.count = 0
+
+    def is_empty(self):
+        return self.count == 0
+
+    def size(self):
+        return self.count
+
+    def add_at_head(self, ele):
+        new_node = self.Node(ele)
+        if self.is_empty():
+            self.head = self.tail = new_node
+        else:
+            new_node.next = self.head
+            self.head.prev = new_node
+            self.head = new_node
+        self.count += 1
+
+    def add_at_tail(self, ele):
+        new_node = self.Node(ele)
+        if self.is_empty():
+            self.head = self.tail = new_node
+        else:
+            new_node.prev = self.tail
+            self.tail.next = new_node
+            self.tail = new_node
+        self.count += 1
+
+    def delete_from_head(self):
+        if self.is_empty():
+            return None
+        ele = self.head.data
+        if self.head == self.tail:  # Only one node
+            self.head = self.tail = None
+        else:
+            self.head = self.head.next
+            self.head.prev = None
+        self.count -= 1
+        return ele
+
+    def delete_from_tail(self):
+        if self.is_empty():
+            return None
+        ele = self.tail.data
+        if self.head == self.tail:  # Only one node
+            self.head = self.tail = None
+        else:
+            self.tail = self.tail.prev
+            self.tail.next = None
+        self.count -= 1
+        return ele
+
+    def is_member(self, key):
+        cur = self.head
+        while cur:
+            if cur.data == key:
+                return True
+            cur = cur.next
+        return False
+
+    def print_forward(self):
+        cur = self.head
+        while cur:
+            print(cur.data, end=" ")
+            cur = cur.next
+        print()
+
+    def print_backward(self):
+        cur = self.tail
+        while cur:
+            print(cur.data, end=" ")
+            cur = cur.prev
+        print()
+

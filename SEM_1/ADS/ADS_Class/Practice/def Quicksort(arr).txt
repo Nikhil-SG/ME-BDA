@@ -1,0 +1,26 @@
+def Quicksort(arr):
+strat = 0 
+end = len(arr) - 1
+_quick_(arr, start, end)
+
+def _quick_(arr, start, end):
+if start < end:
+mid = _partition_(arr, start, end)
+_quick_(arr, start, mid - 1)
+_auick_(arr, mid + 1, end)
+
+def _partition_(arr, start, end):
+up = start
+down = end
+pivot = arr[up]
+while up <= down:
+while up <= down and arr[up] <= pivot
+up+=1
+while up <= down and arr[down] >= pivot
+down-=1
+if up <= down:
+arr[up], arr[down]  = arr[down], arr[up]
+
+arr[start], arr[down] = arr[down], arr[start]
+return down
+
