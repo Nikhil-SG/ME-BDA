@@ -1,0 +1,13 @@
+1. Perform web scraping of the html page by checking the accessibility of the link "https://www.amazon.in/gp/bestsellers" and extract all the best selling products with their ratings using python. 10 Marks
+
+Upload your file as reg_no.ipynb into the respective folder.
+
+2. Project – A dataset of healthcare data is given, which has medical records like blood type, medical condition, date of admission & dischage, admission type etc. Perform analysis on the dataset by cleaning the data and create two dashboards as report, one showing the Healthcare Overview representing the number of admissions based on various factors , average hospital stay, top visited hospital,  (Use as many visuals as needed not less than 8)and other dashboard showing some insights about Healthcare Analysis. By using the data set (healthcare_data), extract some meaningful insights to understand the health of patients through your analytical skills and justify your analysis. 20 Marks
+
+Problem Statement- Create a meaningful dashboard “Healthcare Overview” and "Healthcare Analysis" using Power BI: 5 Marks 
+
+(Hints for Healthcare Analysis - most common and rare medical condition, medication, admission type, most and least visited doctor, common and rare blood type, finding any correlation by comparing the age with medical condition and medication etc)
+
+Upload pbix file as reg_no.pbix along with snapshots of your dashboards without fail in the respective folders. 5 Marks
+
+VIVA - 10 Marks

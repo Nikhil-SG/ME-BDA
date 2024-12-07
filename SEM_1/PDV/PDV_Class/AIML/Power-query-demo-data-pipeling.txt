@@ -1,0 +1,379 @@
+Starting your journey as a data analyst is an amazing start for your career. As you progress, you might find new areas that pique your interest:
+
+	--> Data Science: If you enjoy diving deep into statistics, predictive modeling, and machine learning, this could be your next challenge.
+	--> Data Engineering: If building and optimizing data pipelines excites you, this might be the path for you.
+	--> Business Analysis: If you're passionate about translating data into strategic business insights, consider transitioning to a business analyst role.
+
+But remember, even if you stick with data analysis, there's always room for growth, especially with the evolving landscape of AI.
+
+-------------------------------------------------------------------------------------------------------------------
+
+Power BI:
+	
+	--> From lay man's definition it is excel on steroids.
+	--> A suite of business analytics tools to analyze data and share insights bring data to life inside user's application.
+	--> Power BI is a collection of services, apps, and connectors that enables user to connect to your data, wherever it happens to reside – filter it if necessary, then bring it into Power BI where user can create compelling visualizations which can be shared with others.
+	
+	https://learn.microsoft.com/en-us/training/paths/data-analytics-microsoft/
+-----------------------------------------------------------------------------------------------
+
+Complete Power BI Topics for Data Analysts
+
+1. Introduction to Power BI
+   - Overview and architecture
+   - Installation and setup
+
+2. Loading and Transforming Data
+   - Connecting to various data sources
+   - Data loading techniques
+   - Data cleaning and transformation using Power Query
+
+3. Data Modeling
+   - Creating relationships between tables
+   - DAX (Data Analysis Expressions) basics
+   - Calculated columns and measures
+
+4. Data Visualization
+   - Building reports and dashboards
+   - Visualization best practices
+   - Custom visuals and formatting options
+
+5. Advanced DAX
+   - Time intelligence functions
+   - Advanced DAX functions and scenarios
+   - Row context vs. filter context
+
+6. Power BI Service
+   - Publishing and sharing reports
+   - Power BI workspaces and apps
+   - Power BI mobile app
+
+7. Power BI Integration
+   - Integrating Power BI with other Microsoft tools (Excel, SharePoint, Teams)
+   - Embedding Power BI reports in websites and applications
+
+8. Power BI Security
+   - Row-level security
+   - Data source permissions
+   - Power BI service security features
+
+9. Power BI Governance
+   - Monitoring and managing usage
+   - Best practices for deployment
+   - Version control and deployment pipelines
+
+10. Advanced Visualizations
+    - Drillthrough and bookmarks
+    - Hierarchies and custom visuals
+    - Geo-spatial visualizations
+
+11. Power BI Tips and Tricks
+    - Productivity shortcuts
+    - Data exploration techniques
+    - Troubleshooting common issues
+
+12. Power BI and AI Integration
+    - AI-powered features in Power BI
+    - Azure Machine Learning integration
+    - Advanced analytics in Power BI
+
+13. Power BI Report Server
+    - On-premises deployment
+    - Managing and securing on-premises reports
+    - Power BI Report Server vs. Power BI Service
+
+14. Real-world Use Cases
+    - Case studies and examples
+    - Industry-specific applications
+    - Practical scenarios and solutions
+
+--------------------------------------------------------------------------------------------------------
+	
+
+Power BI Student Demo in Power Query:
+
+1.	Source:  
+		-->	This is the initial step where you connect to your data source. It defines where your data is coming from (e.g., Excel file, SQL database, web, etc.). 
+		-->	Path: = Excel.Workbook(File.Contents("E:\SOIS-Manipal\PDV\2024-25\Power-BI-2025\Zomato_dataset_CB.xlsx"), null, true)
+		
+2.	Navigation:
+		--> This step involves navigating to the specific table, sheet, or object within your data source that you want to work with.
+		-->	Table_order or table_customer
+		
+3.	Changed Type:
+		--> This step changes the data type of one or more columns (e.g., from text to date, number to text, etc.)
+		--> Check the colums of Table_order (OrederID ABC123 click and check for format).
+
+4.	Filtered Rows:
+		--> This step filters out rows based on specified criteria. For example, removing rows where a column value is null or only keeping rows where a column value meets certain conditions.
+		--> Here we have appled filter on price column (display item having price above or equal to 250 so item with 159 Rs is not appearing).
+
+5.	Sorted Rows:
+		--> This step sorts the rows in ascending or descending order based on one or more columns.
+		--> For OrderDate column we are display from latest to old.
+
+6.	Replaced Values:
+		--> his step replaces specified values within one or more columns with different values. For example, replacing all instances of "N/A" with null.
+		--> Performed above null to Not Available in home --> Replace Value. 
+
+7. 	Added Conditional Column:
+		--> This step adds a new column based on a condition. For example, if a certain column's value is greater than a threshold, set the new column's value to "High"; otherwise, set it to "Low".
+		--> In Condition Column ribbon --> Conditional Column --> column name, if price less than 200 Yes in Budget else Not in Budget.  
+
+Table Transformation
+
+8.	Merge Queries:
+		--> This step shows that the current query has been merged with another query, combining data from different tables or datasets based on a common field (e.g., joining customer information with sales data).
+		--> As our table_orders have only customer_id we retrive customer_name from table_customer by merging both by common customer_id we get Expanded Table_customers by using merge querie from Home ribbon.
+
+8.	Appended Query:
+		--> Appending queries means stacking one table on top of another. This step is used when you want to combine the rows of two or more tables with the same structure (columns).
+		--> Create a new table named as missing_customers give column names as cust_id and customer_name and fill one row entry as 5 and rohan then press ok a new table will be created.
+		--> Now in home ribbion --> Append Queries (from table_customers) select missing_customers to combine tables (reslut will not be as expected) now change the column name as in table_customers then we get the expected result (This is due to case sensitivity). 
+		
+----------------------------------------------------------------------------------------------------------
+Best Practices for power query operations in power BI:
+
+Following best practices can help ensure efficient, maintainable, and error-free data processing. Here are some best practices for using Power Query in Power BI:
+
+1. Plan Your Data Model First
+
+    Understand Your Data: Before jumping into transformations, understand your data sources and how they should be structured.
+    Design for Performance: Plan the structure of your data model to minimize complex transformations and avoid unnecessary steps.
+
+2. Minimize Steps
+
+    Reduce the Number of Steps: Combine steps where possible and remove unnecessary ones to improve performance.
+    Avoid Redundant Operations: For example, avoid multiple sorts, filters, or type changes on the same column.
+
+3. Use Buffers Efficiently
+
+    Table.Buffer: Use Table.Buffer wisely to force the query to load the entire table into memory, which can improve performance in certain scenarios, but be cautious as it can also increase memory usage.
+
+4. Filter Early
+
+    Filter Rows Early in the Query: Apply filters as early as possible in your query to reduce the amount of data processed in subsequent steps, which can improve performance.
+
+5. Avoid Changing Data Types Multiple Times
+
+    Set Data Types Once: If possible, set the data type of a column once, and avoid changing it multiple times, as each change adds overhead.
+
+6. Use Parameters for Flexibility
+
+    Parameterize Queries: Use parameters for data sources, filters, or other elements that might need to change over time. This approach increases flexibility and maintainability.
+
+7. Document Your Steps
+
+    Rename Steps: Give meaningful names to your steps instead of using the default names like "Changed Type." This makes the process easier to follow.
+    Add Comments: Use comments within the M code to document complex transformations or explain why certain steps are necessary.
+	
+	----- home --> transformdata --> Applied step --> for each step in proerties add meaningful name and description -----
+
+8. Optimize Data Types
+
+    Use Appropriate Data Types: Choose the most efficient data type for each column (e.g., use integer instead of decimal where possible) to reduce memory usage and improve performance.
+
+9. Group Transformations by Data Source
+
+    Keep Source-Specific Transformations Together: Perform all transformations related to a specific data source before merging with other sources. This approach makes it easier to manage and debug the queries.
+
+10. Handle Errors Gracefully
+
+    Use Error Handling: Implement error handling steps like Try...Otherwise to manage potential issues without breaking the entire query.
+
+11. Test Incrementally
+
+    Test as You Build: Test your queries incrementally to catch issues early. Avoid waiting until all transformations are complete before checking for errors.
+
+12. Be Cautious with Merging and Appending
+
+    Merge Efficiently: When merging queries, ensure that the join is efficient by using indexed columns or columns with low cardinality.
+    Append with Care: Ensure that the data being appended is clean and has the same structure to avoid unexpected results.
+
+13. Refresh Performance
+
+    Monitor Refresh Times: Pay attention to how long your queries take to refresh. Optimize slow steps and check for bottlenecks.
+    Limit Data Load: Load only the necessary data into Power BI by filtering out irrelevant columns and rows.
+
+14. Review and Clean Up
+
+    Clean Up Unused Queries: Remove any queries, parameters, or steps that are no longer needed to keep your model clean and efficient.
+    Optimize Query Dependencies: Reduce the dependency between queries where possible to simplify and speed up the refresh process.
+	
+	----------- After step 8: missing_customers will appearing in PBI desktop which is not required as this info is in table_customers so to optimize home --> transformdata --> missing_customers --> enable load (uncheck) --> close and apply. Now load is reduce on pbix file (It has data + model).
+
+Following these best practices can help you create more efficient, maintainable, and reliable data models in Power BI, ensuring that your reports and dashboards are built on solid foundations.
+
+--------------------------------------------------------------------------------------------------------------
+
+
+Cardinality:
+-------------
+Cardinality refers to the uniqueness of values in a dataset or column. In the context of Power BI, databases, or data modeling, cardinality is crucial when defining relationships between tables or when working with distinct values.
+Types of Cardinality:
+
+    High Cardinality:
+        A column with many unique values (e.g., a column of customer IDs where each customer has a unique ID).
+        Example: A column containing unique transaction IDs in a large sales table.
+
+    Low Cardinality:
+        A column with few unique values (e.g., a column of order statuses like "Pending," "Completed," or "Shipped").
+        Example: A column with just a few values like "Yes" or "No."
+
+Cardinality in Power BI Relationships:
+
+When establishing relationships between tables in Power BI, cardinality defines how the tables relate to each other.
+
+    One-to-One (1:1):
+        Each value in the primary table corresponds to only one value in the related table.
+        Example: A table of employee IDs matching a table of employee personal details.
+    One-to-Many (1:N)
+        One value in the primary table corresponds to multiple values in the related table.
+        Example: A table of customers and a table of their orders, where each customer can have multiple orders.
+    Many-to-One (N:1):
+        The reverse of One-to-Many, where multiple values in one table correspond to a single value in another.
+    Many-to-Many (N:N)
+        Multiple values in one table relate to multiple values in another table.
+        Example: A table of students and a table of classes where students can enroll in multiple classes, and classes have multiple students.
+
+Importance of Cardinality:
+
+    It helps in defining relationships between tables.
+    It impacts performance—high cardinality columns may require more memory and can slow down processing.
+    It affects the accuracy of data aggregation and filtering in reports.
+
+----------------------------------------------------------------------------------------------------------
+
+Data Analysis Expression (DAX)
+
+	--> DAX (Data Analysis Expressions) is a formula expression language and can be used in different BI and visualization tools. 
+	--> DAX is also known as function language, where the full code is kept inside a function. 
+	
+	--> DAX programming formula contains two data types: Numeric and Other. 
+	
+		--> Numeric includes - integers, currency and decimals, 
+		--> while Other includes: string and binary object.
+		
+	--> DAX function can also include other functions, conditional statements, and value references.
+	--> It includes functions from different categories:
+	
+		--> Aggregate: MIN, MAX, AVERAGE, SUM, SUMX.
+		--> Text: REPLACE, SEARCH, UPPER, FIXED, CONCATENATE.
+		--> Date: DATE, HOUR, WEEKEND, NOW EOMONTH.
+		--> Logical: AND, OR, NOT, IF, IFERROR.
+		--> Counting: DISTINCTCOUNT, COUNT, COUNTA, COUNTROWS, COUNTBLANK.
+		--> Information: ISBLANK, ISNUMBER, ISTEXT, ISNONTEXT, ISERROR.
+		
+	--> In Power BI, you can create two primary calculations using DAX: 
+	
+		--> Calculated Columns:
+			------------------
+			--> Definition: 
+				--> A calculated column is a new column that can be add to a table in a data model using a DAX (Data Analysis Expressions) formula. 
+				The value of each row in the calculated column is computed based on the formula and can reference other columns within the same row.
+				
+			--> Used when we want our claculations to be done on a row level basis.
+				
+			--> Row Context: 
+				--> Calculated columns operate in a row context, meaning the DAX expression is evaluated for each row in the table individually.
+
+			--> When to Use:
+			
+				--> Static Calculations: Use calculated columns when you need to perform a calculation that is consistent across all rows of a table and where the result needs to be stored and used like any other column.
+				
+				--> Categorization: Commonly used for creating categories or labels based on existing data, like grouping numerical values into ranges.
+				
+				--> Pre-aggregation: Ideal for calculations that need to be done before aggregation or when the result needs to be used as a filter in your reports.
+
+			--> Example 1: Sales[Profit] = Sales[Revenue] - Sales[Cost]         
+				--> This calculated column will subtract the Cost from Revenue for each row in the Sales table to calculate the Profit.
+			
+			--> Example 2: online trans = IF(table_orders[payment_method] = "COD", 0, table_orders[Bill_amt])
+				--> This DAX formula checks if the payment method in the table_orders table is COD (Cash on Delivery). If it is, it returns 0. Otherwise, it returns the value of the Bill_amt column. Essentially, it calculates the transaction amount for online orders.
+				
+			--> Performance Consideration:
+				--> Calculated columns are stored in the data model, so they consume additional memory. They can impact the size of your data model, especially with large datasets.
+
+		--> Calculated Measures:
+			--------------------
+			--> Definition: 
+				--> A calculated measure is a dynamic calculation that is evaluated based on the filter context of the report or visual in which it is used. Measures are also created using DAX formulas but do not create new columns in your tables.
+			
+			--> used when we want to do the calculations on an aggregated level and dont want to store information on the row level basis.
+				
+			--> Filter Context: 
+				--> Measures operate in a filter context, meaning the DAX expression is evaluated based on the current filters applied in the report or visual.
+				
+			--> When to Use:
+			
+				--> Dynamic Aggregations: Use calculated measures for calculations that need to aggregate data dynamically based on user selections in reports, such as sums, averages, or other aggregations.
+				
+				--> Performance Metrics: Ideal for creating key performance indicators (KPIs) that respond to slicers, filters, and drill-down actions.
+				
+				--> Visualizations: Measures are used in visuals like charts, tables, and cards where the result needs to be recalculated based on the context of the data displayed.
+		
+			--> Example: Total Sales = SUM(Sales[Revenue])
+				--> This calculated measure sums the Revenue column in the Sales table, but the result will vary depending on filters applied to the report, such as a date range or specific products.
+			
+			--> Performance Consideration:
+				--> Measures are not stored in the data model; they are calculated on the fly, which can be more efficient in terms of memory usage. However, complex measures or measures involving large datasets can impact performance during report rendering.
+	
+	
+╔══════════════════════╦═════════════════════════════════════════════════════════════════════╦══════════════════════════════════════════════════╗
+║ Parameter            ║ Calculated Measures                                                 ║ Calculated Column                                ║
+╠══════════════════════╬═════════════════════════════════════════════════════════════════════╬══════════════════════════════════════════════════╣
+║ Storage              ║ Not stored; they are recalculated as needed,                        ║ Stored in the data model, taking up space and    ║
+║                      ║ optimizing memory usage.                                            ║ potentially impacting the size of the model.     ║
+╠══════════════════════╬═════════════════════════════════════════════════════════════════════╬══════════════════════════════════════════════════╣
+║ Resource Consumption ║ CPU.                                                                ║ Memory.                                          ║
+╠══════════════════════╬═════════════════════════════════════════════════════════════════════╬══════════════════════════════════════════════════╣
+║ Context              ║ Work within a filter context and                                    ║ Work within a row context and                    ║
+║                      ║ are calculated dynamically whenever used in a report.               ║ are calculated once during data load or refresh. ║
+╠══════════════════════╬═════════════════════════════════════════════════════════════════════╬══════════════════════════════════════════════════╣
+║ Calculations         ║ Result of an aggregation.                                           ║ Row by row calculation.                          ║
+╠══════════════════════╬═════════════════════════════════════════════════════════════════════╬══════════════════════════════════════════════════╣
+║ Use Cases            ║ Use Calculated Measures for dynamic calculations                    ║ Use Calculated Columns when you need to create   ║
+║                      ║ that depend on the report’s context.                                ║ new fields that act like any other column        ║
+║                      ║                                                                     ║ in your table.                                   ║
+╠══════════════════════╬═════════════════════════════════════════════════════════════════════╬══════════════════════════════════════════════════╣
+║ Visibility           ║ Value can be seen by adding to the report only.                     ║ Value can be seen as a column in data tab.       ║
+╠══════════════════════╬═════════════════════════════════════════════════════════════════════╬══════════════════════════════════════════════════╣
+║ Place of Calculation ║ DAX usually is the best place for this calculation.                 ║ In the majority of the cases can be done         ║
+║                      ║                                                                     ║ in Power Query.                                  ║
+╠══════════════════════╬═════════════════════════════════════════════════════════════════════╬══════════════════════════════════════════════════╣
+║ Example              ║ Sales Year to Date: YTD = TotaIYTD ( Sum(Sales), DateField.[Date] ) ║ Profit Sales: Profit = Sales - Cost              ║
+╠══════════════════════╬═════════════════════════════════════════════════════════════════════╬══════════════════════════════════════════════════╣
+║ Suitability          ║ Suitable for complex calculations and aggregation.                  ║ Suitable for simple calculations and             ║
+║                      ║                                                                     ║ context-based data.                              ║
+╚══════════════════════╩═════════════════════════════════════════════════════════════════════╩══════════════════════════════════════════════════╝
+	
+	
+	--> Best Practices:
+
+		--> Minimize Calculated Columns: Only create calculated columns when absolutely necessary. Often, the same results can be achieved more efficiently with measures.
+		--> Use Measures for Reporting: Measures are generally more flexible and efficient for dynamic reporting scenarios.
+    Optimize DAX Formulas: Whether using calculated columns or measures, ensure your DAX formulas are optimized for performance, especially in large datasets.
+	
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+The Importance of Data Validation:
+
+	--> No matter how advanced your models are or how complex your dashboards look, if you don’t take data validation into consideration, you’re not truly working as a data analyst. Without it, you’re building a house on a jelly foundation.
+
+	--> It might look solid on the surface, but one small “comma” can bring the whole thing down.
+
+	--> Data validation is part of the GIGO (Garbage In, Garbage Out) principle.
+
+	--> If your data is incomplete or incorrect, your results will be too.
+
+	-- >You need to use data validation to ensure that what goes into your analysis is accurate, consistent, and reliable.
+
+Best practices to ensure Data Validation:
+
+	--> Define rules that your data must meet, such as format and range (e.g., a phone number with XX amount of possible characters.)
+	--> Automate where possible (it’s easier because it requires no human interaction).
+	--> Regularly review and update your validation process.
+	--> Involve the end user in the validation process to ensure that the rules you set up align with their needs.
+
+--------------------------------------------------------------------------------------------------------
