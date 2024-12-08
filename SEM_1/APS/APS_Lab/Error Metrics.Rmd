@@ -1,0 +1,46 @@
+---
+title: "Error metrics"
+output:
+  word_document: default
+  pdf_document: default
+  html_document:
+    df_print: paged
+editor_options:
+  chunk_output_type: console
+---
+
+#### Execute the following cells to load the libraries
+```{r}
+library(ggplot2)
+library(dplyr)
+library(caret)
+```
+
+
+#### Load the in-built dataset iris
+```{r}
+
+```
+
+#### Extract dataframe without the "setosa" label leading to a binary output class dataset
+```{r}
+
+```
+
+#### Fit a logistic regression model to predict the output class
+```{r}
+
+```
+
+#### Build the confusion matrix and interpret the error metrics
+```{r}
+
+```
+
+#### Plot the ROC curve for different thresholds
+```{r}
+
+```
+
+
+

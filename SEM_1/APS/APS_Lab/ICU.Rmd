@@ -1,0 +1,91 @@
+---
+title: "The MIMIC ICU data"
+output:
+  pdf_document: default
+  html_document:
+    df_print: paged
+editor_options:
+  chunk_output_type: console
+---
+
+```{r}
+library(ggplot2)
+library(dplyr)
+library(mice)
+```
+
+```{r}
+## Load ICU dataset
+file = 'Data/ICU_filtered.csv'
+dfICU = read.csv(file, header = TRUE, stringsAsFactors = TRUE)
+str(dfICU)
+```
+
+```{r}
+## Print first 5 samples of data frame
+head(dfICU, n = 5)
+```
+
+```{r}
+## Plot fraction of missing values (NAs) in each column of the data frame
+pMissDF = setNames(stack(sapply(dfICU, function(x){(sum(is.na(x))/length(x))*100}))[2:1], c('Feature','Value'))
+p = ggplot(data = pMissDF, aes(x = Feature, y = Value)) +
+  geom_bar(stat = 'identity', fill = 'steelblue', width = 0.3) +
+  theme(text = element_text(size = 14, face = 'bold'),
+  axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5)) +
+  xlab('') + ylab('Percentage') +
+  ggtitle('Percentage of NAs across all features')  +
+  theme(plot.title = element_text(size = 12, hjust = 0.5),
+        axis.text = element_text(size = 8),
+        axis.text.x = element_text(size = 8),
+        axis.text.y = element_text(size = 10),
+        axis.title = element_text(size = 12, face = "bold"))
+p
+```
+
+```{r}
+## Drop columns with more than 20% missing values
+dfICU = dfICU %>% select(-c(pMissDF[pMissDF['Value'] > 20, 'Feature']))
+```
+
+```{r}
+## Collate 4 different ICU types (CCU, CSRU, SICU, CCU) into one column
+## called 'ICU', remove separate ICU columns and the following columns:
+## (1) 'recordid' (2) In.hospital_death (3) Length_of_stay
+dfICU[dfICU['CCU'] == 1, 'ICU'] = 1
+dfICU[dfICU['CSRU'] == 1, 'ICU'] = 2
+dfICU[dfICU['SICU'] == 1, 'ICU'] = 3
+dfICU[(dfICU['CCU'] == 0 ) & (dfICU['CSRU'] == 0) & (dfICU['SICU'] == 0), 'ICU'] = 4
+dfICU = dfICU %>% select(-c(CCU, CSRU, SICU, recordid, In.hospital_death, Length_of_stay))
+```
+
+```{r}
+## Create list of ordinal, categorical, and continuous features
+features = colnames(dfICU)
+ordinal_features = c('GCS_first')
+categorical_features = c('Gender', 'MechVent', 'ICU')
+continuous_features = features[c(!(colnames(dfICU) %in% c(ordinal_features, categorical_features)))]
+```
+
+```{r}
+## Convert ordinal and categorical columns to correct type
+dfICU[categorical_features] = lapply(dfICU[categorical_features], as.factor)
+dfICU[ordinal_features[1]] = lapply(dfICU[ordinal_features[1]], ordered, levels = seq(max(dfICU$GCS_first[!is.na(dfICU$GCS_first)]), min(dfICU$GCS_first[!is.na(dfICU$GCS_first)]), -1))
+str(dfICU)
+```
+
+```{r}
+# Impute missing values using the MICE package
+dfICU = complete(mice(dfICU, m = 40, maxit = 10, pred = quickpred(dfICU, minpuc = 0.25), seed = 500))
+```
+
+```{r}
+dfICU
+```
+
+```{r}
+MvsI = ggplot(data = dfICU) + geom_bar(aes( x = GCS_first))
+MvsI
+```
+
+

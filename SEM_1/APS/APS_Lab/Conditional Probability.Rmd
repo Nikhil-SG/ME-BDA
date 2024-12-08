@@ -1,0 +1,75 @@
+---
+title: "Conditional probability using simulation"
+output:
+  pdf_document: default
+  html_document:
+    df_print: paged
+editor_options:
+  chunk_output_type: console
+---
+
+#### Execute the following cells to load the libraries
+```{r}
+library(ggplot2)
+library(dplyr)
+```
+
+
+#### Load the bats data to a dataframe
+```{r}
+dBat = read.csv('Data/bats.csv', header = TRUE, row.names = 1, stringsAsFactors = TRUE)
+head(dBat)
+```
+
+##### Get the genes that are expressed for the 1st bat
+```{r}
+b1 = colnames(dBat)[dBat[1,1:5] > 0]
+#bt1 = sum(dBat[1,1:5])
+#bt1 
+b1 
+```
+
+#### Probability that a random bat carries the Ebola virus
+```{r}
+ran=sum(dBat$Ebola == 'TRUE')
+eE = ran/nrow(dBat)
+eE
+ebola = mean(dBat$Ebola)
+ebola
+```
+
+#### Probability that gene-1 through gene-5 is expressed in a random bat
+```{r}
+all = apply(dBat[, 1:5], 2, mean)
+all
+```
+
+#### Is expression of gene-1 through gene-5 dependent or independent of the bat carrying the Ebola virus
+```{r}
+# Subset the dataframe to those bats that carry the Ebola virus
+
+
+# Conditional probability that gene-1 through gene-5 is expressed
+# given that the bat carries the Ebola virus
+
+```
+
+```{r}
+with = dBat[dBat$Ebola == "TRUE", ]
+without = dBat[dBat$Ebola == "FALSE", ]
+probwith = apply(bats_with_ebola[, 1:5], 2, mean)
+probwithout = apply(bats_without_ebola[, 1:5], 2, mean)
+print("Conditional probabilities for bats with Ebola:")
+print(probwith)
+print("Conditional probabilities for bats without Ebola:")
+print(probwithout)
+```
+
+#### Probability that a random bat carries the Ebola given that gene-3 through gene-5 is expressed
+```{r}
+bats = dBat[dBat$Gene.3 == "TRUE" & dBat$Gene.4 == "TRUE" & dBat$Gene.5 == "TRUE", ]
+ebola = sum(bats$Ebola == "TRUE")
+prob = ebola / nrow(bats)
+print(prob)
+```
+

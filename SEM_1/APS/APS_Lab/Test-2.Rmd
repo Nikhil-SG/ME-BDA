@@ -1,0 +1,115 @@
+```{r}
+library(ggplot2)
+library(dplyr)
+```
+
+
+```{r}
+file = 'Data/food-texture.csv'
+fd = read.csv(file,header = TRUE,row.names = 1, stringsAsFactors = FALSE)
+head(fd, 5)
+```
+```{r}
+fd$Oil
+```
+```{r}
+fd[['Oil']]
+```
+
+```{r}
+fd['Oil']
+```
+```{r}
+fd[,'Oil']
+```
+```{r}
+fd['B353','Oil']
+```
+```{r}
+fd[c('Oil','Density')]
+```
+
+```{r}
+fd %>% select(c('Crispy','Fracture'))
+```
+```{r}
+file = 'Data/food-texture.csv'
+fds = read.csv(file,header = TRUE,)
+head(fd, 5)
+```
+
+```{r}
+fds %>% select(c('Oil','Crispy'))
+```
+```{r}
+fds[fds$Oil > 17,]
+```
+```{r}
+fds %>% filter(Oil > 17)
+```
+```{r}
+fds %>% select(c('Oil','Density'))
+```
+```{r}
+fds[fds$Oil > 17, c('Density','Crispy')]
+```
+```{r}
+fds %>% filter(Oil > 17) %>% select(Crispy,Hardness)
+```
+```{r}
+fds[(fds$Crispy == 9) | (fds$Crispy == 15), 'Crispy']
+```
+```{r}
+fds %>% filter(Crispy == 9 | Crispy == 15)
+```
+```{r}
+fds %>%filter(Crispy ==9 | Crispy ==15) %>% select(Crispy)
+```
+```{r}
+fds %>% filter(Crispy %in% c(9,15))
+```
+```{r}
+fds %>% filter(Crispy %in% c(9,15)) %>% select(Crispy)
+```
+```{r}
+fds %>% filter(!Crispy %in% c(9,15))
+fds %>% filter(!Crispy %in% c(9,15)) %>% select(Crispy)
+```
+```{r}
+fds %>% mutate(DensityNew = Density*1000)
+```
+```{r}
+fds = fds %>% mutate(DensityNew = Density*1000)
+colnames(fds)
+```
+```{r}
+fds = fds %>% mutate(CrispyLevel = ifelse(Crispy > 11,1,0))
+fds
+```
+```{r}
+str(fds)
+```
+```{r}
+fds = fds %>% mutate(Crispylevel = ifelse(Crispy > 11,'High','Low'))
+fds
+str(fds)
+```
+
+```{r}
+categorical_cols = c('Crispy', 'Crispylevel')
+setdiff(colnames(fds),categorical_cols)
+```
+```{r}
+str(fds)
+fds[categorical_cols] = lapply(fds[categorical_cols], as.factor)
+str(fds)
+```
+```{r}
+bats = E:\BDA_LABS_24\APS\APS_Lab\Data
+```
+
+
+
+
+
+

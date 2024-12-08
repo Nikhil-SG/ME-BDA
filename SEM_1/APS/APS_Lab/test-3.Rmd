@@ -1,0 +1,28 @@
+---
+title: "Hypothesis testing using coin toss"
+output:
+  word_document: default
+  pdf_document: default
+  html_document:
+    df_print: paged
+editor_options:
+  chunk_output_type: console
+---
+
+```{r}
+s = c(1, 0)
+p = c(0.5, 0.5)
+```
+
+```{r}
+simTrial = function(){
+  return(sum(sample(s, 10, replace = T, prob = p)))
+}
+```
+
+```{r}
+nsimulations = 10000
+simulatedData = replicate(nsimulations, simTrial())
+mean(simulatedData >= 9  )
+```
+

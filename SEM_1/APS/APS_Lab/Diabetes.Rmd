@@ -1,0 +1,50 @@
+---
+title: "diabetes"
+output: html_document
+date: "2024-09-23"
+---
+
+```{r}
+library(ggplot2)
+library(dplyr)
+```
+
+```{r}
+df = 'Data/diabetes.csv'
+data = read.csv(df,header = TRUE,stringsAsFactors = FALSE)
+head(data)
+
+```
+
+```{r}
+str(data)
+categ = c('Pregnancies','Outcome')
+data[categ] = lapply(data[categ],as.factor)
+str(data)
+```
+```{r}
+hist = ggplot(data = data) + geom_histogram(aes(x = Glucose), binwidth = 10, color = 'blue')
+hist
+```
+```{r}
+mean(data$Glucose)
+median(data$Glucose)
+quantile(data$Glucose, 0.5)
+```
+```{r}
+scat = ggplot(data = data %>% filter(Insulin != 0)) + geom_point(aes(x = Insulin, y = Glucose, color = Outcome))
+scat
+```
+```{r}
+scat1 = ggplot(data = data) + geom_point(aes(x = Age, y = Glucose, color = Outcome))
+scat1
+```
+```{r}
+avsd = ggplot(data = data) + geom_histogram(aes(x = Age, color = Outcome))
+avsd
+```
+```{r}
+box1 = ggplot(data = data) + geom_boxplot(aes(x = Outcome, y = Age, colour = Outcome))
+box1
+```
+
