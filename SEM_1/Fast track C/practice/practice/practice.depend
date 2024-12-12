@@ -1,0 +1,18 @@
+# depslib dependency file v1.0
+1697207087 source:c:\users\suhas\onedrive\desktop\fast track c\practice\practice\logic.c
+
+1697220971 source:c:\users\suhas\onedrive\desktop\fast track c\practice\practice\main.c
+	<stdio.h>
+	<stdlib.h>
+
+1697216038 source:c:\users\suhas\onedrive\desktop\fast track c\practice\practice\intersection.c
+	<stdio.h>
+
+1697218872 source:c:\users\suhas\onedrive\desktop\fast track c\practice\practice\pointer.c
+	<stdio.h>
+	<stdlib.h>
+
+1697220956 source:c:\users\suhas\onedrive\desktop\fast track c\practice\practice\file.c
+	<stdio.h>
+	<stdlib.h>
+

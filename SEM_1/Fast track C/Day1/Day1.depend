@@ -1,0 +1,52 @@
+# depslib dependency file v1.0
+1690438544 source:c:\users\suhas\onedrive\desktop\day1\caseconvert.c
+	"caseconvert.h"
+
+1690438590 c:\users\suhas\onedrive\desktop\day1\caseconvert.h
+
+1690438544 source:c:\users\suhas\onedrive\desktop\fast track c\day1\caseconvert.c
+	"caseconvert.h"
+
+1690438590 c:\users\suhas\onedrive\desktop\fast track c\day1\caseconvert.h
+
+1690440757 source:c:\users\suhas\onedrive\desktop\fast track c\day1\areaofcircle.c
+	"areaofcircle.h"
+
+1690440769 c:\users\suhas\onedrive\desktop\fast track c\day1\areaofcircle.h
+
+1690891117 source:c:\users\suhas\onedrive\desktop\fast track c\day1\main.c
+	<stdio.h>
+	<stdlib.h>
+	<assert.h>
+	"header.h"
+
+1690441358 c:\users\suhas\onedrive\desktop\fast track c\day1\ctof.h
+
+1690441975 source:c:\users\suhas\onedrive\desktop\fast track c\day1\ctof.c
+	"ctof.h"
+
+1690442882 source:c:\users\suhas\onedrive\desktop\fast track c\day1\evenodd.c
+	"evenodd.h"
+
+1690442840 c:\users\suhas\onedrive\desktop\fast track c\day1\evenodd.h
+
+1690443990 source:c:\users\suhas\onedrive\desktop\fast track c\day1\leapyear.c
+	"leapyear.h"
+
+1690443971 c:\users\suhas\onedrive\desktop\fast track c\day1\leapyear.h
+
+1690445743 c:\users\suhas\onedrive\desktop\fast track c\day1\random.h
+
+1690445346 source:c:\users\suhas\onedrive\desktop\fast track c\day1\random.c
+	"random.h"
+
+1690446264 source:c:\users\suhas\onedrive\desktop\fast track c\day1\charintcheck.c
+	"charintcheck.h"
+
+1690446159 c:\users\suhas\onedrive\desktop\fast track c\day1\charintcheck.h
+
+1690890705 source:c:\users\suhas\onedrive\desktop\fast track c\day1\sumofthree.c
+	"header.h"
+
+1690890545 c:\users\suhas\onedrive\desktop\fast track c\day1\header.h
+
