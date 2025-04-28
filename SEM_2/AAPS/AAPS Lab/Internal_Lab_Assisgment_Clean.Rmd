@@ -1,0 +1,634 @@
+---
+title: "Internal_lab_Assisgment_Clean"
+output:
+  pdf_document: default
+  html_notebook: default
+---
+
+```{r}
+library(ggplot2)
+library(dplyr)
+library(mice)
+library(tidyr)
+library(Rtsne)
+library(ggplot2)
+library(factoextra)
+library(cluster)
+```
+
+```{r}
+file = 'Data/ICU_filtered.csv'
+dfICU = read.csv(file, header = TRUE, stringsAsFactors = TRUE)
+```
+
+```{r}
+pMissDF = setNames(stack(sapply(dfICU, function(x){(sum(is.na(x))/length(x))*100}))[2:1], c('Feature','Value'))
+p = ggplot(data = pMissDF, aes(x = Feature, y = Value)) +
+  geom_bar(stat = 'identity', fill = 'steelblue', width = 0.3) +
+  theme(text = element_text(size = 14, face = 'bold'),
+  axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5)) +
+  xlab('') + ylab('Percentage') +
+  ggtitle('Percentage of NAs across all features')  +
+  theme(plot.title = element_text(size = 12, hjust = 0.5),
+        axis.text = element_text(size = 8),
+        axis.text.x = element_text(size = 8),
+        axis.text.y = element_text(size = 10),
+        axis.title = element_text(size = 12, face = "bold"))
+p
+```
+
+```{r}
+dfICU = dfICU %>% select(-c(pMissDF[pMissDF['Value'] > 20, 'Feature']))
+```
+
+```{r}
+dfICU[dfICU['CCU'] == 1, 'ICU'] = 1
+dfICU[dfICU['CSRU'] == 1, 'ICU'] = 2
+dfICU[dfICU['SICU'] == 1, 'ICU'] = 3
+dfICU[(dfICU['CCU'] == 0 ) & (dfICU['CSRU'] == 0) & (dfICU['SICU'] == 0), 'ICU'] = 4
+dfICU = dfICU %>% select(-c(CCU, CSRU, SICU, recordid, In.hospital_death, Length_of_stay))
+```
+
+```{r}
+str(dfICU)
+```
+
+```{r}
+dfICU = complete(mice(dfICU, m = 40, maxit = 10, pred = quickpred(dfICU, minpuc = 0.25), seed = 500))
+```
+
+```{r}
+pMissDF = setNames(stack(sapply(dfICU, function(x){(sum(is.na(x))/length(x))*100}))[2:1], c('Feature','Value'))
+p = ggplot(data = pMissDF, aes(x = Feature, y = Value)) +
+  geom_bar(stat = 'identity', fill = 'steelblue', width = 0.3) +
+  theme(text = element_text(size = 14, face = 'bold'),
+  axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5)) +
+  xlab('') + ylab('Percentage') +
+  ggtitle('Percentage of NAs across all features')  +
+  theme(plot.title = element_text(size = 12, hjust = 0.5),
+        axis.text = element_text(size = 8),
+        axis.text.x = element_text(size = 8),
+        axis.text.y = element_text(size = 10),
+        axis.title = element_text(size = 12, face = "bold"))
+p
+```
+
+```{r}
+features = colnames(dfICU)
+categorical_features = c('Gender', 'GCS_first', 'MechVent', 'ICU')
+continuous_features = features[c(!(colnames(dfICU) %in% categorical_features))]
+dfICU_continuous = dfICU %>% select(continuous_features)
+dfICU_categorical = dfICU %>% select(categorical_features)
+```
+
+```{r}
+dfICU_long = dfICU_continuous %>% pivot_longer(cols = everything(), names_to = "variable", values_to = "value")
+
+ggplot(dfICU_long, aes(x = value)) +
+  geom_histogram(bins = 30, fill = "blue", color = "black") +
+  facet_wrap(~ variable, scales = "free") +
+  labs(title = "Histograms of Continuous Features",
+       x = "Value",
+       y = "Frequency") +
+  theme_minimal() +
+  theme(axis.text.y = element_blank(),  
+        axis.ticks.y = element_blank()) 
+```
+
+```{r}
+categorical_cols <- names(dfICU_categorical)
+
+for (col in categorical_cols) {
+  freq_table <- table(dfICU_categorical[[col]])
+  freq_df <- as.data.frame(freq_table)
+  colnames(freq_df) <- c("Category", "Frequency")
+
+  p <- ggplot(freq_df, aes(x = Category, y = Frequency, fill = Category)) +
+    geom_bar(stat = "identity") +
+    geom_text(aes(label = Frequency), vjust = -0.3) + 
+    labs(title = paste("Distribution of", col),
+         x = col,
+         y = "Frequency") +
+    theme_minimal() +
+    theme(axis.text.x = element_text(angle = 45, hjust = 1)) 
+
+  print(p)
+}
+```
+
+```{r}
+dfICU_categorical <- dfICU[, c("Gender", "GCS_first", "MechVent", "ICU")]
+gower_dist_matrix <- daisy(dfICU_categorical, metric = "gower")
+gower_dist_matrix <- as.matrix(gower_dist_matrix)
+avg_distance <- rowMeans(gower_dist_matrix)
+
+dfICU$categorical_avg_distance <- avg_distance
+```
+
+```{r}
+features = colnames(dfICU)
+categorical_features_1 = c('Gender', 'GCS_first', 'MechVent', 'ICU')
+continuous_features_1 = c('Age', 'Glucose_first', 'HR_first', 'NIDiasABP_first', 'NIMAP_first', 'NISysABP_first', 'Temp_first', 'BUN_first', 'Creatinine_first', 'HCO3_first', 'HCT_first', 'K_first', 'Mg_first', 'Na_first', 'Platelets_first', 'WBC_first', 'categorical_avg_distance')
+```
+
+```{r}
+dfICU_continuous_1 = dfICU %>% select(continuous_features_1)
+dfICU_categorical_1 = dfICU %>% select(categorical_features_1)
+```
+```{r}
+feature <- "categorical_avg_distance"
+
+df_transformed <- dfICU_continuous_1 %>%
+  select(all_of(feature)) %>%
+  mutate(
+    asinsqrt_transformed = {
+      scaled_value <- (.data[[feature]] - min(.data[[feature]])) /
+        (max(.data[[feature]]) - min(.data[[feature]]))
+      asin(sqrt(scaled_value))
+    }
+  )
+
+df_long <- df_transformed %>%
+  pivot_longer(
+    cols = everything(),
+    names_to = "transformation",
+    values_to = "value"
+  ) %>%
+  mutate(
+    transformation = factor(
+      transformation,
+      levels = c(feature, "asinsqrt_transformed"),
+      labels = c("Original", "Arcsin-Sqrt")
+    )
+  )
+
+p <- ggplot(df_long, aes(x = value)) +
+  geom_histogram(bins = 30, fill = "steelblue", color = "black") +
+  facet_wrap(~ transformation, scales = "free", ncol = 2) +
+  labs(
+    title = paste("Transformation of", feature),
+    x = "Value",
+    y = "Frequency"
+  ) +
+  theme_minimal() +
+  theme(
+    axis.text.y = element_blank(),
+    axis.ticks.y = element_blank(),
+    strip.text = element_text(size = 10)
+  )
+print(p)
+
+
+cols_to_transform <- c("Age", "BUN_first", "Creatinine_first",
+                      "Glucose_first", "K_first", "Mg_first",
+                      "Platelets_first", "WBC_first")
+
+dfICU_transformed <- dfICU_continuous_1 %>%
+  mutate(across(all_of(cols_to_transform), ~ log1p(.))) %>%
+  mutate(
+    asinsqrt_categorical_avg_distance = {
+      scaled_value <- (.data[["categorical_avg_distance"]] - min(.data[["categorical_avg_distance"]])) /
+        (max(.data[["categorical_avg_distance"]]) - min(.data[["categorical_avg_distance"]]))
+      asin(sqrt(scaled_value))
+    }
+  ) %>%
+  select(-categorical_avg_distance) %>%
+  rename(categorical_avg_distance_asinsqrt = asinsqrt_categorical_avg_distance)
+
+dfICU_long_transformed <- dfICU_transformed %>%
+  pivot_longer(cols = everything(), names_to = "variable", values_to = "value")
+
+ggplot(dfICU_long_transformed, aes(x = value)) +
+  geom_histogram(bins = 30, fill = "blue", color = "black") +
+  facet_wrap(~ variable, scales = "free") +
+  labs(title = "Histograms of Continuous Features (Log-Transformed Selected, Arcsin-Sqrt for categorical_avg_distance)",
+       x = "Value (Transformed)",
+       y = "Frequency") +
+  theme_minimal() +
+  theme(axis.text.y = element_blank(),
+        axis.ticks.y = element_blank())
+```
+```{r}
+# Clean and scale the data
+df_clean <- na.omit(dfICU_transformed)
+df_scaled <- scale(df_clean)
+
+# ----- 1. PCA Scores -----
+pca_result <- prcomp(df_scaled, center = TRUE, scale. = TRUE)
+
+# Get PCA scores (coordinates in the principal component space)
+pca_scores <- as.data.frame(pca_result$x)
+
+# View first few rows of PCA scores
+head(pca_scores)
+```
+
+```{r}
+# Standard deviations of the principal components
+std_devs <- pca_result$sdev
+
+# Variance explained by each PC
+var_explained <- std_devs^2
+prop_var_explained <- var_explained / sum(var_explained)
+
+# Create a data frame of variance explained
+pca_variance_df <- data.frame(
+  PC = paste0("PC", 1:length(prop_var_explained)),
+  Variance_Explained = prop_var_explained,
+  Cumulative_Variance = cumsum(prop_var_explained)
+)
+
+# View the variance explained
+print(pca_variance_df)
+```
+
+```{r}
+pca_mahalanobis_analysis <- function(df, n_components = 13) {
+  # Ensure we're working with numeric data only
+  numeric_cols <- sapply(df, is.numeric)
+  data_numeric <- df[, numeric_cols]
+
+  # Remove NA values if any
+  if(any(is.na(data_numeric))) {
+    warning("NA values detected. Using complete cases only.")
+    data_numeric <- na.omit(data_numeric)
+  }
+
+  # Store row names for later matching
+  original_rows <- rownames(data_numeric)
+
+  # Perform PCA
+  pca_result <- prcomp(data_numeric, scale. = TRUE)
+
+  # Extract the first n_components PCs
+  pc_scores <- pca_result$x[, 1:n_components]
+
+  # Calculate Mahalanobis distances using the PC scores
+  mean_vec <- colMeans(pc_scores)
+  cov_mat <- cov(pc_scores)
+
+  mahalanobis_dist <- mahalanobis(pc_scores, mean_vec, cov_mat)
+
+  # Create results dataframe
+  result_df <- data.frame(
+    original_index = as.integer(original_rows),
+    mahalanobis_dist = mahalanobis_dist
+  )
+
+  # Add outlier flags for different confidence levels
+  # For p dimensions, Mahalanobis distance follows chi-square with p degrees of freedom
+  result_df$outlier_68 <- mahalanobis_dist > qchisq(0.68, df = n_components)
+  result_df$outlier_95 <- mahalanobis_dist > qchisq(0.95, df = n_components)
+  result_df$outlier_98 <- mahalanobis_dist > qchisq(0.98, df = n_components)
+
+  # Count outliers
+  outlier_counts <- list(
+    "Total_observations" = nrow(result_df),
+    "68%" = sum(result_df$outlier_68),
+    "95%" = sum(result_df$outlier_95),
+    "98%" = sum(result_df$outlier_98)
+  )
+
+  # Calculate percentages
+  outlier_percentages <- list(
+    "68%" = round(100 * outlier_counts[["68%"]] / outlier_counts[["Total_observations"]], 2),
+    "95%" = round(100 * outlier_counts[["95%"]] / outlier_counts[["Total_observations"]], 2),
+    "98%" = round(100 * outlier_counts[["98%"]] / outlier_counts[["Total_observations"]], 2)
+  )
+
+  return(list(
+    result_df = result_df,
+    pca_result = pca_result,
+    pc_scores = pc_scores,
+    outlier_counts = outlier_counts,
+    outlier_percentages = outlier_percentages
+  ))
+}
+
+# Plot functions
+plot_mahalanobis_density <- function(result, n_components) {
+  distances <- result$result_df$mahalanobis_dist
+
+  # Create the density plot
+  plot(density(distances),
+       main = "Mahalanobis Distance Distribution (13 PCs)",
+       xlab = "Mahalanobis Distance",
+       ylab = "Density")
+
+  # Add vertical lines for the chi-square cutoffs
+  abline(v = qchisq(0.68, df = n_components), col = "yellow", lwd = 2)
+  abline(v = qchisq(0.95, df = n_components), col = "orange", lwd = 2)
+  abline(v = qchisq(0.98, df = n_components), col = "red", lwd = 2)
+
+  # Add a legend
+  legend("topright",
+         legend = c("68% cutoff", "95% cutoff", "98% cutoff"),
+         col = c("yellow", "orange", "red"),
+         lwd = 2)
+}
+
+# Plot the first few PCs with outliers highlighted
+plot_pc_outliers <- function(result, pc1 = 1, pc2 = 2) {
+  pc_data <- result$pc_scores
+  outliers <- result$result_df
+
+  # Create PCA plot
+  plot(pc_data[, pc1], pc_data[, pc2],
+       col = ifelse(outliers$outlier_98, "red",
+                    ifelse(outliers$outlier_95, "orange",
+                           ifelse(outliers$outlier_68, "yellow", "darkgrey"))),
+       pch = 19,
+       main = paste("PC", pc1, "vs PC", pc2, "with Outliers"),
+       xlab = paste("PC", pc1),
+       ylab = paste("PC", pc2))
+
+  # Add legend
+  legend("topright",
+         legend = c("Within 68%", "68-95%", "95-98%", "Outside 98%"),
+         pch = 19,
+         col = c("darkgrey", "yellow", "orange", "red"))
+}
+
+# Main function to run the analysis and display results
+apply_pca_mahalanobis <- function(df, n_components = 13) {
+  # Run the PCA-based Mahalanobis analysis
+  cat("Performing PCA and calculating Mahalanobis distances...\n")
+  result <- pca_mahalanobis_analysis(df, n_components)
+
+  # Print summary of results
+  cat("\n============ PCA-based Outlier Detection Results ============\n")
+  cat("Analysis performed using the first", n_components, "principal components\n")
+  cat("These components explain approximately 92% of the total variance\n")
+  cat("Total observations:", result$outlier_counts[["Total_observations"]], "\n\n")
+
+  cat("Outlier counts and percentages at different confidence levels:\n")
+  cat("68% confidence level:", result$outlier_counts[["68%"]], "outliers (",
+      result$outlier_percentages[["68%"]], "%)\n")
+  cat("95% confidence level:", result$outlier_counts[["95%"]], "outliers (",
+      result$outlier_percentages[["95%"]], "%)\n")
+  cat("98% confidence level:", result$outlier_counts[["98%"]], "outliers (",
+      result$outlier_percentages[["98%"]], "%)\n")
+
+  # Create visualizations
+  cat("\nCreating visualizations...\n")
+
+  # Plot Mahalanobis distance distribution
+  plot_mahalanobis_density(result, n_components)
+
+  # Plot the first 6 pairs of PCs
+  par(mfrow = c(2, 3))
+  plot_pc_outliers(result, 1, 2)
+  plot_pc_outliers(result, 1, 3)
+  plot_pc_outliers(result, 2, 3)
+  plot_pc_outliers(result, 4, 5)
+  plot_pc_outliers(result, 6, 7)
+  plot_pc_outliers(result, 8, 9)
+  par(mfrow = c(1, 1)) # Reset to single plot
+
+  # Display examples of extreme outliers
+  cat("\nExamples of extreme outliers (top 5 by Mahalanobis distance):\n")
+  extreme_indices <- order(result$result_df$mahalanobis_dist, decreasing = TRUE)[1:5]
+  extreme_rows <- result$result_df$original_index[extreme_indices]
+  print(df[extreme_rows, ])
+
+  cat("\nAnalysis complete.\n")
+
+  # Return the results dataframe with outlier flags
+  invisible(result$result_df)
+}
+
+# Run the analysis on dfICU_transformed using 13 PCs
+outlier_results <- apply_pca_mahalanobis(dfICU_transformed, n_components = 13)
+```
+```{r}
+# Load necessary library
+library(ggplot2)
+
+# Assume pca_scores is already available from your prcomp() call.
+# Extract the first 13 principal components
+pca_13 <- pca_scores[, 1:13]
+
+# ------------------------------
+# 1. Compute the Mahalanobis Distance
+# ------------------------------
+
+# Calculate the center (mean) and covariance matrix for the PCA-13 data
+center <- colMeans(pca_13)
+cov_matrix <- cov(pca_13)
+
+# Compute squared Mahalanobis distances for all observations
+mahal_sq <- mahalanobis(pca_13, center, cov_matrix)
+
+# For later plotting, also compute the raw Mahalanobis distance (optional)
+mahal <- sqrt(mahal_sq)
+
+# ------------------------------
+# 2. Define Chi-square Thresholds
+# ------------------------------
+
+# Compute chi-square thresholds for 68%, 95%, and 99% using 13 degrees of freedom
+thresh_68 <- qchisq(0.68, df = 13)
+thresh_95 <- qchisq(0.95, df = 13)
+thresh_99 <- qchisq(0.99, df = 13)
+
+# ------------------------------
+# 3. Classify Anomalies Based on Thresholds
+# ------------------------------
+
+# Create anomaly flags based on the squared Mahalanobis distance
+anomaly68 <- ifelse(mahal_sq > thresh_68, "Yes", "No")
+anomaly95 <- ifelse(mahal_sq > thresh_95, "Yes", "No")
+anomaly99 <- ifelse(mahal_sq > thresh_99, "Yes", "No")
+
+# Add these variables to a new data frame combining the scores and Mahalanobis distances
+results <- data.frame(
+  pca_13,
+  Mahalanobis_Squared = mahal_sq,
+  Mahalanobis = mahal,
+  Anomaly_68 = anomaly68,
+  Anomaly_95 = anomaly95,
+  Anomaly_99 = anomaly99
+)
+
+# Optionally, you can view a summary of the results
+head(results)
+summary(results)
+
+# ------------------------------
+# 4. Plotting the Mahalanobis Distances with Thresholds
+# ------------------------------
+
+# Option A: Scatter plot of squared Mahalanobis distances (by observation index) with threshold lines
+df_plot <- data.frame(Index = 1:nrow(results), Mahalanobis_Squared = mahal_sq)
+
+ggplot(df_plot, aes(x = Index, y = Mahalanobis_Squared)) +
+  geom_point(alpha = 0.7) +
+  geom_hline(yintercept = thresh_68, color = "blue", linetype = "dashed", size = 1) +
+  geom_hline(yintercept = thresh_95, color = "green", linetype = "dashed", size = 1) +
+  geom_hline(yintercept = thresh_99, color = "red", linetype = "dashed", size = 1) +
+  labs(title = "Squared Mahalanobis Distances with Chi-Square Thresholds",
+       y = "Mahalanobis Distance (Squared)",
+       x = "Observation Index") +
+  annotate("text", x = max(df_plot$Index) * 0.8, y = thresh_68, 
+           label = "68%", color = "blue", vjust = -1) +
+  annotate("text", x = max(df_plot$Index) * 0.8, y = thresh_95, 
+           label = "95%", color = "green", vjust = -1) +
+  annotate("text", x = max(df_plot$Index) * 0.8, y = thresh_99, 
+           label = "99%", color = "red", vjust = -1) +
+  theme_minimal()
+
+# Option B: Histogram of squared Mahalanobis distances with overlaid threshold lines
+ggplot(df_plot, aes(x = Mahalanobis_Squared)) +
+  geom_histogram(bins = 30, fill = "skyblue", color = "black", alpha = 0.7) +
+  geom_vline(xintercept = thresh_68, color = "blue", linetype = "dashed", size = 1) +
+  geom_vline(xintercept = thresh_95, color = "green", linetype = "dashed", size = 1) +
+  geom_vline(xintercept = thresh_99, color = "red", linetype = "dashed", size = 1) +
+  labs(title = "Histogram of Squared Mahalanobis Distances",
+       x = "Mahalanobis Distance (Squared)",
+       y = "Count") +
+  theme_minimal()
+
+# ------------------------------
+# 5. (Optional) Plot the PCA-13 Space with Anomalies Highlighted
+# ------------------------------
+# For a 2D view, you can plot the first two principal components and color points by an anomaly flag.
+# Here we use the 95% threshold as an example.
+ggplot(results, aes(x = PC1, y = PC2, color = Anomaly_95)) +
+  geom_point(alpha = 0.8, size = 2) +
+  labs(title = "PCA (PC1 vs PC2) with 95% Anomaly Flag",
+       x = "PC1", y = "PC2") +
+  scale_color_manual(values = c("No" = "black", "Yes" = "red")) +
+  theme_minimal()
+```
+```{r}
+# Install and load necessary package if not already installed
+if (!require(GGally)) install.packages("GGally")
+library(GGally)
+library(ggplot2)
+
+# Assume 'results' is your data frame that includes the PCA-13 scores and an anomaly indicator.
+# For demonstration purposes, create a factor based on the 95% threshold anomaly flag.
+results$Anomaly <- as.factor(results$Anomaly_95)
+
+# Create a parallel coordinate plot for the 13 principal components.
+# 'columns' identifies the PCA columns, and 'groupColumn' uses the anomaly factor for color grouping.
+ggparcoord(data = results,
+           columns = 1:13,         # columns corresponding to PCA-13
+           groupColumn = "Anomaly", # group by anomaly status
+           scale = "globalminmax") +  # scales each variable between its minimum and maximum values
+  theme_minimal() +
+  labs(title = "Parallel Coordinate Plot of PCA-13 Dimensions",
+       x = "PCA Dimensions",
+       y = "Scaled Value") +
+  scale_color_manual(values = c("No" = "blue", "Yes" = "red"))
+
+```
+```{r}
+# Load necessary libraries
+library(ggplot2)
+
+# ------------------------------
+# Assume pca_scores is already available from your prcomp() call
+# Extract the first 13 principal components
+pca_13 <- pca_scores[, 1:13]
+
+# ------------------------------
+# 1. Compute the Mahalanobis Distance
+# ------------------------------
+
+# Calculate the center (mean) and covariance matrix for the PCA-13 data
+center <- colMeans(pca_13)
+cov_matrix <- cov(pca_13)
+
+# Compute squared Mahalanobis distances for all observations
+mahal_sq <- mahalanobis(pca_13, center, cov_matrix)
+# Compute the raw Mahalanobis distances (optional)
+mahal <- sqrt(mahal_sq)
+
+# ------------------------------
+# 2. Define Chi-square Thresholds for 13 dimensions
+# ------------------------------
+
+thresh_68 <- qchisq(0.68, df = 13)
+thresh_95 <- qchisq(0.95, df = 13)
+thresh_99 <- qchisq(0.99, df = 13)
+
+# ------------------------------
+# 3. Classify Anomalies Based on Each Threshold
+# ------------------------------
+
+# For each threshold, flag observations as "Yes" if the squared Mahalanobis distance 
+# exceeds the threshold, "No" otherwise.
+anomaly68 <- ifelse(mahal_sq > thresh_68, "Yes", "No")
+anomaly95 <- ifelse(mahal_sq > thresh_95, "Yes", "No")
+anomaly99 <- ifelse(mahal_sq > thresh_99, "Yes", "No")
+
+# Combine the PCA-13 scores and the computed distances/anomaly flags into one data frame.
+results <- data.frame(
+  pca_13,
+  Mahalanobis_Squared = mahal_sq,
+  Mahalanobis = mahal,
+  Anomaly_68 = anomaly68,
+  Anomaly_95 = anomaly95,
+  Anomaly_99 = anomaly99
+)
+
+# ------------------------------
+# 4. Save the Anomaly Results for Each Threshold into Separate CSV Files
+# ------------------------------
+
+# Create a directory "Data/" if it doesn't already exist.
+if(!dir.exists("Data")){
+  dir.create("Data")
+}
+
+# Save all the results (if needed)
+write.csv(results, file = "Data/anomalies_all.csv", row.names = FALSE)
+
+# Save only those observations flagged as anomalies for each threshold.
+
+# 68% threshold anomalies
+results_68 <- results[results$Anomaly_68 == "Yes", ]
+write.csv(results_68, file = "Data/anomalies_68.csv", row.names = FALSE)
+
+# 95% threshold anomalies
+results_95 <- results[results$Anomaly_95 == "Yes", ]
+write.csv(results_95, file = "Data/anomalies_95.csv", row.names = FALSE)
+
+# 99% threshold anomalies
+results_99 <- results[results$Anomaly_99 == "Yes", ]
+write.csv(results_99, file = "Data/anomalies_99.csv", row.names = FALSE)
+
+# ------------------------------
+# 5. Plotting the Mahalanobis Distances with Thresholds (Optional)
+# ------------------------------
+
+# Create a plot of the squared Mahalanobis distances with threshold lines.
+df_plot <- data.frame(Index = 1:nrow(results), Mahalanobis_Squared = mahal_sq)
+
+ggplot(df_plot, aes(x = Index, y = Mahalanobis_Squared)) +
+  geom_point(alpha = 0.7) +
+  geom_hline(yintercept = thresh_68, color = "blue", linetype = "dashed", size = 1) +
+  geom_hline(yintercept = thresh_95, color = "green", linetype = "dashed", size = 1) +
+  geom_hline(yintercept = thresh_99, color = "red", linetype = "dashed", size = 1) +
+  labs(title = "Squared Mahalanobis Distances with Chi-Square Thresholds",
+       y = "Mahalanobis Distance (Squared)",
+       x = "Observation Index") +
+  annotate("text", x = max(df_plot$Index) * 0.8, y = thresh_68, 
+           label = "68%", color = "blue", vjust = -1) +
+  annotate("text", x = max(df_plot$Index) * 0.8, y = thresh_95, 
+           label = "95%", color = "green", vjust = -1) +
+  annotate("text", x = max(df_plot$Index) * 0.8, y = thresh_99, 
+           label = "99%", color = "red", vjust = -1) +
+  theme_minimal()
+
+# Optionally, create a 2D plot of the PCA space (PC1 vs PC2) highlighting anomalies by threshold
+ggplot(results, aes(x = PC1, y = PC2, color = Anomaly_95)) +
+  geom_point(alpha = 0.8, size = 2) +
+  labs(title = "PCA (PC1 vs PC2) with 95% Anomaly Flag",
+       x = "PC1", y = "PC2") +
+  scale_color_manual(values = c("No" = "black", "Yes" = "red")) +
+  theme_minimal()
+```
+
+

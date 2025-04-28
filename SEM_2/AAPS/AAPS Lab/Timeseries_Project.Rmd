@@ -1,0 +1,348 @@
+---
+title: "Timeseries Project Even Semester 2025"
+editor_options:
+chunk_output_type: console
+output:
+html_document:
+df_print: paged
+pdf_document: default
+---
+
+```{r}
+# Load essential libraries
+library(ggplot2)
+library(dplyr)
+library(datasets)
+library(forecast)
+library(xts)
+library(scales)
+library(lubridate)
+library(quantmod)
+```
+
+```{r, echo = FALSE}
+# Set ggplot theme for plotting
+My_Theme = theme(axis.text.x = element_text(size = 6, angle = 90, vjust = 0.5, hjust=1),
+   axis.text.y = element_text(size = 9),
+   axis.title.x = element_text(size = 11),
+   axis.title.y = element_text(size = 11),
+   plot.title = element_text(size = 12, hjust = 0.5, face = "bold"))
+```
+
+## 1. Using R's in-built function ts(), create timeseries data for a temperature sensor measuring temperature once every 5 minutes for 24 hours starting from 00:00 hours on January 1, 2025
+```{r}
+data = rnorm(288, 27, 8)
+ts_temperature = ts(data, frequency = 288, start = c(2025, 1))
+print(ts_temperature)
+plot(ts_temperature)
+print(time(ts_temperature))
+```
+
+## 2. Using the xts library, create an xts timeseries object using the same data above
+```{r}
+# Generate timestamps 
+time_index = seq(from = ymd_hms("2025-01-01 00:00:00", tz = 'Asia/Kolkata'), to = ymd_hms("2025-01-01 23:55:00", tz = 'Asia/Kolkata'), by = "5 min")
+# Create an xts time series object
+xts_temperature = xts(data, order.by = time_index)
+print(xts_temperature)
+plot(xts_temperature)
+print(index(xts_temperature))
+```
+
+## 3. Plot the timeseries data using ggplot
+```{r}
+# Convert xts object into dataframe
+df_temperature = fortify(xts_temperature)
+colnames(df_temperature)[2] = c('Temperature')
+
+# Plot the time series
+ggplot(data= df_temperature) +
+  geom_line(aes(x = Index, y = Temperature), color = 'blue') +
+  scale_x_datetime(expand = c(0,0),  labels = date_format("%H:%M", tz = 'Asia/Kolkata'), breaks = seq(min(index(xts_temperature)), max(index(xts_temperature)), by = "60 mins"))+
+  labs(title = "Temperature Timeseries", x = "Time", y = "Temperature") +
+  My_Theme
+```
+
+## 4. Filter temperature data from 09:00 to 14:30 and plot it
+```{r}
+# Define the time range for subsetting
+start_time = ymd_hms("2025-01-01 09:00:00", tz = 'Asia/Kolkata')
+end_time = ymd_hms("2025-01-01 14:30:00", tz = 'Asia/Kolkata')
+
+# Subset using xts index function
+xts_temperature_filtered <- xts_temperature[index(xts_temperature) >= start_time & index(xts_temperature) <= end_time]
+xts_temperature_filtered
+plot(xts_temperature_filtered)
+```
+
+## 5. Plot filtered temperature data from 09:00 to 14:30 using ggplot
+```{r}
+# Convert xts object into dataframe
+df_temperature_filtered = fortify(xts_temperature_filtered)
+colnames(df_temperature_filtered)[2] = c('Temperature')
+
+# Plot the time series
+ggplot(data= df_temperature_filtered) +
+  geom_line(aes(x = Index, y = Temperature), color = 'blue') +
+  scale_x_datetime(expand = c(0,0),  labels = date_format("%H:%M", tz = 'Asia/Kolkata'), breaks = seq(min(index(xts_temperature)), max(index(xts_temperature)), by = "30 mins"))+
+  labs(title = "Filtered Temperature Timeseries", x = "Time", y = "Temperature") +
+  My_Theme
+```
+
+## 5. Load the "Applicance Energy Consumption" dataset
+```{r}
+# Load data into a dataframe
+df_energy = read.csv("Data/energydata_complete.csv")
+
+# Convert 'date' column to POSIXct format
+df_energy$date = ymd_hms(df_energy$date, tz = "UTC")
+
+# Convert to xts object
+xts_energy = xts(df_energy[, -1], order.by = df_energy$date)
+```
+
+## 6. Plot the "Applicances Energy Consumption" timeseries data using ggplot
+```{r}
+# Convert xts object into dataframe
+df_energy = fortify(xts_energy)
+
+# Plot the time series
+ggplot(data= df_energy) +
+  geom_line(aes(x = Index, y = Appliances), color = 'blue') +
+  scale_x_datetime(expand = c(0,0),  labels = date_format("%m-%d", tz = 'UTC'), breaks = seq(min(index(xts_energy)), max(index(xts_energy)), by = "1 week"))+
+  labs(title = "Energy Consumption Timeseries", x = "Date", y = "Energy Consumption (Wh)") +
+  My_Theme
+```
+
+## 7. Plot the "Kitchen Temperature" timeseries data using ggplot
+```{r}
+# Plot the time series
+ggplot(data= df_energy) +
+  geom_line(aes(x = Index, y = T1), color = 'blue') +
+  scale_x_datetime(expand = c(0,0),  labels = date_format("%m-%d", tz = 'UTC'), breaks = seq(min(index(xts_energy)), max(index(xts_energy)), by = "1 week"))+
+  labs(title = "Energy Consumption Timeseries", x = "Date", y = "Energy Consumption (Wh)") +
+  My_Theme
+```
+
+## 8. Decompose the "Kitchen Temperature" timeseries data into trend, seasonality, and noise parts using the stl() function which uses LOESS
+```{r}
+# Convert to time series object (ts) with 144 observations per day (10-minute intervals)
+ts_energy_temperature = ts(as.numeric(xts_energy$T1), frequency = 144)
+
+# Compute decomposition using the stl function
+ts_energy_temperature_decomposed = stl(ts_energy_temperature, s.window = "periodic")
+
+# Append trend to the original xts object
+xts_energy =  merge(xts_energy, ts_energy_temperature_decomposed$time.series[, "trend"])
+names(xts_energy)[ncol(xts_energy)] = "Trend" 
+
+# Plot decomposition
+plot(ts_energy_temperature_decomposed, main = "Decomposition of Kitchen Temperature")
+```
+
+## 9. Plot the trend and seasonality in the "Kitchen Temperature" timeseries data using ggplot
+```{r}
+# Convert STL output to data frame
+df_energy_decomposed = data.frame(
+  Index = index(xts_energy),
+  Observed = as.numeric(xts_energy$T1),
+  Trend = ts_energy_temperature_decomposed$time.series[, "trend"],
+  Seasonal = ts_energy_temperature_decomposed$time.series[, "seasonal"],
+  Remainder = ts_energy_temperature_decomposed$time.series[, "remainder"]
+)
+
+# Plot all components
+ggplot(df_energy_decomposed, aes(x = Index)) +
+  geom_line(aes(y = Observed, color = "Observed")) +
+  geom_line(aes(y = Trend, color = "Trend"), linetype = "dashed") +
+  geom_line(aes(y = Seasonal, color = "Seasonal"), linetype = "dotted")+
+  scale_x_datetime(expand = c(0,0), labels = date_format("%m-%d", tz = 'UTC'), breaks = seq(min(index(xts_energy)), max(index(xts_energy)), by = "10 days"))+
+   scale_color_manual(values = c("Observed" = "black", "Trend" = "blue", "Seasonal" = "red"))+
+  scale_y_continuous(breaks = seq(0, 30, by = 2))+
+  labs(title = "Decomposition of Kitchen Temperature (T1)",
+       x = "Time", y = "Temperature (°C)") +
+My_Theme
+```
+
+## 10. Extract the trend in the "Kitchen Temperature" timeseries data using LOWESS and plot it with the original data using ggplot
+```{r}
+model_lowess = lowess(df_energy$Index, df_energy$T1)
+df_energy$Trend_Lowess = model_lowess$y
+
+# Plot the trend extracted using LOWESS along with the original data using ggplot 
+ggplot(df_energy) +
+  geom_line(aes(x = Index, y = T1, color = "Observed")) +
+  geom_line(aes(x = Index, y = Trend_Lowess, color = "Trend"), linetype = "dashed") +
+  scale_x_datetime(expand = c(0,0), labels = date_format("%m-%d", tz = 'UTC'), breaks = seq(min(index(xts_energy)), max(index(xts_energy)), by = "10 days"))+
+   scale_color_manual(values = c("Observed" = "grey", "Trend" = "blue"))+
+  scale_y_continuous(breaks = seq(0, 30, by = 2))+
+  labs(title = "Trend of Kitchen Temperature (T1)",
+       x = "Time", y = "Temperature (°C)", color = 'Legend') +
+My_Theme
+```
+
+
+## 11. Forecast  "Kitchen Temperature" timeseries using Holt-Winters exponential smoothing model
+```{r}
+# Apply Holt-Winters model
+hw_model = HoltWinters(ts_energy_temperature, gamma = FALSE)
+
+# Display model parameters
+hw_model
+
+# Forecast the next 7 days (7 * 144 = 1008 future observations)
+forecast_holtwinters = forecast(hw_model, h = 1008)
+
+# Print the forecast summary
+print(forecast_holtwinters)
+
+# Generate dynamic future timestamps
+last_time = tail(index(xts_energy), 1)
+future_timestamps = last_time + seq(10 * 60, 10 * 60 * length(forecast_holtwinters$mean), by = 10 * 60)
+ 
+# Create dataframe including original and forecasted values
+df_energy_forecast = data.frame(
+  Index = c(index(xts_energy), future_timestamps),
+  Temperature = c(df_energy$T1, forecast_holtwinters$mean),
+  Type = c(rep('Original', length(index(xts_energy))), rep('Forecasted', length(future_timestamps)))
+)
+ 
+# Plot the original and forecasted values
+ggplot(df_energy_forecast) +
+  geom_line(aes(x = Index, y = Temperature, color = Type)) +
+  scale_color_manual(values = c("Original" = "blue", "Forecasted" = "red")) +
+  scale_x_datetime(expand = c(0,0), labels = date_format("%m-%d", tz = 'UTC'), breaks = seq(min(df_energy_forecast$Index), max(df_energy_forecast$Index), by = "10 days"))+
+  scale_y_continuous(breaks = seq(0, 30, by = 2))+
+  labs(title = "Forecast of Kitchen Temperature (T1)",
+       x = "Time", y = "Temperature (°C)",  color = "Legend") +
+My_Theme
+```
+
+## 12. Generate Gaussian white noise data and plot it along with its ACF and PACF
+```{r}
+set.seed(1)
+w = rnorm(100)
+y = w
+Acf(y)
+pacf(y)
+```
+
+## 13. Generate random walk data and plot it along with its ACF and PACF
+```{r}
+set.seed(1)
+w = rnorm(100)
+y = w
+for (t in 2:100){
+  y[t] = y[t-1] +w[t]
+}
+plot(y, type = 'l')
+Acf(y)
+pacf(y)
+```
+
+## 14. Difference the random walk data once and plot its ACF
+```{r}
+acf(diff(y))
+```
+
+## 15. Load the Adjusted Close prices for the Microsoft stock and plot using ggplot
+```{r}
+# Load data into xts object
+getSymbols('MSFT', src = 'yahoo')
+ 
+# Convert xts object into dataframe
+df_msft = fortify(MSFT)
+ 
+# Convert Index column to POSIXct
+df_msft$Index = ymd(df_msft$Index, tz = 'UTC')
+ 
+# Convert to xts object
+xts_msft = xts(df_msft[, -1], order.by = df_msft$Index)
+ 
+# Plot the time series
+ggplot(data= df_msft) +
+  geom_line(aes(x = Index, y = MSFT.Adjusted), color = 'blue')  +
+   scale_x_datetime(expand = c(0,0),  labels = date_format("%Y-%m", tz = 'UTC'), breaks = seq(min(index(xts_msft)), max(index(xts_msft)), by = "1 year")) +
+  labs(title = "Adjusted Close Price for MSFT Stock", x = "Date", y = "ACP") +
+  My_Theme
+```
+
+## 16. Check if the Adjusted Close prices for the Microsoft stock can be modeled as a random walk
+```{r}
+Acf()
+```
+
+## 17. User-defined function for simulating a p-th order autoregressive process referred to as AR(p)
+```{r}
+generate_AR = function(n, alphas) {
+  p = length(alphas)  # AR order
+  w = rnorm(n)  # Generate Gaussian white noise
+  y = w
+
+  # Generate AR(p) series
+  for (t in (p + 1):n) {
+    y[t] <- sum(alphas * rev(y[(t - p):(t - 1)])) + w[t]
+  }
+
+  return(y)
+}
+```
+
+## 18. Simulate the following autoregressive (AR) processes and check if they are stationary or not using the ACF plot
+```{r}
+set.seed(1)
+# AR(1) with alpha_1 = 1 is simply a random walk
+generate_AR(100, c(1))
+
+# AR(1) with alpha_1 = 0.25
+
+
+# AR(1) with alpha_1 = 0.6
+
+
+# AR(2) with alpha_1 = 0.5 and alpha_2 = 0.5
+
+```
+
+## 19. Simulate an AR(2) process with alpha_1 = 0.5 and alpha_2 = 0.5, and fit an autoregressive model on the simulated data
+```{r}
+set.seed(1)
+y = generate_AR(100, c(0.5, 0.5))
+model_ar = ar(y, method = "mle")
+model_ar$order
+model_ar$asy.var
+#model_ar$ar[1] + c(-1.96, 1.96)*sqrt(model_ar$asy.var[1,])
+```
+
+## 20. Investigate Amazon stock's Closing Price using an autoregressive (AR) model
+```{r}
+#getSymbols('AMZN', src = 'yahoo')
+plot(AMZN$AMZN.Close)
+plot(log(AMZN$AMZN.Close))
+y = diff(log(AMZN$AMZN.Close))
+Acf(y)
+model_ar = ar(y, na.action = na.omit)
+model_ar$order
+
+```
+
+## 22. Simulate a moving average (MA) processes and check their PACF plot
+```{r}
+
+```
+
+## 23. Investigate Amazon stock's Closing Price using a moving average (MA) model
+```{r}
+
+```
+
+## 24. Investigate Amazon stock's Closing Price using an AR-integrated MA (ARIMA) model
+```{r}
+
+```
+
+
+
+
+
+
