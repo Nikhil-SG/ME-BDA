@@ -1,0 +1,226 @@
+locality,area,rent,price_per_sqft,facing,BHK,bathrooms,parking
+BTM Layout,565,20060,6195,North-West,1,1,Bike
+BTM Layout,1837,97434,9254,East,3,3,Bike and Car
+BTM Layout,1280,54448,7422,East,2,2,Car
+BTM Layout,2220,117000,9234,North,3,3,Bike and Car
+BTM Layout,1113,34388,5391,East,2,2,Bike and Car
+BTM Layout,1332,36394,4767,West,2,2,Bike and Car
+BTM Layout,1815,112000,10744,North-East,3,2,Car
+BTM Layout,1400,41266,5143,South-East,2,2,Bike and Car
+BTM Layout,3006,129000,7485,East,4,5,Bike and Car
+BTM Layout,1600,92849,10125,South,3,2,Bike and Car
+BTM Layout,1200,42985,6250,West,2,2,Bike and Car
+BTM Layout,1000,34388,6000,West,2,2,Bike and Car
+BTM Layout,1200,40120,5833,North,2,2,Bike and Car
+BTM Layout,4650,229000,8602,East,4,13,Bike
+BTM Layout,1060,31522,5189,North,3,2,Bike and Car
+BTM Layout,1325,71643,9434,East,3,2,Bike and Car
+BTM Layout,1025,32096,5463,North,2,2,Bike and Car
+BTM Layout,2200,71643,5682,East,3,3,Bike and Car
+BTM Layout,920,22925,4348,North,2,2,Bike and Car
+BTM Layout,1030,27510,4660,North,2,2,Bike and Car
+BTM Layout,1020,33242,5686,West,2,2,Car
+BTM Layout,1650,42985,4545,East,3,2,Car
+BTM Layout,1100,51583,8182,West,2,2,Bike and Car
+BTM Layout,1185,40120,5907,North,3,2,Bike and Car
+BTM Layout,2220,117000,9234,North,3,3,Bike and Car
+Attibele,765,18340,4183,East,1,1,Bike and Car
+Attibele,656,13182,3506,North-East,2,2,Bike and Car
+Attibele,837,18913,3943,East,2,2,Car
+Attibele,1347,21091,2732,North,3,2,Bike and Car
+Attibele,691,20060,5065,East,2,1,Bike and Car
+Attibele,750,15474,3600,East,2,2,Bike and Car
+Attibele,1069,21206,3461,North,2,2,Bike and Car
+Attibele,1007,25791,4469,East,2,2,Bike and Car
+Attibele,1258,25791,3577,East,2,2,Bike and Car
+Attibele,1169,25791,3849,West,2,2,Bike and Car
+Attibele,1350,26937,3481,North-East,2,2,Car
+Attibele,1175,25218,3745,East,2,2,Bike and Car
+Attibele,2900,54448,3276,North,4,4,Car
+Attibele,1060,20633,3396,South,2,2,Bike and Car
+Attibele,1007,31522,5462,East,2,2,Bike and Car
+Attibele,1210,21779,3140,North-East,3,3,Bike and Car
+Attibele,880,16048,3182,North-East,2,2,Bike and Car
+Attibele,810,18340,3951,East,2,2,Bike and Car
+Attibele,800,14328,3125,North,2,2,Bike and Car
+Attibele,750,12609,2933,North,2,1,Bike and Car
+Attibele,2000,13468,1175,East,2,1,Bike and Car
+Attibele,615,17194,4878,East,2,1,Bike and Car
+Attibele,630,18340,5079,East,2,2,Car
+Attibele,1200,28657,4167,North,3,3,Bike and Car
+Attibele,750,20060,4667,North-East,2,2,Bike and Car
+K R Puram ,1164,37254,5584,West,2,2,Bike and Car
+K R Puram ,1138,35534,5448,West,2,2,Bike and Car
+K R Puram ,1139,36108,5531,West,2,2,Bike and Car
+K R Puram ,1139,36108,5531,West,2,2,Bike and Car
+K R Puram ,1139,36108,5531,West,2,2,Bike and Car
+K R Puram ,1133,36108,5560,West,2,2,Bike and Car
+K R Puram ,1228,36108,5130,East,2,2,Bike and Car
+K R Puram ,1064,33886,5557,West,2,2,Bike and Car
+K R Puram ,1138,35534,5448,West,2,2,Bike and Car
+K R Puram ,1295,44203,5956,East,3,2,Bike and Car
+K R Puram ,1425,47651,5834,East,3,2,Bike and Car
+K R Puram ,1339,41839,5452,East,3,2,Bike and Car
+K R Puram ,1075,35735,5800,West,2,2,Bike and Car
+K R Puram ,1339,40120,5228,East,3,2,Bike and Car
+K R Puram ,1113,37445,5870,West,2,2,Bike and Car
+K R Puram ,1139,37254,5707,West,2,2,Bike and Car
+K R Puram ,1139,37254,5707,West,2,2,Bike and Car
+K R Puram ,1295,43623,5877,East,3,2,Bike and Car
+K R Puram ,1151,35534,5387,West,2,2,Bike and Car
+K R Puram ,1139,35534,5443,West,2,2,Bike and Car
+K R Puram ,1075,34512,5601,West,2,2,Bike and Car
+K R Puram ,1113,36229,5679,West,2,2,Bike and Car
+K R Puram ,1143,38471,5873,North,2,2,Bike and Car
+K R Puram ,1064,35534,5827,West,2,2,Bike and Car
+K R Puram ,1143,38523,5881,North,2,2,Bike and Car
+Marathahalli,7200,126000,3056,,4,26,Bike
+Marathahalli,4200,74508,3095,North,4,16,
+Marathahalli,1550,46997,5290,West,3,3,Bike and Car
+Marathahalli,1120,37254,5804,West,2,2,Bike and Car
+Marathahalli,1560,50150,5609,East,3,3,Bike and Car
+Marathahalli,1560,54448,6090,East,3,3,Bike and Car
+Marathahalli,1110,42412,6667,East,2,2,Bike and Car
+Marathahalli,1050,31522,5238,East,2,2,Car
+Marathahalli,1500,42985,5000,West,3,3,Bike and Car
+Marathahalli,950,25791,4737,East,2,2,Bike and Car
+Marathahalli,1600,51583,5625,West,3,3,Bike and Car
+Marathahalli,1302,48717,6528,East,2,2,Bike and Car
+Marathahalli,1450,48717,5862,West,3,3,Bike and Car
+Marathahalli,1170,39833,5940,North,2,2,Bike and Car
+Marathahalli,1000,28657,5000,East,2,2,Bike
+Marathahalli,1000,37254,6500,North,2,2,Bike and Car
+Marathahalli,1650,45851,4848,East,3,3,Bike and Car
+Marathahalli,1640,48717,5183,North,3,2,Bike and Car
+Marathahalli,1168,31522,4709,South,2,2,Car
+Marathahalli,2400,68777,5000,,4,4,Bike
+Marathahalli,1145,31522,4803,East,2,2,Bike and Car
+Marathahalli,1204,42412,6146,East,2,2,Bike and Car
+Marathahalli,1204,37953,5500,West,2,2,Bike and Car
+Marathahalli,1300,28657,3846,North,2,2,Bike
+Marathahalli,1034,24072,4062,West,2,2,Car
+Indiranagar,2200,235000,18636,North,3,3,Bike and Car
+Indiranagar,2750,163000,10364,North,4,3,Bike and Car
+Indiranagar,1100,51583,8182,North,2,2,Bike and Car
+Indiranagar,2450,201000,14286,,3,3,Bike and Car
+Indiranagar,1780,84825,8315,North-West,3,3,Bike and Car
+Indiranagar,1780,91703,8989,South,3,3,Bike and Car
+Indiranagar,1300,65911,8846,East,3,2,Bike and Car
+Indiranagar,1400,40120,5000,North,2,2,Bike and Car
+Indiranagar,925,37254,7027,North,2,2,Car
+Indiranagar,1475,120000,14237,East,3,2,Bike and Car
+Indiranagar,1200,57314,8333,North-West,2,2,Bike and Car
+Indiranagar,1650,85971,9091,,3,3,Bike and Car
+Indiranagar,1800,25791,2500,East,4,3,Bike and Car
+Indiranagar,1445,54448,6574,South-East,3,2,Bike and Car
+Indiranagar,1900,103000,9474,East,3,2,Bike and Car
+Indiranagar,1230,71643,10163,West,2,2,
+Indiranagar,1165,71643,10730,,2,2,Bike and Car
+Indiranagar,1437,81386,9882,North,2,2,Car
+Indiranagar,1100,48717,7727,North,2,2,Bike and Car
+Indiranagar,2258,115000,8902,East,3,4,Bike and Car
+Indiranagar,1331,48717,6386,East,3,2,Bike and Car
+Indiranagar,2700,126000,8148,South,4,6,Bike and Car
+Indiranagar,1070,71643,11682,South,2,2,Car
+Indiranagar,1250,65911,9200,South,2,2,Bike and Car
+Indiranagar,1243,56741,7965,South,3,2,Bike and Car
+Electronic City,1200,29803,4333,West,2,2,Car
+Electronic City,900,22925,4444,West,2,2,Bike and Car
+Electronic City,720,31522,7639,,1,1,Bike and Car
+Electronic City,1395,55595,6953,West,3,2,Bike and Car
+Electronic City,1211,52156,7514,East,2,2,Bike and Car
+Electronic City,1175,38973,5787,East,2,2,Bike and Car
+Electronic City,1170,37254,5556,East,2,2,Bike and Car
+Electronic City,1500,41266,4800,North,3,2,Bike and Car
+Electronic City,1350,37254,4815,West,3,3,Car
+Electronic City,1470,56741,6735,South,3,3,Car
+Electronic City,540,10603,3426,North,1,1,Bike
+Electronic City,1270,54448,7480,North,2,2,Bike and Car
+Electronic City,1850,49290,4649,,3,2,Car
+Electronic City,990,40120,7071,East,2,2,Car
+Electronic City,1558,41266,4621,North,3,3,Bike and Car
+Electronic City,1585,60180,6625,East,3,3,Bike and Car
+Electronic City,1360,29803,3824,West,3,2,Bike and Car
+Electronic City,995,28084,4925,East,2,2,Bike and Car
+Electronic City,965,22925,4145,West,2,2,Car
+Electronic City,1220,30376,4344,East,3,2,Bike and Car
+Electronic City,860,33242,6744,,2,1,Bike and Car
+Electronic City,1010,38572,6663,,3,2,Bike and Car
+Electronic City,1365,60180,7692,North-East,2,2,Bike and Car
+Electronic City,1108,39546,6227,East,2,2,Bike and Car
+Electronic City,1325,37254,4906,North,2,2,Bike and Car
+Yalahanka,1100,34388,5455,,3,3,Bike and Car
+Yalahanka,1100,28657,4545,East,2,2,Bike and Car
+Yalahanka,1580,57314,6329,West,3,2,Bike and Car
+Yalahanka,550,12609,4000,North,1,1,Bike and Car
+Yalahanka,1275,42985,5882,North,3,2,Bike and Car
+Yalahanka,600,13755,4000,North,1,2,Bike and Car
+Yalahanka,1080,28657,4630,East,3,2,
+Yalahanka,475,11119,4084,West,1,1,Bike
+Yalahanka,485,11749,4227,East,1,1,Bike and Car
+Yalahanka,700,10889,2714,North-East,1,1,Bike and Car
+Yalahanka,450,10316,4000,South,1,1,
+Yalahanka,1250,39546,5520,North-East,3,2,Bike and Car
+Yalahanka,500,11462,4000,East,1,2,Bike and Car
+Yalahanka,750,25791,6000,North-West,2,2,Bike
+Yalahanka,1500,42985,5000,East,2,2,Bike and Car
+Yalahanka,1556,82864,9292,,3,3,Bike and Car
+Yalahanka,1349,72658,9398,,2,2,Bike and Car
+Yalahanka,1350,54448,7037,East,3,2,Car
+Yalahanka,2661,100000,6576,East,3,3,Car
+Yalahanka,1096,57314,9124,North,2,2,Car
+Yalahanka,468,6877,2564,South,1,1,Bike
+Yalahanka,1390,42985,5396,East,2,2,Bike and Car
+Yalahanka,1065,31522,5164,North,2,2,Bike and Car
+Yalahanka,1800,51583,5000,East,4,4,Bike
+Yalahanka,1150,54448,8261,North-East,2,2,Bike and Car
+Malleshwaram,5200,344000,11538,,4,14,
+Malleshwaram,1582,115000,12642,South,3,3,Car
+Malleshwaram,937,48717,9072,West,2,2,Bike and Car
+Malleshwaram,882,42985,8503,North,2,2,Bike and Car
+Malleshwaram,1850,91703,8649,South,4,4,Bike and Car
+Malleshwaram,1770,129000,12712,East,3,4,Bike and Car
+Malleshwaram,1800,132000,12778,,3,4,Bike and Car
+Malleshwaram,1550,112000,12581,East,3,3,Bike and Car
+Malleshwaram,900,48717,9444,East,2,1,Bike and Car
+Malleshwaram,1150,85971,13043,West,3,2,Bike and Car
+Malleshwaram,600,22925,6667,West,1,1,
+Malleshwaram,965,63045,11399,East,2,2,Car
+Malleshwaram,1250,68777,9600,North,2,2,Bike and Car
+Malleshwaram,1960,80240,7143,East,3,3,Car
+Malleshwaram,1960,91703,8163,East,3,3,Bike and Car
+Malleshwaram,1185,54448,8017,East,2,2,Bike and Car
+Malleshwaram,950,54448,10000,North,2,2,Bike and Car
+Malleshwaram,1400,85971,10714,East,3,2,Bike and Car
+Malleshwaram,700,42985,10714,North-East,2,2,Bike and Car
+Malleshwaram,650,25791,6923,South,2,2,Bike and Car
+Malleshwaram,1200,66484,9667,South-East,3,2,Bike and Car
+Malleshwaram,750,48717,11333,South,2,2,Car
+Malleshwaram,2016,85971,7440,East,4,4,Car
+Malleshwaram,900,39546,7667,East,2,1,Car
+Malleshwaram,850,42985,8824,South,2,2,Bike and Car
+Jayanagar,1990,201000,17588,South,3,3,Bike and Car
+Jayanagar,1420,71643,8803,North,3,2,
+Jayanagar,1200,74508,10833,North,2,2,Bike and Car
+Jayanagar,2628,172000,11416,South,3,3,Bike and Car
+Jayanagar,1485,85971,10101,South-East,3,3,Bike and Car
+Jayanagar,4859,391000,14056,,4,4,Bike and Car
+Jayanagar,2037,169000,14433,,3,3,Bike and Car
+Jayanagar,2336,77374,5779,East,4,4,
+Jayanagar,2000,109000,9500,East,3,3,Bike and Car
+Jayanagar,1774,132000,12965,West,3,3,Car
+Jayanagar,4084,299000,12782,,4,4,Bike and Car
+Jayanagar,1100,53302,8455,North-West,2,2,Bike and Car
+Jayanagar,1100,31522,5000,East,2,3,Bike
+Jayanagar,1410,97434,12057,North,3,3,Bike and Car
+Jayanagar,1940,152000,13660,West,3,3,Bike and Car
+Jayanagar,1731,144000,14500,,2,2,Bike and Car
+Jayanagar,3223,229000,12411,East,4,4,Car
+Jayanagar,2495,201000,14028,East,4,4,Bike and Car
+Jayanagar,850,51583,10588,North-East,2,2,Bike and Car
+Jayanagar,1200,42985,6250,East,3,2,Bike and Car
+Jayanagar,1060,45851,7547,,2,2,Bike and Car
+Jayanagar,2000,85971,7500,East,3,3,Bike and Car
+Jayanagar,1340,77947,10149,East,3,2,Bike and Car
+Jayanagar,5100,430000,14706,East,4,5,Bike and Car
+Jayanagar,1340,74508,9701,East,3,2,Bike and Car

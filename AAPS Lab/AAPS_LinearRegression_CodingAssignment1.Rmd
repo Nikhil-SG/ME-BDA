@@ -1,0 +1,297 @@
+---
+title: "Linear Regression Coding Assignment-1"
+editor_options:
+  chunk_output_type: console
+output:
+  pdf_document: default
+  html_notebook: default
+  word_document: default
+---
+
+```{r}
+# Load essential libraries
+library(ggplot2)
+library(dplyr)
+```
+
+```{r}
+# Set ggplot theme for plotting
+My_Theme = theme(axis.text.x = element_text(size = 9),
+   axis.text.y = element_text(size = 9),
+   axis.title.x = element_text(size = 11),
+   axis.title.y = element_text(size = 11),
+   plot.title = element_text(size = 12, hjust = 0.5, face = "bold"))
+```   
+
+```{r}
+# Load the house price dataset
+hData = read.csv("Data/houseprices.csv")
+str(hData)
+```
+
+```{r}
+hData = read.csv('Data/houseprices.csv', header = TRUE, stringsAsFactors = FALSE, na.strings = c("", "NA", "Not Available", "not available"))
+str(hData)
+```
+
+
+```{r}
+# Convert 'locality', 'facing' and 'parking' columns to factors
+categorical_cols = c("locality", "facing", "parking")
+hData[categorical_cols] = lapply(hData[categorical_cols], as.factor)
+str(hData)
+```
+
+```{r}
+# Continuous columns
+continuous_cols = setdiff(colnames(hData), categorical_cols)
+```
+
+```{r}
+# Plot percentage of NAs in each column of the data frame
+hData_NA = setNames(stack(sapply(hData, function(x){(sum(is.na(x))/length(x))*100}))[2:1], c('Feature','Value'))
+p = ggplot(data = hData_NA, aes(x = Feature, y = Value)) +
+  geom_bar(stat = 'identity', fill = 'steelblue', width = 0.3) +
+  theme(text = element_text(size = 14, face = 'bold'),
+  axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5)) +
+  xlab('') + ylab('Percentage') +
+  ggtitle('Percentage of NAs across all features')
+p
+```
+
+```{r}
+categorical_cols1 = c('facing', 'parking')
+# Add NA as a factor level for categorical columns facing and parking only
+hData[categorical_cols1] = lapply(hData[categorical_cols1], addNA)
+str(hData)
+```
+
+```{r}
+# Calculate the mean and standard deviation of rent
+mean_rent <- mean(hData$rent, na.rm = TRUE)
+sd_rent <- sd(hData$rent, na.rm = TRUE)
+
+# Create histogram
+p = ggplot(data = hData) +
+  geom_histogram(aes(x = rent, y = after_stat(count)), 
+                 breaks = seq(mean_rent - 4 * sd_rent, mean_rent + 4 * sd_rent, by = sd_rent), 
+                 color = 'black', fill = 'blue') +
+  labs(x = 'Rent', y = 'Frequency') +
+  ggtitle('Histogram of house rents') +
+  My_Theme
+
+# Display the plot
+p
+```
+
+```{r}
+# Build a linear model to predict price per square feet as a function of rent. How accurate is the model?
+model = lm(data=hData, price_per_sqft ~ rent)
+summary(model)
+```
+
+The model is explaining 0.5531 of varinace for this given dataset the model is about 55% accurate
+
+```{r}
+# Make a histogram of log-transformed rent values
+hData['logrent'] = log(hData$rent)
+p = ggplot(data = hData) +
+  geom_histogram(aes(x = logrent), bins = 30, color = 'black', fill = 'blue') +
+  labs(x = 'Log-transformed Rent', y = 'Frequency') +
+  ggtitle('Histogram of Log-transformed Rent Values') +
+  My_Theme  # You can replace this with your custom theme (e.g., My_Theme)
+
+# Display the plot
+p
+```
+
+```{r}
+# Build a linear model to predict price per square feet as a function of logrent. Did log-transforming rent help improve the model accuracy?
+model = lm(data=hData, price_per_sqft ~ logrent)
+summary(model) 
+```
+
+The model accuracy has imporved by 12 % the accuracy of the model obtained after using logrent as predictor is about 67% 
+
+```{r}
+# Build a linear model to predict log of price per square feet as a function of logrent. Did log-transforming the response variable price per square feet improve the model accuracy?
+hData['logprice_per_sqft'] = log(hData$price_per_sqft)
+model = lm(logprice_per_sqft ~ logrent, data = hData)
+summary(model)
+```
+
+The model accuracy has decreased by 1 % the accuracy of the model obtained after using log-transforming the response variable price per square feet as response is about 66%, SO the models accuracy is decreased.
+
+```{r}
+# Build a linear model to predict sqrt of price per square feet as a function of logrent. Did sqrt-transforming the response variable price per square feet improve the model accuracy?
+hData['sqrtprice_per_sqft'] = sqrt(hData$price_per_sqft)
+model = lm(sqrtprice_per_sqft ~ logrent, data = hData)
+summary(model)
+```
+
+The model accuracy has imporved by 1 % the accuracy of the model obtained after using sqrt-transforming the response variable price per square feet as response is about 68%, SO the models accuracy is Increased.
+
+```{r}
+# Build a linear model to predict price per sqft as a function of area and rent. Did adding area as an additional predictor improve model accuracy (compared to only rent as the predictor)? Also, interpret the coefficient estimates for area and rent practically.
+model = lm(price_per_sqft ~ area + rent, data = hData)
+summary(model)
+```
+
+Only rent as the predictor the models accuracy was 55% after using the area as a new predictor the models accuracy is increased to 73%.
+
+the coefficent estimates for area beta1 is that the change in the price_per_sqft of a house when the area of the house is increased by 1 unit (1 sqr feet) and by keeping the rent predictor fixed.
+
+the coefficent estimates for area beta2 is that the change in the price per sqft of a house when the rent of the house is increased by 1 unit ($ increase) and by keep the area predictor fixed.
+
+```{r}
+# Build a linear model to predict sqrt of price per sqft as a function of area and logrent. Did adding area as an additional predictor improve model accuracy (compared to only logrent as the predictor)? Also, interpret the coefficient estimates for area and logrent practically.
+model = lm(sqrtprice_per_sqft ~ area + logrent, data = hData)
+summary(model)
+```
+
+the model accuracy is increased when compared to only logrent as the predictor.
+
+the coefficent estimates for area beta1 is that the change in the sqrt_price_per_sqft of a house when the area of the house is increased by 1 unit (1 sqr feet) and by keeping the logrent predictor fixed.
+
+the coefficent estimates for area beta2 is that the change in the sqrt_price per_sqft of a house when the logrent of the house is increased by 1 unit ($ increase) and by keep the area predictor fixed.
+
+```{r}
+# Build a linear model to predict sqrt of price per sqft as a function of logarea and logrent. Did log-transforming area improve model accuracy?
+hData['logarea'] = log(hData$area)
+model = lm(sqrt(price_per_sqft) ~ logarea + logrent, data = hData)
+summary(model)
+```
+
+The model accuracy is improved to 97%.
+
+```{r}
+# Build a linear model to predict price per sqft as a function of area, rent, and parking (compared to just using area and rent as predictors). Did adding parking as an additional predictor improve model accuracy?
+model = lm(price_per_sqft ~ area + rent, data = hData)
+summary(model)  
+model1 = lm(price_per_sqft ~ area + rent + parking, data = hData)
+summary(model1)
+```
+
+The model accuracy is the same even after add the parking as a new predictor.
+
+```{r}
+# Build a linear model to predict sqrt of price per sqft as a function of logarea, logrent, and locality. Did adding locality as an additional predictor improve model accuracy (compared to just using logarea and logrent as predictors)?
+model = lm(sqrt(price_per_sqft) ~ logarea + logrent + locality, data = hData)
+summary(model)
+```
+
+The model accuracy is improved to 98%.
+
+```{r}
+# Build a linear model to predict price per sqft as a function of area, rent, and parking. How many levels does the categorical feature parking have? How many new variables are introduced for the categorical variable parking? Interpret all regression coefficient estimates except the intercept coefficient estimate beta0 practically. Do the p-values suggest any insignificant features (that is, features which probably don't have a linear relationship with the response variable?
+levels_parking = levels(as.factor(hData$parking))
+num_levels = length(levels_parking)
+model = lm(price_per_sqft ~ area + rent + parking, data = hData)
+summary(model)
+```
+
+parking have 4 levels parkingBike is the reference.
+parking 3 new variables are introduced.
+
+the coefficent estimates for area beta1 is that the change in the price_per_sqft of a house when the area of the house is increased by 1 unit (1 sqr feet) and by keeping the all other predictor fixed.
+
+the coefficent estimates for area beta2 is that the change in the price_per_sqft of a house when the rent of the house is increased by 1 unit ($ increased) and by keeping the all other predictor fixed.
+
+the coefficent estimates for area beta3 is that the change in the price_per_sqft of a house when the house parking as Bike and Car parking availabity and by keeping the all other predictor fixed.
+
+the coefficent estimates for area beta4 is that the change in the price_per_sqft of a house when the house parking as only Car parking availabity and by keeping the all other predictor fixed.
+
+the coefficent estimates for area beta4 is that the change in the price_per_sqft of a house when the house as no parking availabity and by keeping the all other predictor fixed.
+
+Yes parking perdictor as less significant to the model.
+
+```{r}
+# Create new columns corresponding to scaled versions of the continuous columns
+continuous_cols = c("area", "rent", "price_per_sqft")
+hData[paste0('scaled_', continuous_cols)] = lapply(hData[continuous_cols], scale)
+str(hData)
+```
+
+```{r}
+# Build a linear model to predict scaled price per sqft as a function of scaled area and scaled rent. Compare this with the model built using unscaled data: that is, predict price per sqft as a function of area and rent. Does scaling help?
+model = lm(price_per_sqft ~ area + rent, data= hData)
+summary(model)
+model_scaled = lm(scaled_price_per_sqft ~ scaled_area + scaled_rent, data = hData)
+summary(model_scaled)
+```
+
+the scaling of the predictors haven't imporved the model's accuracy.
+
+```{r}
+# Rebuild a linear model to predict sqrt of price per sqft as a function of logarea, logrent, and locality which we will evaluate using a train-test split of the dataset
+model = lm(data = hData, sqrtprice_per_sqft ~ logarea + logrent + locality)
+summary(model)
+```
+
+```{r}
+# Split data into train (80%) and test (20%) sets and evaluate model performance on train and test sets. Run this cell multiple times for a random splitting of the data into train and test sets and report the model performance on the resulting train and test sets. Is there much variability in the model performance across different test sets? If that is the case, then the model is not generalizing well and is overfitting the train set. Is it the case here?
+ind = sample(nrow(hData), size = floor(0.8 * nrow(hData)), replace = FALSE)
+hData_train = hData[ind, ]
+hData_test = hData[-ind, ]
+
+# Build the model using the training data
+model = lm(sqrtprice_per_sqft ~ logarea + logrent + locality, data = hData_train)
+
+# Calculate RMSE (Root Mean Squared Error) on train data
+train_error = sqrt(mean((hData_train$price_per_sqft - predict(model, hData_train))^2))
+
+# Calculate RMSE (Root Mean Squared Error) on test data
+test_error = sqrt(mean((hData_test$price_per_sqft - predict(model, hData_test))^2))
+
+# Print RMSE for train and test sets
+print(paste("Train RMSE: ", train_error))
+print(paste("Test RMSE: ", test_error))
+```
+
+there is no much variability in the model performance across different test sets setting the test error +/- 10 % to the train error.
+
+```{r}
+# Set a seed for reproducibility (optional, you can remove or change the seed each time for different splits)
+#set.seed(123)
+
+# Initialize vectors to store RMSE values
+train_errors <- numeric(10)
+test_errors <- numeric(10)
+
+# Repeat the model training and error calculation 10 times
+for (i in 1:10) {
+  
+  # Generate a new random sample for training data each time
+  ind <- sample(nrow(hData), size = floor(0.8 * nrow(hData)), replace = FALSE)
+  
+  # Split the data into training and test sets
+  hData_train <- hData[ind, ]
+  hData_test <- hData[-ind, ]
+  
+  # Build the model using the training data
+  model <- lm(sqrtprice_per_sqft ~ logarea + logrent + locality, data = hData_train)
+  
+  # Calculate RMSE (Root Mean Squared Error) on train data
+  train_error <- sqrt(mean((hData_train$price_per_sqft - predict(model, hData_train))^2))
+  
+  # Calculate RMSE (Root Mean Squared Error) on test data
+  test_error <- sqrt(mean((hData_test$price_per_sqft - predict(model, hData_test))^2))
+  
+  # Store the RMSE results in the vectors
+  train_errors[i] <- train_error
+  test_errors[i] <- test_error
+}
+
+# Print the RMSE results for each iteration
+for (i in 1:10) {
+  print(paste("Iteration ", i, " - Train RMSE: ", train_errors[i], " Test RMSE: ", test_errors[i]))
+}
+
+# Optionally, you can calculate the average RMSE across all iterations
+avg_train_error <- mean(train_errors)
+avg_test_error <- mean(test_errors)
+
+print(paste("Average Train RMSE: ", avg_train_error))
+print(paste("Average Test RMSE: ", avg_test_error))
+```
+
