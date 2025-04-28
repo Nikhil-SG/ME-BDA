@@ -1,0 +1,198 @@
+-- PostgreSQL version of the CO schema
+
+-- ************************************************************
+-- Section 1: Table Creation
+-- ************************************************************
+
+-- Customers table
+CREATE TABLE customers (
+    customer_id     SERIAL PRIMARY KEY,
+    email_address   VARCHAR(255) NOT NULL,
+    full_name       VARCHAR(255) NOT NULL
+);
+
+ALTER TABLE customers ADD CONSTRAINT customers_email_u UNIQUE (email_address);
+
+-- Stores table
+CREATE TABLE stores (
+    store_id            SERIAL PRIMARY KEY,
+    store_name          VARCHAR(255) NOT NULL,
+    web_address         VARCHAR(100),
+    physical_address    VARCHAR(512),
+    latitude            NUMERIC(9,6),
+    longitude           NUMERIC(9,6),
+    logo                BYTEA,
+    logo_mime_type      VARCHAR(512),
+    logo_filename       VARCHAR(512),
+    logo_charset        VARCHAR(512),
+    logo_last_updated   TIMESTAMP
+);
+
+ALTER TABLE stores ADD CONSTRAINT store_name_u UNIQUE (store_name);
+ALTER TABLE stores ADD CONSTRAINT store_at_least_one_address_c CHECK (
+    web_address IS NOT NULL OR physical_address IS NOT NULL
+);
+
+-- Products table
+CREATE TABLE products (
+    product_id           SERIAL PRIMARY KEY,
+    product_name         VARCHAR(255) NOT NULL,
+    unit_price           NUMERIC(10,2),
+    product_details      JSONB,
+    product_image        BYTEA,
+    image_mime_type      VARCHAR(512),
+    image_filename       VARCHAR(512),
+    image_charset        VARCHAR(512),
+    image_last_updated   TIMESTAMP
+);
+
+ALTER TABLE products ADD CONSTRAINT products_json_c CHECK (jsonb_typeof(product_details) = 'object');
+
+-- Orders table
+CREATE TABLE orders (
+    order_id       SERIAL PRIMARY KEY,
+    order_tms      TIMESTAMP NOT NULL,
+    customer_id    INTEGER NOT NULL,
+    order_status   VARCHAR(10) NOT NULL,
+    store_id       INTEGER NOT NULL
+);
+
+ALTER TABLE orders ADD CONSTRAINT orders_customer_id_fk
+    FOREIGN KEY (customer_id) REFERENCES customers(customer_id);
+ALTER TABLE orders ADD CONSTRAINT orders_status_c
+    CHECK (order_status IN ('CANCELLED','COMPLETE','OPEN','PAID','REFUNDED','SHIPPED'));
+ALTER TABLE orders ADD CONSTRAINT orders_store_id_fk 
+    FOREIGN KEY (store_id) REFERENCES stores(store_id);
+
+-- Shipments table
+CREATE TABLE shipments (
+    shipment_id        SERIAL PRIMARY KEY,
+    store_id           INTEGER NOT NULL,
+    customer_id        INTEGER NOT NULL,
+    delivery_address   VARCHAR(512) NOT NULL,
+    shipment_status    VARCHAR(100) NOT NULL
+);
+
+ALTER TABLE shipments ADD CONSTRAINT shipments_store_id_fk
+    FOREIGN KEY (store_id) REFERENCES stores(store_id);
+ALTER TABLE shipments ADD CONSTRAINT shipments_customer_id_fk
+    FOREIGN KEY (customer_id) REFERENCES customers(customer_id);
+ALTER TABLE shipments ADD CONSTRAINT shipment_status_c
+    CHECK (shipment_status IN ('CREATED', 'SHIPPED', 'IN-TRANSIT', 'DELIVERED'));
+
+-- Order_items table
+CREATE TABLE order_items (
+    order_id       INTEGER NOT NULL,
+    line_item_id   INTEGER NOT NULL,
+    product_id     INTEGER NOT NULL,
+    unit_price     NUMERIC(10,2) NOT NULL,
+    quantity       INTEGER NOT NULL,
+    shipment_id    INTEGER,
+    PRIMARY KEY (order_id, line_item_id)
+);
+
+ALTER TABLE order_items ADD CONSTRAINT order_items_order_id_fk
+    FOREIGN KEY (order_id) REFERENCES orders(order_id);
+ALTER TABLE order_items ADD CONSTRAINT order_items_shipment_id_fk
+    FOREIGN KEY (shipment_id) REFERENCES shipments(shipment_id);
+ALTER TABLE order_items ADD CONSTRAINT order_items_product_id_fk
+    FOREIGN KEY (product_id) REFERENCES products(product_id);
+ALTER TABLE order_items ADD CONSTRAINT order_items_product_u UNIQUE (product_id, order_id);
+
+-- Inventory table
+CREATE TABLE inventory (
+    inventory_id        SERIAL PRIMARY KEY,
+    store_id            INTEGER NOT NULL,
+    product_id          INTEGER NOT NULL,
+    product_inventory   INTEGER NOT NULL
+);
+
+ALTER TABLE inventory ADD CONSTRAINT inventory_store_product_u UNIQUE (store_id, product_id);
+ALTER TABLE inventory ADD CONSTRAINT inventory_store_id_fk
+    FOREIGN KEY (store_id) REFERENCES stores(store_id);
+ALTER TABLE inventory ADD CONSTRAINT inventory_product_id_fk
+    FOREIGN KEY (product_id) REFERENCES products(product_id);
+
+-- ************************************************************
+-- Section 2: Index Creation
+-- ************************************************************
+
+CREATE INDEX customers_name_i ON customers(full_name);
+CREATE INDEX orders_customer_id_i ON orders(customer_id);
+CREATE INDEX orders_store_id_i ON orders(store_id);
+CREATE INDEX shipments_store_id_i ON shipments(store_id);
+CREATE INDEX shipments_customer_id_i ON shipments(customer_id);
+CREATE INDEX order_items_shipment_id_i ON order_items(shipment_id);
+CREATE INDEX inventory_product_id_i ON inventory(product_id);
+
+-- ************************************************************
+-- Section 3: View Creation (PostgreSQL version)
+-- ************************************************************
+
+-- Customer order products view
+CREATE OR REPLACE VIEW customer_order_products AS
+SELECT 
+    o.order_id, 
+    o.order_tms, 
+    o.order_status,
+    c.customer_id, 
+    c.email_address, 
+    c.full_name,
+    SUM(oi.quantity * oi.unit_price) AS order_total,
+    STRING_AGG(p.product_name, ', ' ORDER BY oi.line_item_id) AS items
+FROM orders o
+JOIN order_items oi ON o.order_id = oi.order_id
+JOIN customers c ON o.customer_id = c.customer_id
+JOIN products p ON oi.product_id = p.product_id
+GROUP BY o.order_id, o.order_tms, o.order_status,
+         c.customer_id, c.email_address, c.full_name;
+
+-- Store orders view
+CREATE OR REPLACE VIEW store_orders AS
+SELECT 
+    CASE
+        WHEN GROUPING(store_name) = 1 AND GROUPING(order_status) = 0 THEN 'STATUS TOTAL'
+        WHEN GROUPING(store_name) = 0 AND GROUPING(order_status) = 1 THEN 'STORE TOTAL'
+        WHEN GROUPING(store_name) = 1 AND GROUPING(order_status) = 1 THEN 'GRAND TOTAL'
+    END AS total,
+    s.store_name,
+    COALESCE(s.web_address, s.physical_address) AS address,
+    s.latitude, 
+    s.longitude,
+    o.order_status,
+    COUNT(DISTINCT o.order_id) AS order_count,
+    SUM(oi.quantity * oi.unit_price) AS total_sales
+FROM stores s
+JOIN orders o ON s.store_id = o.store_id
+JOIN order_items oi ON o.order_id = oi.order_id
+GROUP BY GROUPING SETS (
+    (s.store_name, COALESCE(s.web_address, s.physical_address), s.latitude, s.longitude),
+    (s.store_name, COALESCE(s.web_address, s.physical_address), s.latitude, s.longitude, o.order_status),
+    (o.order_status),
+    ()
+);
+
+-- Product reviews view
+CREATE OR REPLACE VIEW product_reviews AS
+SELECT 
+    p.product_name, 
+    (review->>'rating')::INTEGER AS rating,
+    ROUND(AVG((review->>'rating')::NUMERIC) OVER (
+        PARTITION BY product_name
+    ), 2) AS avg_rating,
+    review->>'review' AS review
+FROM products p,
+     jsonb_array_elements(p.product_details->'reviews') AS review;
+
+-- Product orders view
+CREATE OR REPLACE VIEW product_orders AS
+SELECT 
+    p.product_name, 
+    o.order_status,
+    SUM(oi.quantity * oi.unit_price) AS total_sales,
+    COUNT(*) AS order_count
+FROM orders o
+JOIN order_items oi ON o.order_id = oi.order_id
+JOIN customers c ON o.customer_id = c.customer_id
+JOIN products p ON oi.product_id = p.product_id
+GROUP BY p.product_name, o.order_status;
