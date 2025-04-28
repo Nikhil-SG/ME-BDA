@@ -1,0 +1,101 @@
+-- Populate Users table
+INSERT INTO Users (first_name, last_name, email, date_of_birth) VALUES
+('Sanjay', 'Reddy', 'sanjay.reddy@example.com', '2001-09-03'),
+('Chandana', 'Ramanahali', 'chandana.ramanahali@example.com', '2002-07-10'),
+('Sakshi', 'Mayya', 'sakshi.mayya@example.com', '2000-11-03'),
+('Bhoomika', 'Hegde', 'bhoomika.hegde@example.com', '2001-10-02'),
+('Prabal', 'Shetty', 'prabal.shetty@example.com', '1998-11-12'),
+('Sneha', 'Shet', 'sneha.shet@example.com', '2002-07-18'),
+('Nikhil', 'Gouda', 'nikhil.gouda@example.com', '2002-06-13'),
+('Akash', 'Chitragar', 'akash.chitragar@example.com', '2002-12-19'),
+('Nithik', 'Joseph', 'nithik.joseph@example.com', '2001-06-05'),
+('ADITHYA', 'ACHARYA', 'adithya.acharya@example.com', '1987-01-20'),
+('Hardik', 'Prabhu', 'hardik.prabhu@example.com', '2002-04-06'),
+('Suchitra', 'Desai', 'suchitra.desai@example.com', '2002-03-08'),
+('Akshat', 'Maurya', 'akshat.maurya@example.com', '2002-12-12'),
+('Archana', 'Halagannanavar', 'archana.halagannanavar@example.com', '2001-07-22'),
+('Deepak', 'Rao', 'deepak.rao@example.com', '1973-11-30'),
+('Devi', 'Prasad', 'devi.prasad@example.com', '1969-03-25'),
+('ASHOK', 'BONI', 'ashok.boni@example.com', '2000-05-17'),
+('Rohan', 'Devang', 'rohan.devang@example.com', '2001-08-10'),
+('Imraz', 'Ziya', 'imraz.ziya@example.com', '1994-09-05'),
+('PAVANKUMAR', 'NAYAK', 'pavankumar.nayak@example.com', '1997-12-06'),
+('Karthik', 'C', 'Karthik.C@example.com','1998-12-15');
+
+-- Populate Accounts table with random data
+INSERT INTO Accounts (user_id, account_type, balance, currency) VALUES
+(1,  'savings',   125000.00, 'INR'),
+(1,  'checking',   25000.00, 'INR'),
+(2,  'savings',    85000.00, 'INR'),
+(3,  'brokerage', 150000.00, 'INR'),
+(4,  'savings',    75000.00, 'INR'),
+(4,  'checking',   15000.00, 'INR'),
+(5,  'brokerage', 250000.00, 'INR'),
+(6,  'savings',    45000.00, 'INR'),
+(7,  'checking',   95000.00, 'INR'),
+(8,  'savings',   110000.00, 'INR'),
+(9,  'brokerage',  80000.00, 'INR'),
+(10, 'savings',   175000.00, 'INR'),
+(11, 'checking',   30000.00, 'INR'),
+(12, 'savings',    60000.00, 'INR'),
+(13, 'brokerage', 200000.00, 'INR'),
+(14, 'savings',    55000.00, 'INR'),
+(15, 'checking',   40000.00, 'INR'),
+(16, 'savings',   120000.00, 'INR'),
+(17, 'brokerage',  90000.00, 'INR'),
+(18, 'savings',    70000.00, 'INR'),
+(19, 'checking',   35000.00, 'INR'),
+(20, 'savings',   105000.00, 'INR');
+
+-- Populate Transactions table
+INSERT INTO Transactions (account_id, amount, transaction_type, description) VALUES
+(1,  15000.00, 'credit', 'Salary deposit'),
+(1,   5000.00, 'debit',  'Rent payment'),
+(2,   2500.00, 'debit',  'Grocery shopping'),
+(3,  10000.00, 'credit', 'Client payment'),
+(4,  25000.00, 'credit', 'Investment return'),
+(4,   8000.00, 'debit',  'Purchase stocks'),
+(5,   3500.00, 'debit',  'Utility bills'),
+(6,   4000.00, 'debit',  'Insurance premium'),
+(7,  12000.00, 'credit', 'Bonus payment'),
+(8,   7500.00, 'credit', 'Tax refund'),
+(9,   6000.00, 'debit',  'Online shopping'),
+(10,  9000.00, 'credit', 'Interest earned'),
+(11,  3000.00, 'debit',  'Restaurant charges'),
+(12, 15000.00, 'credit', 'Freelance payment'),
+(13, 20000.00, 'credit', 'Dividend income'),
+(14,  4500.00, 'debit',  'Medical expenses'),
+(15,  8000.00, 'debit',  'Travel booking'),
+(16, 12000.00, 'credit', 'Client advance'),
+(17,  5500.00, 'debit',  'Electronics purchase'),
+(18, 10000.00, 'credit', 'Rental income'),
+(19,  3000.00, 'debit',  'School fees'),
+(20, 15000.00, 'credit', 'Salary deposit');
+
+-- Populate Investments table
+INSERT INTO Investments (account_id, investment_type, amount, current_value) VALUES
+(3,  'stocks',       50000.00,  55000.00),
+(4,  'mutual_funds', 75000.00,  80000.00),
+(5,  'bonds',        25000.00,  26500.00),
+(7,  'crypto',       15000.00,  18000.00),
+(9,  'stocks',       30000.00,  32000.00),
+(10, 'mutual_funds', 45000.00,  48000.00),
+(13, 'crypto',       20000.00,  15000.00),
+(13, 'stocks',       80000.00,  90000.00),
+(15, 'bonds',        15000.00,  15750.00),
+(17, 'mutual_funds', 35000.00,  37500.00),
+(18, 'stocks',       20000.00,  22000.00),
+(20, 'crypto',       10000.00,  12000.00);
+
+-- Populate Loans table
+INSERT INTO Loans (user_id, loan_amount, interest_rate, loan_term_months, loan_start_date, loan_status) VALUES
+(2,  500000.00,  8.50, 60, '2023-01-15', 'active'),
+(4,  200000.00,  7.75, 36, '2022-08-20', 'active'),
+(5, 1000000.00, 10.25, 120, '2021-12-10', 'active'),
+(8,  300000.00,  8.00, 48, '2023-03-05', 'active'),
+(9,  150000.00,  7.50, 24, '2022-05-18', 'active'),
+(12, 400000.00,  9.75, 60, '2022-11-30', 'active'),
+(14, 250000.00,  8.25, 36, '2023-02-12', 'active'),
+(16, 750000.00, 10.50, 84, '2021-09-25', 'active'),
+(17, 175000.00,  7.25, 24, '2022-07-08', 'closed'),
+(19, 350000.00,  9.00, 48, '2023-04-15', 'active');
