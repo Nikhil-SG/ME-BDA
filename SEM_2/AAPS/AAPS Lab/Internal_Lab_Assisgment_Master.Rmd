@@ -1,0 +1,1348 @@
+---
+title: "AAPS Lab Assignment"
+output: html_notebook
+---
+
+```{r}
+library(ggplot2)
+library(dplyr)
+library(mice)
+library(tidyr)
+library(Rtsne)
+library(ggplot2)
+library(factoextra)
+```
+
+```{r}
+## Load ICU dataset
+file = 'Data/ICU_filtered.csv'
+dfICU = read.csv(file, header = TRUE, stringsAsFactors = TRUE)
+str(dfICU)
+```
+```{r}
+## Print first 5 samples of data frame
+head(dfICU, n = 5)
+```
+
+```{r}
+## Plot fraction of missing values (NAs) in each column of the data frame
+pMissDF = setNames(stack(sapply(dfICU, function(x){(sum(is.na(x))/length(x))*100}))[2:1], c('Feature','Value'))
+p = ggplot(data = pMissDF, aes(x = Feature, y = Value)) +
+  geom_bar(stat = 'identity', fill = 'steelblue', width = 0.3) +
+  theme(text = element_text(size = 14, face = 'bold'),
+  axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5)) +
+  xlab('') + ylab('Percentage') +
+  ggtitle('Percentage of NAs across all features')  +
+  theme(plot.title = element_text(size = 12, hjust = 0.5),
+        axis.text = element_text(size = 8),
+        axis.text.x = element_text(size = 8),
+        axis.text.y = element_text(size = 10),
+        axis.title = element_text(size = 12, face = "bold"))
+p
+```
+
+```{r}
+## Drop columns with more than 20% missing values
+dfICU = dfICU %>% select(-c(pMissDF[pMissDF['Value'] > 20, 'Feature']))
+```
+
+```{r}
+## Collate 4 different ICU types (CCU, CSRU, SICU, CCU) into one column
+## called 'ICU', remove separate ICU columns and the following columns:
+## (1) 'recordid' (2) In.hospital_death (3) Length_of_stay
+dfICU[dfICU['CCU'] == 1, 'ICU'] = 1
+dfICU[dfICU['CSRU'] == 1, 'ICU'] = 2
+dfICU[dfICU['SICU'] == 1, 'ICU'] = 3
+dfICU[(dfICU['CCU'] == 0 ) & (dfICU['CSRU'] == 0) & (dfICU['SICU'] == 0), 'ICU'] = 4
+dfICU = dfICU %>% select(-c(CCU, CSRU, SICU, recordid, In.hospital_death, Length_of_stay))
+```
+
+```{r}
+## Plot fraction of missing values (NAs) in each column of the data frame
+pMissDF = setNames(stack(sapply(dfICU, function(x){(sum(is.na(x))/length(x))*100}))[2:1], c('Feature','Value'))
+p = ggplot(data = pMissDF, aes(x = Feature, y = Value)) +
+  geom_bar(stat = 'identity', fill = 'steelblue', width = 0.3) +
+  theme(text = element_text(size = 14, face = 'bold'),
+  axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5)) +
+  xlab('') + ylab('Percentage') +
+  ggtitle('Percentage of NAs across all features')  +
+  theme(plot.title = element_text(size = 12, hjust = 0.5),
+        axis.text = element_text(size = 8),
+        axis.text.x = element_text(size = 8),
+        axis.text.y = element_text(size = 10),
+        axis.title = element_text(size = 12, face = "bold"))
+p
+```
+```{r}
+# Impute missing values using the MICE package
+dfICU = complete(mice(dfICU, m = 40, maxit = 10, pred = quickpred(dfICU, minpuc = 0.25), seed = 500))
+```
+```{r}
+## Plot fraction of missing values (NAs) in each column of the data frame
+pMissDF = setNames(stack(sapply(dfICU, function(x){(sum(is.na(x))/length(x))*100}))[2:1], c('Feature','Value'))
+p = ggplot(data = pMissDF, aes(x = Feature, y = Value)) +
+  geom_bar(stat = 'identity', fill = 'steelblue', width = 0.3) +
+  theme(text = element_text(size = 14, face = 'bold'),
+  axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5)) +
+  xlab('') + ylab('Percentage') +
+  ggtitle('Percentage of NAs across all features')  +
+  theme(plot.title = element_text(size = 12, hjust = 0.5),
+        axis.text = element_text(size = 8),
+        axis.text.x = element_text(size = 8),
+        axis.text.y = element_text(size = 10),
+        axis.title = element_text(size = 12, face = "bold"))
+p
+```
+
+```{r}
+str(dfICU)
+```
+```{r}
+## Create list of continuous and categorical features
+features = colnames(dfICU)
+categorical_features = c('Gender', 'GCS_first', 'MechVent', 'ICU')
+continuous_features = features[c(!(colnames(dfICU) %in% categorical_features))]
+```
+
+```{r}
+## Select only continuous features
+dfICU_continuous = dfICU %>% select(continuous_features)
+head(dfICU_continuous)
+```
+```{r}
+## Select only continuous features
+dfICU_categorical = dfICU %>% select(categorical_features)
+head(dfICU_categorical)
+```
+
+```{r}
+names(dfICU_continuous)
+```
+
+```{r}
+names(dfICU_categorical)
+```
+```{r}
+dfICU_long = dfICU_continuous %>% pivot_longer(cols = everything(), names_to = "variable", values_to = "value")
+
+# Create histograms for each continuous variable
+ggplot(dfICU_long, aes(x = value)) +
+  geom_histogram(bins = 30, fill = "blue", color = "black") +
+  facet_wrap(~ variable, scales = "free") +
+  labs(title = "Histograms of Continuous Features",
+       x = "Value",
+       y = "Frequency") +
+  theme_minimal() +
+  theme(axis.text.y = element_blank(),  # Remove y-axis labels
+        axis.ticks.y = element_blank()) # Remove y-axis ticks
+```
+
+```{r}
+# Get the names of the categorical columns
+categorical_cols <- names(dfICU_categorical)
+
+# Loop through each categorical column and create a bar plot
+for (col in categorical_cols) {
+  # Create a frequency table for the current column
+  freq_table <- table(dfICU_categorical[[col]])
+  freq_df <- as.data.frame(freq_table)
+  colnames(freq_df) <- c("Category", "Frequency")
+
+  # Create the bar plot using ggplot2
+  p <- ggplot(freq_df, aes(x = Category, y = Frequency, fill = Category)) +
+    geom_bar(stat = "identity") +
+    geom_text(aes(label = Frequency), vjust = -0.3) + # Add frequency labels
+    labs(title = paste("Distribution of", col),
+         x = col,
+         y = "Frequency") +
+    theme_minimal() +
+    theme(axis.text.x = element_text(angle = 45, hjust = 1)) # Rotate x-axis labels if needed
+
+  # Print the plot
+  print(p)
+}
+```
+```{r}
+cor(dfICU_continuous)
+```
+
+
+```{r}
+cor(dfICU_categorical)
+```
+```{r}
+# Load required libraries
+library(Rtsne)
+
+# Clean and scale the data
+df_clean <- na.omit(dfICU_continuous)
+df_scaled <- scale(df_clean)
+
+# ----- 1. PCA Scores -----
+pca_result <- prcomp(df_scaled, center = TRUE, scale. = TRUE)
+
+# Get PCA scores (coordinates in the principal component space)
+pca_scores <- as.data.frame(pca_result$x)
+
+# View first few rows of PCA scores
+head(pca_scores)
+```
+```{r}
+# Standard deviations of the principal components
+std_devs <- pca_result$sdev
+
+# Variance explained by each PC
+var_explained <- std_devs^2
+prop_var_explained <- var_explained / sum(var_explained)
+
+# Create a data frame of variance explained
+pca_variance_df <- data.frame(
+  PC = paste0("PC", 1:length(prop_var_explained)),
+  Variance_Explained = prop_var_explained,
+  Cumulative_Variance = cumsum(prop_var_explained)
+)
+
+# View the variance explained
+print(pca_variance_df)
+```
+```{r}
+# Clean and scale the data
+df_clean <- na.omit(dfICU_continuous)
+df_scaled <- scale(df_clean)
+
+# ----- 1. PCA -----
+pca_result <- prcomp(df_scaled, center = TRUE, scale. = TRUE)
+pca_scores <- as.data.frame(pca_result$x)
+
+# ----- 2. PCA Variance Explained -----
+std_devs <- pca_result$sdev
+var_explained <- std_devs^2
+prop_var_explained <- var_explained / sum(var_explained)
+pca_variance_df <- data.frame(
+  PC = paste0("PC", 1:length(prop_var_explained)),
+  Variance_Explained = prop_var_explained,
+  Cumulative_Variance = cumsum(prop_var_explained)
+)
+print(pca_variance_df)
+
+# ----- 3. PCA Direction Plot with Variable Names -----
+fviz_pca_biplot(pca_result, 
+                repel = TRUE,
+                col.var = "blue", # Arrows
+                col.ind = "gray", # Points
+                title = "PCA - Variable Directions")
+
+# ----- 4. KMeans++ using Elbow Method -----
+set.seed(123)
+wss <- vector()
+for (k in 1:10) {
+  km <- kmeans(pca_scores[, 1:2], centers = k, nstart = 25)
+  wss[k] <- km$tot.withinss
+}
+
+# Plot the elbow
+elbow_df <- data.frame(Clusters = 1:10, WSS = wss)
+ggplot(elbow_df, aes(x = Clusters, y = WSS)) +
+  geom_point() + geom_line() +
+  theme_minimal() +
+  ggtitle("Elbow Method for Optimal Clusters") +
+  xlab("Number of Clusters") + ylab("Within-Cluster Sum of Squares")
+
+# ----- 5. Final KMeans Clustering (Choose optimal k based on elbow, e.g., k=3) -----
+set.seed(123)
+final_kmeans <- kmeans(pca_scores[, 1:2], centers = 3, nstart = 25)
+pca_scores$Cluster <- as.factor(final_kmeans$cluster)
+
+# Plot clusters
+ggplot(pca_scores, aes(x = PC1, y = PC2, color = Cluster)) +
+  geom_point(alpha = 0.6, size = 2) +
+  theme_minimal() +
+  labs(title = "KMeans Clustering on PCA Components",
+       x = "PC1", y = "PC2") +
+  scale_color_brewer(palette = "Set1")
+
+```
+
+```{r}
+for (col_name in names(dfICU_categorical)) {
+  cat("Unique values in", col_name, ":\n")
+  print(unique(dfICU_categorical[[col_name]]))
+  cat("\n")
+}
+```
+```{r}
+# --- 0. Libraries ---
+library(dplyr)       # For data manipulation
+library(ggplot2)     # For plotting
+
+# --- 1. Prepare the Data ---
+# Suppose you have two data frames: dfICU_categorical and dfICU_continuous.
+# First, check your categorical data:
+print(sapply(dfICU_categorical, unique))
+
+# --- 2. Encode Categorical Variables ---
+# Use model.matrix to one-hot encode categorical variables.
+# This creates dummy variables for each factor level (excluding intercept).
+dummy_vars <- model.matrix(~ Gender + GCS_first + MechVent + ICU - 1, data = dfICU_categorical)
+# View first few rows of dummy encoded variables
+head(dummy_vars)
+
+# --- 3. Scale Continuous Features ---
+# Remove rows with NA if any.
+df_continuous_clean <- na.omit(dfICU_continuous)
+# Scale the continuous variables (mean = 0, sd = 1)
+df_continuous_scaled <- scale(df_continuous_clean)
+
+# --- 4. Combine the Processed Features ---
+# Make sure that the ordering of rows in the categorical and continuous datasets match.
+# If they originated from the same source, they likely do.
+# Combine as a single data frame:
+full_data <- cbind(df_continuous_scaled, dummy_vars)
+
+# --- 5. Compute Mahalanobis Distance ---
+# Calculate the center (mean vector) and covariance matrix for the combined data.
+center_vec <- colMeans(full_data)
+cov_matrix <- cov(full_data)
+
+# Compute the Mahalanobis distance for each observation.
+mah_dist <- mahalanobis(full_data, center_vec, cov_matrix)
+
+# Append the Mahalanobis distance to your data for further analysis:
+full_data_with_md <- cbind(as.data.frame(full_data), Mahalanobis_Distance = mah_dist)
+
+# --- 6. Outlier Detection ---
+# Choose a threshold. For example, if your data has 'p' features, use the 97.5th percentile 
+# of the chi-square distribution with p degrees of freedom.
+p <- ncol(full_data)
+threshold <- qchisq(0.975, df = p)
+
+# Identify outliers:
+full_data_with_md <- full_data_with_md %>%
+  mutate(Outlier = ifelse(Mahalanobis_Distance > threshold, "Yes", "No"))
+
+# Summary of outliers:
+table(full_data_with_md$Outlier)
+
+# --- 7. Visualization ---
+# Since full_data is high-dimensional, project the Mahalanobis distances into a histogram to view the distribution.
+ggplot(full_data_with_md, aes(x = Mahalanobis_Distance)) +
+  geom_histogram(bins = 30, fill = "steelblue", color = "black") +
+  geom_vline(xintercept = threshold, linetype = "dashed", color = "red") +
+  theme_minimal() +
+  labs(title = "Histogram of Mahalanobis Distance", 
+       x = "Mahalanobis Distance", 
+       y = "Count")
+
+# Additionally, for illustration, if you wish to view how outliers look in the original continuous space,
+# you might use PCA for plotting:
+pca_result <- prcomp(full_data, center = TRUE, scale. = TRUE)
+pca_scores <- as.data.frame(pca_result$x)
+pca_scores$Outlier <- full_data_with_md$Outlier
+
+ggplot(pca_scores, aes(x = PC1, y = PC2, color = Outlier)) +
+  geom_point(alpha = 0.6, size = 2) +
+  theme_minimal() +
+  labs(title = "PCA Plot Indicating Outliers",
+       x = "PC1", y = "PC2") +
+  scale_color_manual(values = c("No" = "gray", "Yes" = "red"))
+
+```
+```{r}
+# --- Libraries ---
+# library(cluster)    # For daisy() to compute Gower distances.
+# library(ggplot2)    # For plotting.
+# library(dplyr)      # For data manipulation.
+
+# --- 1. Combine All Features ---
+# Assuming dfICU_continuous and dfICU_categorical are data frames.
+# Ensure the categorical variables are factors:
+# dfICU_categorical <- dfICU_categorical %>%
+#   mutate(across(everything(), as.factor))
+
+# Combine the continuous and categorical data.
+# Here we assume both data sets have the same row order.
+# full_df <- cbind(dfICU_continuous, dfICU_categorical)
+
+# --- 2. Compute Gower Distance ---
+# The daisy function can handle mixed data types.
+# gower_dist <- daisy(full_df, metric = "gower")
+
+# --- 3. Perform MDS on the Gower Distance Matrix ---
+# Classical Multi-Dimensional Scaling (MDS) converts a distance matrix
+# to a set of points in Euclidean space. You can decide on the number of dimensions (k)
+# based on how much variance you want to preserve (or simply experiment).
+# mds_fit <- cmdscale(gower_dist, k = 2)  # You can increase k if needed.
+# mds_coords <- as.data.frame(mds_fit)
+# names(mds_coords) <- paste0("MDS", 1:ncol(mds_coords))
+
+# --- 4. Compute Mahalanobis Distance ---
+# The Mahalanobis distance is computed in the new Euclidean space.
+# center_vec <- colMeans(mds_coords)
+# cov_matrix <- cov(mds_coords)
+# mah_dist <- mahalanobis(mds_coords, center_vec, cov_matrix)
+
+# Append the Mahalanobis distance and mark outliers using a chi-square threshold.
+# Degrees of freedom = number of dimensions used in MDS (e.g., 2 in this example)
+# threshold <- qchisq(0.975, df = ncol(mds_coords))  # using 97.5% quantile for outlier threshold
+# mds_coords$Mahalanobis_Distance <- mah_dist
+# mds_coords$Outlier <- ifelse(mah_dist > threshold, "Yes", "No")
+
+# --- 5. Results and Visualization ---
+# Print a summary of detected outliers:
+# print(table(mds_coords$Outlier))
+
+# Visualize the MDS coordinates and mark outliers.
+# ggplot(mds_coords, aes(x = MDS1, y = MDS2, color = Outlier)) +
+#   geom_point(size = 3, alpha = 0.7) +
+#   geom_text(aes(label = ifelse(Outlier == "Yes", as.character(round(Mahalanobis_Distance, 1)), "")),
+#             hjust = -0.1, vjust = 0.5, size = 3) +
+#   theme_minimal() +
+#   labs(title = "MDS Plot with Outliers (Mahalanobis Distance)",
+#        x = "MDS Dimension 1", y = "MDS Dimension 2") +
+#   scale_color_manual(values = c("No" = "gray", "Yes" = "red"))
+
+```
+
+```{r}
+# Assuming your original dataframe is named 'dfICU'
+# Extract the categorical variables
+dfICU_categorical <- dfICU[, c("Gender", "GCS_first", "MechVent", "ICU")]
+
+# Install and load the required package if not already done
+# install.packages("cluster")
+library(cluster)
+
+# Calculate Gower's distance matrix
+gower_dist_matrix <- daisy(dfICU_categorical, metric = "gower")
+
+# Convert to regular distance matrix
+gower_dist_matrix <- as.matrix(gower_dist_matrix)
+
+# You can now use this distance matrix for further analysis
+# For example, you might want to add a feature representing the average distance to all other points
+avg_distance <- rowMeans(gower_dist_matrix)
+
+# Add this as a new continuous feature to your original dataframe
+dfICU$categorical_avg_distance <- avg_distance
+
+# Alternatively, you can calculate distance to a reference point
+# For example, distance to the first observation
+dist_to_reference <- gower_dist_matrix[, 1]
+
+# Add this as another continuous feature
+dfICU$categorical_dist_to_ref <- dist_to_reference
+```
+```{r}
+str(dfICU)
+```
+```{r}
+names(dfICU)
+```
+
+```{r}
+## Create list of continuous and categorical features
+features = colnames(dfICU)
+categorical_features_1 = c('Gender', 'GCS_first', 'MechVent', 'ICU')
+continuous_features_1 = c('Age', 'Glucose_first', 'HR_first', 'NIDiasABP_first', 'NIMAP_first', 'NISysABP_first', 'Temp_first', 'BUN_first', 'Creatinine_first', 'HCO3_first', 'HCT_first', 'K_first', 'Mg_first', 'Na_first', 'Platelets_first', 'WBC_first', 'categorical_avg_distance', 'categorical_dist_to_ref')
+```
+
+```{r}
+dfICU_continuous_1 = dfICU %>% select(continuous_features_1)
+dfICU_categorical_1 = dfICU %>% select(categorical_features_1)
+```
+
+```{r}
+dfICU_long = dfICU_continuous_1 %>% pivot_longer(cols = everything(), names_to = "variable", values_to = "value")
+
+# Create histograms for each continuous variable
+ggplot(dfICU_long, aes(x = value)) +
+  geom_histogram(bins = 30, fill = "blue", color = "black") +
+  facet_wrap(~ variable, scales = "free") +
+  labs(title = "Histograms of Continuous Features",
+       x = "Value",
+       y = "Frequency") +
+  theme_minimal() +
+  theme(axis.text.y = element_blank(),  # Remove y-axis labels
+        axis.ticks.y = element_blank()) # Remove y-axis ticks
+```
+```{r}
+# Load necessary libraries
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+
+# Define the columns to apply the log transformation
+cols_to_transform <- c("Age", "BUN_first", "categorical_avg_distance",
+                       "categorical_dist_to_ref", "Creatinine_first",
+                       "Glucose_first", "K_first", "Mg_first",
+                       "Platelets_first", "WBC_first")
+
+# Apply log1p transformation (log(x+1)) to the specified columns
+dfICU_transformed <- dfICU_continuous_1 %>%
+  mutate(across(all_of(cols_to_transform), ~ log1p(.)))
+
+# Pivot the transformed data frame to a long format for plotting
+dfICU_long_transformed <- dfICU_transformed %>%
+  pivot_longer(cols = everything(), names_to = "variable", values_to = "value")
+
+# Create histograms for each continuous variable (including transformed ones)
+ggplot(dfICU_long_transformed, aes(x = value)) +
+  geom_histogram(bins = 30, fill = "blue", color = "black") +
+  facet_wrap(~ variable, scales = "free") +
+  labs(title = "Histograms of Continuous Features (Log-Transformed Selected)",
+       x = "Value (Log-transformed for specified variables)",
+       y = "Frequency") +
+  theme_minimal() +
+  theme(axis.text.y = element_blank(),
+        axis.ticks.y = element_blank())
+```
+
+
+```{r}
+# Load necessary libraries
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+
+# Select the two features to transform
+features <- c("categorical_avg_distance", "categorical_dist_to_ref")
+
+# Apply transformations and create plots for each feature
+for (feature in features) {
+  # Create transformed versions
+  df_transformed <- dfICU_continuous_1 %>%
+    select(all_of(feature)) %>%
+    mutate(
+      log_transformed = log(.data[[feature]] + 0.001),  # Add small constant to avoid log(0)
+      sqrt_transformed = sqrt(.data[[feature]]),
+      
+      # For arcsine sqrt - first scale to 0-1 range
+      scaled_value = (.data[[feature]] - min(.data[[feature]])) / 
+                     (max(.data[[feature]]) - min(.data[[feature]])),
+      asinsqrt_transformed = asin(sqrt(scaled_value))
+    ) %>%
+    select(-scaled_value)  # Remove intermediate column
+  
+  # Pivot to long format for plotting
+  df_long <- df_transformed %>%
+    pivot_longer(
+      cols = everything(),
+      names_to = "transformation",
+      values_to = "value"
+    ) %>%
+    mutate(
+      transformation = factor(
+        transformation,
+        levels = c(feature, "log_transformed", "sqrt_transformed", "asinsqrt_transformed"),
+        labels = c("Original", "Log", "Square Root", "Arcsin-Sqrt")
+      )
+    )
+  
+  # Create plot
+  p <- ggplot(df_long, aes(x = value)) +
+    geom_histogram(bins = 30, fill = "steelblue", color = "black") +
+    facet_wrap(~ transformation, scales = "free", ncol = 2) +
+    labs(
+      title = paste("Transformations of", feature),
+      x = "Value",
+      y = "Frequency"
+    ) +
+    theme_minimal() +
+    theme(
+      axis.text.y = element_blank(),
+      axis.ticks.y = element_blank(),
+      strip.text = element_text(size = 10)
+    )
+  
+  # Display plot
+  print(p)
+}
+```
+```{r}
+# Load necessary libraries
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+
+# Select the feature to transform
+feature <- "categorical_avg_distance"
+
+# Apply transformations and create plots for the specified feature
+# Create transformed versions
+df_transformed <- dfICU_continuous_1 %>%
+  select(all_of(feature)) %>%
+  mutate(
+    asinsqrt_transformed = {
+      # Scale to 0-1 range
+      scaled_value <- (.data[[feature]] - min(.data[[feature]])) /
+        (max(.data[[feature]]) - min(.data[[feature]]))
+      asin(sqrt(scaled_value))
+    }
+  )
+
+# Pivot to long format for plotting
+df_long <- df_transformed %>%
+  pivot_longer(
+    cols = everything(),
+    names_to = "transformation",
+    values_to = "value"
+  ) %>%
+  mutate(
+    transformation = factor(
+      transformation,
+      levels = c(feature, "asinsqrt_transformed"),
+      labels = c("Original", "Arcsin-Sqrt")
+    )
+  )
+
+# Create plot
+p <- ggplot(df_long, aes(x = value)) +
+  geom_histogram(bins = 30, fill = "steelblue", color = "black") +
+  facet_wrap(~ transformation, scales = "free", ncol = 2) +
+  labs(
+    title = paste("Transformation of", feature),
+    x = "Value",
+    y = "Frequency"
+  ) +
+  theme_minimal() +
+  theme(
+    axis.text.y = element_blank(),
+    axis.ticks.y = element_blank(),
+    strip.text = element_text(size = 10)
+  )
+
+# Display plot
+print(p)
+
+# Load necessary libraries
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+
+# Define the columns to apply the log transformation
+cols_to_transform <- c("Age", "BUN_first",
+                      "categorical_dist_to_ref", "Creatinine_first",
+                      "Glucose_first", "K_first", "Mg_first",
+                      "Platelets_first", "WBC_first")
+
+# Apply log1p transformation (log(x+1)) to the specified columns
+dfICU_transformed <- dfICU_continuous_1 %>%
+  mutate(across(all_of(cols_to_transform), ~ log1p(.))) %>%
+  # Apply asinsqrt transformation to categorical_avg_distance
+  mutate(
+    asinsqrt_categorical_avg_distance = {
+      scaled_value <- (.data[["categorical_avg_distance"]] - min(.data[["categorical_avg_distance"]])) /
+        (max(.data[["categorical_avg_distance"]]) - min(.data[["categorical_avg_distance"]]))
+      asin(sqrt(scaled_value))
+    }
+  ) %>%
+  # Remove the original categorical_avg_distance column after transformation
+  select(-categorical_avg_distance) %>%
+  # Rename the transformed column
+  rename(categorical_avg_distance_asinsqrt = asinsqrt_categorical_avg_distance)
+
+
+# Pivot the transformed data frame to a long format for plotting
+dfICU_long_transformed <- dfICU_transformed %>%
+  pivot_longer(cols = everything(), names_to = "variable", values_to = "value")
+
+# Create histograms for each continuous variable (including transformed ones)
+ggplot(dfICU_long_transformed, aes(x = value)) +
+  geom_histogram(bins = 30, fill = "blue", color = "black") +
+  facet_wrap(~ variable, scales = "free") +
+  labs(title = "Histograms of Continuous Features (Log-Transformed Selected, Arcsin-Sqrt for categorical_avg_distance)",
+       x = "Value (Transformed)",
+       y = "Frequency") +
+  theme_minimal() +
+  theme(axis.text.y = element_blank(),
+        axis.ticks.y = element_blank())
+```
+```{r}
+names(dfICU_transformed)
+```
+```{r}
+# Load necessary libraries
+library(ggplot2)
+
+# Assuming dfICU_transformed is already created as in the previous response
+
+# Create a histogram for the asinsqrt transformed categorical_avg_distance
+ggplot(dfICU_transformed, aes(x = categorical_avg_distance_asinsqrt)) +
+  geom_histogram(bins = 30, fill = "steelblue", color = "black") +
+  labs(
+    title = "Histogram of Arcsin-Sqrt Transformed categorical_avg_distance",
+    x = "Arcsin-Sqrt Transformed Value",
+    y = "Frequency"
+  ) +
+  theme_minimal() +
+  theme(
+    axis.text.y = element_blank(),
+    axis.ticks.y = element_blank()
+  )
+```
+```{r}
+# Mahalanobis Distance Analysis for All Features in df_ICU_transformed
+
+# Function to calculate Mahalanobis distances and identify outliers using all features
+mahalanobis_all_features <- function(df) {
+  # Remove any non-numeric columns that would cause issues with covariance calculation
+  numeric_cols <- sapply(df, is.numeric)
+  data_numeric <- df[, numeric_cols]
+  
+  # Check for NA values
+  if(any(is.na(data_numeric))) {
+    warning("NA values detected in numeric columns. Using complete cases only.")
+    data_numeric <- na.omit(data_numeric)
+  }
+  
+  # Store original row indices to match back to original dataframe
+  row_indices <- rownames(data_numeric)
+  
+  # Calculate mean vector and covariance matrix
+  mean_vec <- colMeans(data_numeric)
+  cov_mat <- cov(data_numeric)
+  
+  # Calculate Mahalanobis distances
+  tryCatch({
+    mahalanobis_dist <- mahalanobis(data_numeric, mean_vec, cov_mat)
+  }, error = function(e) {
+    stop("Error calculating Mahalanobis distances. Check for singularity in covariance matrix: ", e$message)
+  })
+  
+  # Create a result dataframe with original indices
+  result_df <- data.frame(
+    original_index = as.integer(row_indices),
+    mahalanobis_dist = mahalanobis_dist
+  )
+  
+  # Add columns indicating outlier status at different confidence levels
+  # For p dimensions, the Mahalanobis distance follows a chi-square distribution with p degrees of freedom
+  df_dim <- ncol(data_numeric)
+  result_df$outlier_68 <- mahalanobis_dist > qchisq(0.68, df = df_dim)
+  result_df$outlier_95 <- mahalanobis_dist > qchisq(0.95, df = df_dim)
+  result_df$outlier_98 <- mahalanobis_dist > qchisq(0.98, df = df_dim)
+  
+  # Count outliers at each confidence level
+  outlier_counts <- list(
+    "Total_observations" = nrow(result_df),
+    "68%" = sum(result_df$outlier_68),
+    "95%" = sum(result_df$outlier_95),
+    "98%" = sum(result_df$outlier_98)
+  )
+  
+  # Calculate percentages
+  outlier_percentages <- list(
+    "68%" = round(100 * outlier_counts[["68%"]] / outlier_counts[["Total_observations"]], 2),
+    "95%" = round(100 * outlier_counts[["95%"]] / outlier_counts[["Total_observations"]], 2),
+    "98%" = round(100 * outlier_counts[["98%"]] / outlier_counts[["Total_observations"]], 2)
+  )
+  
+  # Return the results
+  return(list(
+    result_df = result_df,
+    outlier_counts = outlier_counts,
+    outlier_percentages = outlier_percentages,
+    dimensions = df_dim
+  ))
+}
+
+# Function to visualize the outliers using pairwise plots of the first few features
+visualize_outliers <- function(df, result_df, max_features = 4) {
+  # Merge results back with original data
+  numeric_cols <- sapply(df, is.numeric)
+  data_numeric <- df[, numeric_cols]
+  
+  # Get the first few features for visualization
+  if(ncol(data_numeric) > max_features) {
+    cat("Using only the first", max_features, "numeric features for visualization\n")
+    data_subset <- data_numeric[, 1:max_features]
+  } else {
+    data_subset <- data_numeric
+  }
+  
+  # Create pairwise plots
+  pairs(data_subset, 
+        col = ifelse(result_df$outlier_98, "red", 
+                    ifelse(result_df$outlier_95, "orange", 
+                          ifelse(result_df$outlier_68, "yellow", "darkgrey"))),
+        pch = 19,
+        main = "Pairwise Plots with Outliers Highlighted")
+  
+  # Add legend to the pairwise plot
+  par(xpd = TRUE)
+  legend("bottomright", 
+         legend = c("Within 68%", "68-95%", "95-98%", "Outside 98%"),
+         pch = 19, 
+         col = c("darkgrey", "yellow", "orange", "red"),
+         cex = 0.8)
+  par(xpd = FALSE)
+}
+
+# Function to create a density plot of Mahalanobis distances with cutoff lines
+plot_mahalanobis_density <- function(result, title = "Mahalanobis Distance Distribution") {
+  distances <- result$result_df$mahalanobis_dist
+  dimensions <- result$dimensions
+  
+  # Create the density plot
+  plot(density(distances), 
+       main = title,
+       xlab = "Mahalanobis Distance", 
+       ylab = "Density")
+  
+  # Add vertical lines for the chi-square cutoffs
+  abline(v = qchisq(0.68, df = dimensions), col = "yellow", lwd = 2)
+  abline(v = qchisq(0.95, df = dimensions), col = "orange", lwd = 2)
+  abline(v = qchisq(0.98, df = dimensions), col = "red", lwd = 2)
+  
+  # Add a legend
+  legend("topright", 
+         legend = c("68% cutoff", "95% cutoff", "98% cutoff"),
+         col = c("yellow", "orange", "red"),
+         lwd = 2)
+}
+
+# Function to get the most extreme outliers
+get_extreme_outliers <- function(df, result_df, n = 10) {
+  # Order by Mahalanobis distance (descending)
+  ordered_indices <- order(result_df$mahalanobis_dist, decreasing = TRUE)
+  
+  # Get the top n outliers
+  top_outliers_indices <- ordered_indices[1:min(n, length(ordered_indices))]
+  top_outliers <- result_df[top_outliers_indices, ]
+  
+  # Get the corresponding rows from the original dataframe
+  extreme_cases <- df[top_outliers$original_index, ]
+  
+  # Add the Mahalanobis distance to the result
+  extreme_cases$mahalanobis_dist <- top_outliers$mahalanobis_dist
+  
+  return(extreme_cases)
+}
+
+# Main function to run the full analysis
+analyze_mahalanobis_full <- function(df) {
+  # Calculate Mahalanobis distances and identify outliers
+  cat("Calculating Mahalanobis distances for all numeric features...\n")
+  result <- mahalanobis_all_features(df)
+  
+  # Print summary of results
+  cat("\n============ Outlier Detection Results ============\n")
+  cat("Analysis performed on", result$dimensions, "numeric dimensions\n")
+  cat("Total observations:", result$outlier_counts[["Total_observations"]], "\n\n")
+  cat("Outlier counts and percentages at different confidence levels:\n")
+  cat("68% confidence level:", result$outlier_counts[["68%"]], "outliers (", 
+      result$outlier_percentages[["68%"]], "%)\n")
+  cat("95% confidence level:", result$outlier_counts[["95%"]], "outliers (", 
+      result$outlier_percentages[["95%"]], "%)\n")
+  cat("98% confidence level:", result$outlier_counts[["98%"]], "outliers (", 
+      result$outlier_percentages[["98%"]], "%)\n")
+  
+  # Create visualizations
+  cat("\nCreating visualizations...\n")
+  par(mfrow = c(1, 1))
+  plot_mahalanobis_density(result)
+  
+  # Create pairwise plots for the first few features
+  par(mfrow = c(1, 1))
+  visualize_outliers(df, result$result_df)
+  
+  # Get the most extreme outliers
+  cat("\nExtreme outliers (top 10 by Mahalanobis distance):\n")
+  extreme_outliers <- get_extreme_outliers(df, result$result_df)
+  print(extreme_outliers)
+  
+  # Add Mahalanobis distances to the original dataframe
+  df_with_md <- df
+  df_with_md$mahalanobis_dist <- NA
+  df_with_md$outlier_68 <- FALSE
+  df_with_md$outlier_95 <- FALSE
+  df_with_md$outlier_98 <- FALSE
+  
+  # Update values for rows that were analyzed
+  for (i in 1:nrow(result$result_df)) {
+    idx <- result$result_df$original_index[i]
+    df_with_md$mahalanobis_dist[idx] <- result$result_df$mahalanobis_dist[i]
+    df_with_md$outlier_68[idx] <- result$result_df$outlier_68[i]
+    df_with_md$outlier_95[idx] <- result$result_df$outlier_95[i]
+    df_with_md$outlier_98[idx] <- result$result_df$outlier_98[i]
+  }
+  
+  cat("\nAnalysis complete. Results added to the dataframe.\n")
+  
+  return(df_with_md)
+}
+
+# Usage:
+# df_with_outliers <- analyze_mahalanobis_full(df_ICU_transformed)
+
+# To apply this to your df_ICU_transformed dataframe:
+df_ICU_with_outliers <- analyze_mahalanobis_full(dfICU_transformed)
+```
+```{r}
+# Remove the column "categorical_dist_to_ref"
+dfICU_transformed <- dfICU_transformed %>%
+  select(-categorical_dist_to_ref)
+
+# Verify the removal
+names(dfICU_transformed)
+```
+```{r}
+# Load required libraries
+library(Rtsne)
+
+# Clean and scale the data
+df_clean <- na.omit(dfICU_transformed)
+df_scaled <- scale(df_clean)
+
+# ----- 1. PCA Scores -----
+pca_result <- prcomp(df_scaled, center = TRUE, scale. = TRUE)
+
+# Get PCA scores (coordinates in the principal component space)
+pca_scores <- as.data.frame(pca_result$x)
+
+# View first few rows of PCA scores
+head(pca_scores)
+```
+
+
+```{r}
+# Standard deviations of the principal components
+std_devs <- pca_result$sdev
+
+# Variance explained by each PC
+var_explained <- std_devs^2
+prop_var_explained <- var_explained / sum(var_explained)
+
+# Create a data frame of variance explained
+pca_variance_df <- data.frame(
+  PC = paste0("PC", 1:length(prop_var_explained)),
+  Variance_Explained = prop_var_explained,
+  Cumulative_Variance = cumsum(prop_var_explained)
+)
+
+# View the variance explained
+print(pca_variance_df)
+```
+
+
+```{r}
+# Load necessary libraries
+library(dplyr)
+library(Rtsne)
+library(dbscan)
+library(ggplot2)
+
+# Assuming your dataframe is named 'dfICU_transformed'
+# (Based on your previous interactions, this dataframe likely exists)
+
+# Display the first few rows and structure of your dataframe to understand its content
+head(dfICU_transformed)
+str(dfICU_transformed)
+
+# 1. Select Numerical Features
+# Identify numerical columns. We'll exclude any non-numeric columns
+# that might have been introduced during previous transformations.
+numerical_df <- dfICU_transformed %>% select_if(is.numeric)
+
+# Print the names of the selected numerical features
+print("Numerical features selected for t-SNE:")
+print(names(numerical_df))
+
+# Check if there are any rows with all NA values after selecting numerical features
+if (any(apply(numerical_df, 1, function(row) all(is.na(row))))) {
+  warning("Warning: Some rows contain only NA values in the numerical features. Consider removing or imputing them.")
+  numerical_df <- na.omit(numerical_df) # Simple removal of rows with all NAs
+}
+
+# 2. Handle Missing Values (Imputation with Mean as an example)
+# It's crucial to handle missing values before applying t-SNE.
+# This step imputes missing values with the mean of each column.
+# Consider more sophisticated imputation techniques if appropriate for your data.
+numerical_df_imputed <- numerical_df %>%
+  mutate(across(everything(), ~ifelse(is.na(.), mean(., na.rm = TRUE), .)))
+
+# Verify that there are no more missing values in the imputed dataframe
+print("Number of missing values after imputation:")
+print(sum(is.na(numerical_df_imputed)))
+
+# 3. Scale the Data
+# Scaling is generally recommended for t-SNE.
+scaled_features <- scale(numerical_df_imputed)
+
+# Convert the scaled matrix back to a dataframe
+scaled_df <- as.data.frame(scaled_features)
+
+# 4. Apply t-SNE
+# Set a seed for reproducibility
+set.seed(42) # Using a different seed
+
+# Run t-SNE
+# Adjust parameters like dims, perplexity, and max_iter as needed
+tsne_result <- Rtsne(scaled_df, dims = 2, perplexity = 30, verbose = TRUE, max_iter = 500)
+
+# Extract the t-SNE embeddings
+tsne_embedding <- as.data.frame(tsne_result$Y)
+colnames(tsne_embedding) <- c("TSNE1", "TSNE2")
+
+# Print the first few rows of the t-SNE embeddings
+print("First few rows of t-SNE embeddings:")
+head(tsne_embedding)
+
+# 5. Visualize the t-SNE Embeddings (Optional, but helpful for understanding)
+ggplot(tsne_embedding, aes(x = TSNE1, y = TSNE2)) +
+  geom_point() +
+  labs(title = "t-SNE Visualization of ICU Data") +
+  theme_minimal()
+
+# 6. Perform Clustering on t-SNE Embeddings (using DBSCAN as an example)
+# Determine appropriate eps (epsilon) and minPts parameters for DBSCAN.
+# This often requires some experimentation or domain knowledge.
+# You can try different values and observe the resulting clusters.
+
+# Example: Trying a few different eps values
+eps_values <- c(0.3, 0.5, 0.7)
+min_pts <- 5
+
+for (eps in eps_values) {
+  dbscan_result <- dbscan(tsne_embedding, eps = eps, minPts = min_pts)
+
+  # Add cluster assignments to the t-SNE embedding dataframe
+  tsne_embedding_clustered <- tsne_embedding %>%
+    mutate(cluster = factor(dbscan_result$cluster))
+
+  # Visualize the clustered t-SNE embeddings
+  plot_title <- paste("Clustered t-SNE Visualization (eps =", eps, ", minPts =", min_pts, ")")
+  print(ggplot(tsne_embedding_clustered, aes(x = TSNE1, y = TSNE2, color = cluster)) +
+          geom_point() +
+          labs(title = plot_title) +
+          theme_minimal() +
+          scale_color_manual(values = c("gray", rainbow(length(unique(dbscan_result$cluster)) - 1))))
+}
+
+# You might need to iterate and adjust eps and minPts to get meaningful clusters.
+# Once you find suitable parameters, you can proceed with the chosen clustering.
+
+# Example with a specific set of parameters:
+final_eps <- 0.5
+final_min_pts <- 5
+final_dbscan_result <- dbscan(tsne_embedding, eps = final_eps, minPts = final_min_pts)
+
+# Add final cluster assignments
+tsne_embedding_final_clustered <- tsne_embedding %>%
+  mutate(cluster = factor(final_dbscan_result$cluster))
+
+# Print the cluster assignments for each data point
+print("Cluster assignments based on DBSCAN on t-SNE embeddings:")
+print(table(tsne_embedding_final_clustered$cluster))
+
+# You can now analyze the characteristics of each cluster by joining this
+# cluster information back to your original dataframe (dfICU_transformed)
+# based on the row order.
+
+# Example of joining back (assuming row order is preserved):
+final_clustered_df <- dfICU_transformed %>%
+  mutate(TSNE1 = tsne_embedding_final_clustered$TSNE1,
+         TSNE2 = tsne_embedding_final_clustered$TSNE2,
+         cluster = tsne_embedding_final_clustered$cluster)
+
+# You can now explore the properties of each cluster in 'final_clustered_df'
+# by grouping by 'cluster' and looking at the means, medians, etc., of the original features.
+```
+```{r}
+# PCA-based Mahalanobis Distance Outlier Detection
+# Using the first 13 PCs that explain ~92% of variance
+
+# Function to perform PCA and then apply Mahalanobis distance for outlier detection
+pca_mahalanobis_analysis <- function(df, n_components = 13) {
+  # Ensure we're working with numeric data only
+  numeric_cols <- sapply(df, is.numeric)
+  data_numeric <- df[, numeric_cols]
+  
+  # Remove NA values if any
+  if(any(is.na(data_numeric))) {
+    warning("NA values detected. Using complete cases only.")
+    data_numeric <- na.omit(data_numeric)
+  }
+  
+  # Store row names for later matching
+  original_rows <- rownames(data_numeric)
+  
+  # Perform PCA
+  pca_result <- prcomp(data_numeric, scale. = TRUE)
+  
+  # Extract the first n_components PCs
+  pc_scores <- pca_result$x[, 1:n_components]
+  
+  # Calculate Mahalanobis distances using the PC scores
+  mean_vec <- colMeans(pc_scores)
+  cov_mat <- cov(pc_scores)
+  
+  mahalanobis_dist <- mahalanobis(pc_scores, mean_vec, cov_mat)
+  
+  # Create results dataframe
+  result_df <- data.frame(
+    original_index = as.integer(original_rows),
+    mahalanobis_dist = mahalanobis_dist
+  )
+  
+  # Add outlier flags for different confidence levels
+  # For p dimensions, Mahalanobis distance follows chi-square with p degrees of freedom
+  result_df$outlier_68 <- mahalanobis_dist > qchisq(0.68, df = n_components)
+  result_df$outlier_95 <- mahalanobis_dist > qchisq(0.95, df = n_components)
+  result_df$outlier_98 <- mahalanobis_dist > qchisq(0.98, df = n_components)
+  
+  # Count outliers
+  outlier_counts <- list(
+    "Total_observations" = nrow(result_df),
+    "68%" = sum(result_df$outlier_68),
+    "95%" = sum(result_df$outlier_95),
+    "98%" = sum(result_df$outlier_98)
+  )
+  
+  # Calculate percentages
+  outlier_percentages <- list(
+    "68%" = round(100 * outlier_counts[["68%"]] / outlier_counts[["Total_observations"]], 2),
+    "95%" = round(100 * outlier_counts[["95%"]] / outlier_counts[["Total_observations"]], 2),
+    "98%" = round(100 * outlier_counts[["98%"]] / outlier_counts[["Total_observations"]], 2)
+  )
+  
+  return(list(
+    result_df = result_df,
+    pca_result = pca_result,
+    pc_scores = pc_scores,
+    outlier_counts = outlier_counts,
+    outlier_percentages = outlier_percentages
+  ))
+}
+
+# Plot functions
+plot_mahalanobis_density <- function(result, n_components) {
+  distances <- result$result_df$mahalanobis_dist
+  
+  # Create the density plot
+  plot(density(distances), 
+       main = "Mahalanobis Distance Distribution (13 PCs)",
+       xlab = "Mahalanobis Distance", 
+       ylab = "Density")
+  
+  # Add vertical lines for the chi-square cutoffs
+  abline(v = qchisq(0.68, df = n_components), col = "yellow", lwd = 2)
+  abline(v = qchisq(0.95, df = n_components), col = "orange", lwd = 2)
+  abline(v = qchisq(0.98, df = n_components), col = "red", lwd = 2)
+  
+  # Add a legend
+  legend("topright", 
+         legend = c("68% cutoff", "95% cutoff", "98% cutoff"),
+         col = c("yellow", "orange", "red"),
+         lwd = 2)
+}
+
+# Plot the first few PCs with outliers highlighted
+plot_pc_outliers <- function(result, pc1 = 1, pc2 = 2) {
+  pc_data <- result$pc_scores
+  outliers <- result$result_df
+  
+  # Create PCA plot
+  plot(pc_data[, pc1], pc_data[, pc2],
+       col = ifelse(outliers$outlier_98, "red", 
+                   ifelse(outliers$outlier_95, "orange", 
+                         ifelse(outliers$outlier_68, "yellow", "darkgrey"))),
+       pch = 19,
+       main = paste("PC", pc1, "vs PC", pc2, "with Outliers"),
+       xlab = paste("PC", pc1),
+       ylab = paste("PC", pc2))
+  
+  # Add legend
+  legend("topright", 
+         legend = c("Within 68%", "68-95%", "95-98%", "Outside 98%"),
+         pch = 19, 
+         col = c("darkgrey", "yellow", "orange", "red"))
+}
+
+# Create and save CSV files for outliers at each threshold
+save_outlier_csv <- function(df, result, file_prefix = "outliers") {
+  # Prepare the dataframe with original data
+  original_data <- df
+  
+  # Add outlier information to original data
+  df_with_outliers <- original_data
+  df_with_outliers$mahalanobis_dist <- NA
+  df_with_outliers$outlier_68 <- FALSE
+  df_with_outliers$outlier_95 <- FALSE
+  df_with_outliers$outlier_98 <- FALSE
+  
+  # Update values for rows that were analyzed
+  for (i in 1:nrow(result$result_df)) {
+    idx <- result$result_df$original_index[i]
+    df_with_outliers$mahalanobis_dist[idx] <- result$result_df$mahalanobis_dist[i]
+    df_with_outliers$outlier_68[idx] <- result$result_df$outlier_68[i]
+    df_with_outliers$outlier_95[idx] <- result$result_df$outlier_95[i]
+    df_with_outliers$outlier_98[idx] <- result$result_df$outlier_98[i]
+  }
+  
+  # Save full dataframe with outlier flags
+  write.csv(df_with_outliers, paste0(file_prefix, "_all_with_flags.csv"), row.names = FALSE)
+  
+  # Save outliers at 68% threshold
+  outliers_68 <- df_with_outliers[df_with_outliers$outlier_68, ]
+  write.csv(outliers_68, paste0(file_prefix, "_threshold_68.csv"), row.names = FALSE)
+  
+  # Save outliers at 95% threshold
+  outliers_95 <- df_with_outliers[df_with_outliers$outlier_95, ]
+  write.csv(outliers_95, paste0(file_prefix, "_threshold_95.csv"), row.names = FALSE)
+  
+  # Save outliers at 98% threshold
+  outliers_98 <- df_with_outliers[df_with_outliers$outlier_98, ]
+  write.csv(outliers_98, paste0(file_prefix, "_threshold_98.csv"), row.names = FALSE)
+  
+  cat("CSV files saved with prefix:", file_prefix, "\n")
+  
+  return(df_with_outliers)
+}
+
+# Main function to run the analysis
+analyze_pca_mahalanobis <- function(df, n_components = 13, file_prefix = "icu_outliers") {
+  # Run the PCA-based Mahalanobis analysis
+  cat("Performing PCA and calculating Mahalanobis distances...\n")
+  result <- pca_mahalanobis_analysis(df, n_components)
+  
+  # Print summary of results
+  cat("\n============ PCA-based Outlier Detection Results ============\n")
+  cat("Analysis performed using the first", n_components, "principal components\n")
+  cat("These components explain approximately 92% of the total variance\n")
+  cat("Total observations:", result$outlier_counts[["Total_observations"]], "\n\n")
+  
+  cat("Outlier counts and percentages at different confidence levels:\n")
+  cat("68% confidence level:", result$outlier_counts[["68%"]], "outliers (", 
+      result$outlier_percentages[["68%"]], "%)\n")
+  cat("95% confidence level:", result$outlier_counts[["95%"]], "outliers (", 
+      result$outlier_percentages[["95%"]], "%)\n")
+  cat("98% confidence level:", result$outlier_counts[["98%"]], "outliers (", 
+      result$outlier_percentages[["98%"]], "%)\n")
+  
+  # Create visualizations
+  cat("\nCreating visualizations...\n")
+  
+  # Plot Mahalanobis distance distribution
+  pdf("mahalanobis_distance_distribution.pdf")
+  plot_mahalanobis_density(result, n_components)
+  dev.off()
+  
+  # Plot the first 6 pairs of PCs
+  pdf("pc_outlier_plots.pdf")
+  par(mfrow = c(2, 3))
+  plot_pc_outliers(result, 1, 2)
+  plot_pc_outliers(result, 1, 3)
+  plot_pc_outliers(result, 2, 3)
+  plot_pc_outliers(result, 4, 5)
+  plot_pc_outliers(result, 6, 7)
+  plot_pc_outliers(result, 8, 9)
+  dev.off()
+  
+  # Save CSV files
+  cat("\nSaving outlier CSV files...\n")
+  df_with_outliers <- save_outlier_csv(df, result, file_prefix)
+  
+  # Display examples of outliers
+  cat("\nExamples of extreme outliers (top 5 by Mahalanobis distance):\n")
+  extreme_indices <- order(result$result_df$mahalanobis_dist, decreasing = TRUE)[1:5]
+  extreme_rows <- result$result_df$original_index[extreme_indices]
+  print(df[extreme_rows, ])
+  
+  cat("\nAnalysis complete.\n")
+  
+  return(df_with_outliers)
+}
+
+# Run the analysis on dfICU_transformed using 13 PCs
+# To use this, uncomment the line below:
+df_with_outliers <- analyze_pca_mahalanobis(dfICU_transformed, n_components = 13)
+
+# Alternative version to run with plot display instead of saving to PDF
+run_pca_mahalanobis_interactive <- function(df, n_components = 13) {
+  # Run the analysis
+  result <- pca_mahalanobis_analysis(df, n_components)
+  
+  # Print summary
+  cat("\n============ PCA-based Outlier Detection Results ============\n")
+  cat("Analysis performed using the first", n_components, "principal components\n")
+  cat("Total observations:", result$outlier_counts[["Total_observations"]], "\n\n")
+  
+  cat("Outlier counts at different confidence levels:\n")
+  cat("68% confidence level:", result$outlier_counts[["68%"]], "outliers (", 
+      result$outlier_percentages[["68%"]], "%)\n")
+  cat("95% confidence level:", result$outlier_counts[["95%"]], "outliers (", 
+      result$outlier_percentages[["95%"]], "%)\n")
+  cat("98% confidence level:", result$outlier_counts[["98%"]], "outliers (", 
+      result$outlier_percentages[["98%"]], "%)\n")
+  
+  # Interactive plots
+  par(mfrow = c(1, 1))
+  plot_mahalanobis_density(result, n_components)
+  
+  cat("\nPress Enter to see PC plots...\n")
+  readline()
+  
+  par(mfrow = c(2, 2))
+  plot_pc_outliers(result, 1, 2)
+  plot_pc_outliers(result, 3, 4)
+  plot_pc_outliers(result, 5, 6)
+  plot_pc_outliers(result, 7, 8)
+  
+  # Save CSV files
+  df_with_outliers <- save_outlier_csv(df, result)
+  
+  return(df_with_outliers)
+}
+df_with_outliers <- run_pca_mahalanobis_interactive(dfICU_transformed, n_components = 13)
+```
+
+```{r}
+library(dplyr)
+library(MASS) # For mahalanobis distance
+library(ggplot2)
+
+# Assuming dfICU_continuous is your data frame
+
+# 1. Calculate the Mean Vector and Covariance Matrix (as before)
+mean_vector <- colMeans(dfICU_continuous)
+covariance_matrix <- cov(dfICU_continuous)
+
+# 2. Calculate the Mahalanobis Distance for Each Patient (as before)
+mahalanobis_distances <- mahalanobis(dfICU_continuous,
+                                      center = mean_vector,
+                                      cov = covariance_matrix)
+
+# 3. Add the Mahalanobis Distances to your Original Data Frame (dfICU)
+dfICU$Mahalanobis_Distance <- mahalanobis_distances
+
+# 4. Set a Threshold Based on Percentile (Intuitive Approach)
+# Let's intuitively consider the top 1% of Mahalanobis distances as potential anomalies.
+# You can adjust this percentile (e.g., 5%, 0.5%) based on how strict you want to be.
+anomaly_percentile <- 0.99
+threshold_intuitive <- quantile(dfICU$Mahalanobis_Distance, anomaly_percentile)
+
+# 5. Create a flag for potential anomalies using the intuitive threshold
+dfICU <- dfICU %>%
+  mutate(Is_Anomaly_Intuitive = Mahalanobis_Distance > threshold_intuitive)
+
+# 6. Display the patients identified as potential anomalies using this threshold
+anomalous_patients_intuitive <- dfICU %>%
+  filter(Is_Anomaly_Intuitive == TRUE)
+
+print(paste0("Number of potential anomalous patients (top ", (1 - anomaly_percentile) * 100, "%):"))
+print(nrow(anomalous_patients_intuitive))
+
+print("\nFirst few potential anomalous patients (intuitive threshold):")
+print(head(anomalous_patients_intuitive))
+
+# 7. Visualize the Mahalanobis distances with the intuitive threshold
+ggplot(dfICU, aes(x = Mahalanobis_Distance)) +
+  geom_histogram(bins = 30, fill = "orange", color = "black") +
+  geom_vline(aes(xintercept = threshold_intuitive), color = "purple", linetype = "dashed", linewidth = 1) +
+  labs(title = "Distribution of Mahalanobis Distances (Intuitive Threshold)",
+       x = "Mahalanobis Distance",
+       y = "Frequency") +
+  theme_minimal()
+```
+
