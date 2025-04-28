@@ -1,0 +1,218 @@
+![](_page_0_Picture_0.jpeg)
+
+# **Master of Engineering - ME (Embedded Systems)**
+
+| Course Name | : | Database Programming in Java Lab |
+| --- | --- | --- |
+| Course Code | : | ESD 5183 |
+| Academic Year | : | 2024 – 25 |
+| Semester | : | I |
+| Name of the Course Coordinator | : | Dr. SATHYENDRANATH MALLI |
+| Name of the Program Coordinator | : | Dr. DINESH RAO |
+
+# **Course File**
+
+| Signature of Program Coordinator | Signature of Course Coordinator |
+| --- | --- |
+| with Date | with Date |
+
+|  |  | Table of Contents |
+| --- | --- | --- |
+|  | 1. | Course Plan 5 |
+| 1.1 |  | Primary Information 5 |
+| 1.2 |  | Course Outcomes (COs) 6 |
+| 1.3 |  | Assessment Plan 7 |
+| 1.4 |  | Lesson Plan 8 |
+| 1.5 |  | References 9 |
+| 1.6 |  | Other Resources (Online, Text, Multimedia, etc.) 9 |
+| 1.7 |  | Course Timetable 10 |
+| 1.8 |  | Assessment Plan 11 |
+| 1.9 |  | Assessment Details 12 |
+| 1.10 |  | Course Articulation Matrix 13 |
+
+![](_page_2_Picture_0.jpeg)
+
+# Program Education Objectives (PEOs)
+
+The overall objectives of the Learning Outcomes-based Curriculum Framework (LOCF) for **ME (Embedded Systems)**, program are as follows.
+
+| PEO No. | Education Objective |
+| --- | --- |
+| PEO 1 | Enable to draw upon fundamental and advanced knowledge to apply analytical and computational approaches to solve technological problems in embedded systems.. |
+| PEO 2 | Introduce state of art technologies in the area of embedded systems and inculcate ethical practices to make industry-ready professionals. |
+| PEO 3 | Promote scientific and societal advancement through research and entrepreneurship. |
+
+![](_page_3_Picture_0.jpeg)
+
+# Program Outcomes (POs)
+
+By the end of the postgraduate program in **ME (Embedded Systems)**, graduates will be able to:
+
+| PO1 | An ability to independently carry out research /investigation and development work to solve practical problems. |
+| --- | --- |
+| PO2 | An ability to write and present a substantial technical report/document. |
+| PO3 | Students should be able to demonstrate a degree of mastery over the area as per the specialization of the program. The mastery should be at a level higher than the requirements in the appropriate bachelor program. |
+| PO4 | Ability to develop and implement embedded systems requirements based on theoretical principles and practical knowledge. |
+| PO5 | Ability to demonstrate knowledge of the underlying principles and evaluation methods for analyzing and decision-making. |
+
+![](_page_4_Picture_0.jpeg)
+
+# 1. Course Plan
+
+# 1.1 Primary Information
+
+| Course Name | : | Database Programming in Java Lab[ESD 5183] |
+| --- | --- | --- |
+| L-T-P-C | : | 0-0-3-1 |
+| Contact Hours | : | 36 Hours |
+| Pre-requisite | : | Basic Programming Knowledge |
+| Core/ PE/OE | : | Elective – 1 |
+
+![](_page_5_Picture_0.jpeg)
+
+# 1.2 Course Outcomes (COs)
+
+| CO | At the end of this course, the student should be able to: | No. of Contact Hours | Program Outcomes (PO's) | BL |
+| --- | --- | --- | --- | --- |
+| CO1 | Apply object-oriented programming concepts for a java | 12 | PO3 | 3 |
+|  | application |  |  |  |
+| CO2 | Use core java concepts to build a java application | 12 | PO3, PO5 | 3 |
+| CO3 | Implement a java application using JDBC concepts. | 6 | PO4 | 3 |
+|  | Analyze the different set of SQL statements which are |  |  |  |
+| CO4 | used for defining, constructing, and manipulating a database | 6 | PO4, PO5 | 4 |
+
+![](_page_6_Picture_0.jpeg)
+
+# 1.3 Assessment Plan
+
+| Components | Lab Test | Flexible Assessments | End semester/ Makeup |
+| --- | --- | --- | --- |
+|  |  | (2 – 3 in number) | examination |
+| Duration | 120 minutes | To be decided by the faculty. | 180 minutes |
+| Weightage | 0.3 | 0.2 | 0.5 |
+| Typology of | Applying; | Applying; Analyzing. | Applying; Analyzing; |
+| questions | Analyzing. | Evaluating. Assignment: Apply, analyze | Evaluating. |
+|  | Answer all the | and evaluate all the applications covering all the topics of OOP's, |  |
+|  |  | core java, JDBC and Database: |  |
+|  | questions. |  | Answer all the questions. |
+| Pattern | Maximum marks | Maximum 20 marks. | Maximum marks 50. |
+|  |  | [To be decided by the faculty |  |
+|  | 30. | members. |  |
+|  |  | May be Assignments, Problem |  |
+|  |  | solving, etc.] |  |
+
+![](_page_7_Picture_0.jpeg)
+
+| Schedule | As per academic | Assignment | submission: | As per academic calendar. |
+| --- | --- | --- | --- | --- |
+|  | calendar. | November 2023 |  |  |
+| Topics covered | OOP's concepts, Core java, UI |  |  |  |
+|  |  |  |  | Comprehensive examination |
+|  | application, JDBC, |  |  | covering the full syllabus. |
+|  | and SQL |  |  |  |
+
+### 1.4 Lesson Plan
+
+| L. No. | TOPICS | Course Outcome Addressed |
+| --- | --- | --- |
+| L0 | Course delivery plan, Course assessment plan, Course outcomes, Program outcomes, CO-PO mapping, reference books | --- |
+| L1 | Setting the java runtime environment, understanding a simple java application | CO1 |
+| L2 | Exercises to build the java applications using core java concepts | CO2 |
+| L3 | Exercises to build the java applications using core java concepts | CO2 |
+| L4 | Exercises to build the java applications using core java concepts | CO2 |
+| L5 | Inheritance - Build & test java applications | CO1 |
+
+![](_page_8_Picture_0.jpeg)
+
+| L6 | Interface - Build & test java applications | CO1 |
+| --- | --- | --- |
+| IT1 |  | CO1 & CO2 |
+| L7 | UI application - Build & test | CO2 |
+| L8 | UI application - Build & test | CO2 |
+| L9 | JDBC application | CO3 |
+| L10 | JDBC application | CO3 |
+| L11 | Test various SQL statements | CO4 |
+| L12 | Test various SQL statements | CO4 |
+| IT2 |  | CO3 & CO4 |
+
+### 1.5 References
+
+- 1. "JAVA 2 The Complete Reference" Patrick Naughton and Herbert Schildt –VII Edition, Tata McGraw Hill.
+- 2. "Database Programming with JDBC and Java" George Reese, O'Reilly, 2nd Edition
+- 3. "Fundamentals of Database systems, Third Edition". Author: Elmasri and Navath
+- 4. "Database system Concepts, Third Edition",Author: Abraham Silberschatz (Bell Laboratories), Henry F. Korth(Bell Laboratories) and S. Sudarshan (Indian Institute of Technology, Bombay, Publishers: The McGraw-Hill Companies, Inc.
+
+# 1.6 Other Resources (Online, Text, Multimedia, etc.)
+
+- 1. Web Resources: Blog, Online tools and cloud resources.
+- 2. Journal Articles.
+
+![](_page_9_Picture_0.jpeg)
+
+# 1.7 Course Timetable
+
+| 1 | st Semester Big Data Analytics |  |  |  |  | Lab: |  |  |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+|  | 9-10 | 10-11 | 11-12 | 12-1 | 1-2 | 2-3 | 3-4 | 4-5 |
+| MON |  |  |  |  |  |  |  |  |
+| TUE |  |  |  |  |  |  | DBPJ Lab |  |
+| WED |  |  |  |  |  |  |  |  |
+| THU |  |  |  |  |  |  |  |  |
+| FRI |  |  |  |  |  |  |  |  |
+| SAT |  |  |  |  |  |  |  |  |
+
+![](_page_10_Picture_0.jpeg)
+
+# 1.8 Assessment Plan
+
+|  | Cos |  | Marks & weightage |  |  |
+| --- | --- | --- | --- | --- | --- |
+| CO No. | CO Name | Mid Semester (Max. 50) | Assignment (Max. 20) | End Semester (Max. 50) | CO wise Weightage |
+| CO1 | Apply object-oriented programming concepts for a java application | 20 | 5 | 10 | 0.3 |
+| CO2 | Use core java concepts to build a java application | 20 | 5 | 20 | 0.3 |
+| CO3 | Implement a java application using JDBC concepts. | 10 | 5 | 10 | 0.2 |
+| CO4 | Analyze the different set of SQL statements which are used for defining, constructing, and manipulating a database |  | 5 | 10 | 0.2 |
+|  | Marks (weightage) | 0.3 | 0.2 | 0.5 | 1.0 |
+
+![](_page_11_Picture_0.jpeg)
+
+Note:
+
+- In-semester Assessment is considered as the Internal Assessment (IA) in this course for 50 marks, which includes the performances in lab participation, assignment work, lab work, lab tests, quizzes etc.
+- End-semester examination (ESE) for this course is conducted for a maximum of 50.
+- End-semester marks for a maximum of 50 and IA marks for a maximum of 50 are added for a maximum of 100 marks to decide upon the grade in this course.
+
+Weightage for CO1 = (Lab Test marks for CO1 + Assignment marks for CO1 + ESE marks for CO1) /100
+
+# 1.9 Assessment Details
+
+The assessment tools to be used for the Current Academic Year (CAY) are as follows:
+
+| SI. No. | Tools | Weightage | Frequency | Details of Measurement (Weightage/Rubrics/Duration, etc.) |
+| --- | --- | --- | --- | --- |
+| 1 | Lab Test | 0.3 | • 1 | Performance is measured using internal test attainment level. |
+|  |  |  | • | Reference: question paper and answer scheme. |
+
+![](_page_12_Picture_0.jpeg)
+
+|  |  |  |  | • Each | internal test is assessed for a maximum of 50 marks and scaled down to 40 |
+| --- | --- | --- | --- | --- | --- |
+|  |  |  |  |  | marks. |
+| 2 | Assignments | 0.2 | 2 | • | Performance is measured using assignments/quiz attainment level. |
+|  |  |  |  | • | Assignments/quiz are evaluated for a maximum of 10 marks. |
+|  | ESE | 0.5 |  | • | Performance is measured using ESE attainment level. |
+| 3 |  |  | 1 | • | Reference: question paper and answer scheme. |
+|  |  |  |  | • ESE | is assessed for a maximum of 100 marks and scaled down to 50 marks. |
+
+# 1.10 Course Articulation Matrix
+
+| CO | PO1 | PO2 | PO3 | PO4 | PO5 |
+| --- | --- | --- | --- | --- | --- |
+| CO1 |  |  | Y |  |  |
+| CO2 |  |  | Y |  | Y |
+| CO3 |  |  |  | Y |  |
+| CO4 |  |  |  | Y | Y |
+| Average Articulation Level |  |  | * | * | * |
+
+![](_page_13_Picture_0.jpeg)
+

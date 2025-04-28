@@ -1,0 +1,240 @@
+![](_page_0_Picture_0.jpeg)
+
+# **Master of Engineering - ME (Embedded Systems)**
+
+| Course Name | : | Database Programming in Java |
+| --- | --- | --- |
+| Course Code | : | ESD 5133 |
+| Academic Year | : | 2024 – 25 |
+| Semester | : | I |
+| Name of the Course Coordinator | : | Dr. SATHYENDRANATH MALLI |
+| Name of the Program Coordinator | : | Dr. DINESH RAO |
+
+### **Course File**
+
+| Signature of Program Coordinator | Signature of Course Coordinator |
+| --- | --- |
+| with Date | with Date |
+
+|  |  | Table of Contents |
+| --- | --- | --- |
+| 1. | Course Plan 5 |  |
+| 1.1 |  | Primary Information 5 |
+| 1.2 | Course Outcomes (COs) | 6 |
+| 1.3 |  | Assessment Plan 7 |
+| 1.4 | Lesson Plan | 8 |
+| 1.5 |  | References 10 |
+| 1.6 | Other Resources (Online, Text, Multimedia, etc.) | 11 |
+| 1.7 | Course Timetable | 12 |
+| 1.8 |  | Assessment Plan 13 |
+| 1.9 |  | Assessment Details 14 |
+| 1.10 | Course Articulation Matrix | 15 |
+
+![](_page_2_Picture_0.jpeg)
+
+## Program Education Objectives (PEOs)
+
+The overall objectives of the Learning Outcomes-based Curriculum Framework (LOCF) for **ME (Embedded Systems)**, program are as follows.
+
+| PEO No. | Education Objective |
+| --- | --- |
+| PEO 1 | Enable to draw upon fundamental and advanced knowledge to apply analytical and computational approaches to solve technological problems in embedded systems.. |
+| PEO 2 | Introduce state of art technologies in the area of embedded systems and inculcate ethical practices to make industry-ready professionals. |
+| PEO 3 | Promote scientific and societal advancement through research and entrepreneurship. |
+
+![](_page_3_Picture_0.jpeg)
+
+## Program Outcomes (POs)
+
+By the end of the postgraduate program in **ME (Embedded Systems)**, graduates will be able to:
+
+| PO1 | An ability to independently carry out research /investigation and development work to solve practical problems. |
+| --- | --- |
+| PO2 | An ability to write and present a substantial technical report/document. |
+| PO3 | Students should be able to demonstrate a degree of mastery over the area as per the specialization of the program. The |
+|  | mastery should be at a level higher than the requirements in the appropriate bachelor program. |
+| PO4 | Ability to develop and implement embedded systems requirements based on theoretical principles and practical knowledge. |
+| PO5 | Ability to demonstrate knowledge of the underlying principles and evaluation methods for analyzing and decision-making. |
+
+![](_page_4_Picture_0.jpeg)
+
+## 1. Course Plan
+
+### 1.1 Primary Information
+
+| Course Name | : | Database Programming in Java [ESD 5133] |
+| --- | --- | --- |
+| L-T-P-C | : | 3-0-0-3 |
+| Contact Hours | : | 36 Hours |
+| Pre-requisite | : | Basic Programming Knowledge |
+| Core/ PE/OE | : | Elective – 1 |
+
+![](_page_5_Picture_0.jpeg)
+
+### 1.2 Course Outcomes (COs)
+
+| CO | At the end of this course, the student should be able to: | No. of Contact Hours | Program | BL |
+| --- | --- | --- | --- | --- |
+|  |  |  | Outcomes (PO's) |  |
+| CO1 | Analyze the object-oriented programming concepts | 2 | PO3, PO4 | L3 |
+| CO2 | Examine the various core java concepts | 16 | PO3, PO4 | L3 |
+| CO3 | Appraise the various techniques used to develop a user | 6 | PO3, PO4, PO5 | L2 |
+|  | interface (UI) application |  |  |  |
+| CO4 | Analyze the concepts of JDBC and SQL | 12 | PO3, PO4 | L3 |
+
+![](_page_6_Picture_0.jpeg)
+
+### 1.3 Assessment Plan
+
+| Components | Mid semester | Flexible Assessments | End semester/ Makeup |
+| --- | --- | --- | --- |
+|  |  | (2 – 3 in number) | examination |
+| Duration | 90 minutes | To be decided by the faculty. | 180 minutes |
+| Weightage | 0.3 | 0.2 | 0.5 |
+| Typology of | Applying; Analyzing and Evaluating. | Applying; Analyzing. | Applying; Analyzing; |
+| questions |  | Evaluating. | Evaluating. |
+|  | Answer all 5 questions of 10 marks each. | Assignment: Solving problems | by Answer all 10 full questions of |
+| Pattern | Each question may have 2 to 3 parts of | applying, analyzing and evaluating | 10 marks each. Each question |
+|  | 3/4/5/6/7 marks. | Generative AI use cases. | may have 2 to 3 parts of |
+|  |  | [To be decided by the faculty.] | 3/4/5/6/7 marks. |
+| Schedule | As per academic calendar. | Assignment submission: November | As per academic calendar. |
+|  |  | 2024 |  |
+| Topics | Introduction to OOP's concepts, Core Java |  |  |
+| covered | Concepts, Database concepts |  |  |
+
+![](_page_7_Picture_0.jpeg)
+
+### 1.4 Lesson Plan
+
+| L. No. | TOPICS | Course Outcome Addressed |
+| --- | --- | --- |
+| L0 | Course delivery plan, Course assessment plan, Course outcomes, Program outcomes, CO-PO | --- |
+|  | mapping, reference books |  |
+| L1 | Introduction to OOP's concepts | CO1 |
+| L2 | Definition of class, object, encapsulation, inheritance, and polymorphism | CO1 |
+| L3 | Introduction to Java language - evolution of the language, features of Java language | CO2 |
+| L4 | Discussion on basic structure of java program. Setting a path to executing an application | CO2 |
+| L5 | Java language structure - Data types | CO2 |
+| L6 | Java language structure - Control statements | CO2 |
+| L7 | Java language structure – Operators | CO2 |
+| L8 | Definition of class and object concepts, Discussion on defining a class includes components such | CO2 |
+|  | as variables, methods |  |
+| L9 | Understanding the concept of constructor | CO2 |
+| L10 | Concepts of static and non-static which are applied to variables and methods. | CO2 |
+
+![](_page_8_Picture_0.jpeg)
+
+| L11 | Concepts of Inner classes | CO2 |
+| --- | --- | --- |
+| L12 | Introduction to Inheritance. Implementation of an application using inheritance in java | CO2 |
+| L13 | Concepts of method overriding and method overloading | CO2 |
+| L14 | Discussion on the mechanism called dynamic method dispatch (run-time polymorphism) | CO2 |
+| IT1 |  | CO1 & CO2 |
+| L15 | Concepts of abstract class and final class | CO2 |
+| L16 | Interface and package | CO2 |
+| L17 | Exception handling in java | CO2 |
+| L18 | Introduction to IO Streams | CO2 |
+| L19 | Discussion on AWT components, and types of layout managers to build a window based | CO3 |
+|  | application |  |
+| L20 | Steps for developing window based applications (UI) | CO3 |
+| L21 | Introduction to swing package | CO3 |
+| L22 | Event handling concepts | CO3 |
+| L23 | Discussion on event delegation model | CO3 |
+| L24 | Steps for developing menu driven applications | CO3 |
+| L25 | Introduction to database concepts. Discussion on characteristics and advantages of database | CO4 |
+| L26 | Definition of various data models, discussion on database overall systems | CO4 |
+| L27 | Definition of schema. Discussion on three tier schema architecture | CO4 |
+| L28 | Introduction to JDBC. Types of JDBC drivers | CO4 |
+
+![](_page_9_Picture_0.jpeg)
+
+| L29 | Steps to connect database using JDBC | CO4 |
+| --- | --- | --- |
+| L30 | Introduction to SQL | CO4 |
+| L31 | Discussion on various SQL statements as part of data definition language | CO4 |
+| IT2 |  | CO3 & CO4 |
+| L32 | SQL statements associated with Data manipulation language | CO4 |
+| L33 | Discussion on ordered by, group by, and having clauses | CO4 |
+| L34 | Discussion on views, stored procedure | CO4 |
+| L35 | Steps to implement transaction | CO4 |
+| L36 | Database normalization | CO4 |
+
+### 1.5 References
+
+- 1. "JAVA 2 The Complete Reference" Patrick Naughton and Herbert Schildt –VII Edition, Tata McGraw Hill.
+- 2. "Database Programming with JDBC and Java" George Reese, O'Reilly, 2nd Edition
+- 3. "Fundamentals of Database systems, Third Edition". Author: Elmasri and Navath
+- 4. "Database system Concepts, Third Edition",Author: Abraham Silberschatz (Bell Laboratories), Henry F. Korth(Bell Laboratories) and S. Sudarshan (Indian Institute of Technology, Bombay, Publishers: The McGraw-Hill Companies, Inc.
+
+![](_page_10_Picture_0.jpeg)
+
+### 1.6 Other Resources (Online, Text, Multimedia, etc.)
+
+- 1. Web Resources: Blog, Online tools and cloud resources.
+- 2. Journal Articles.
+
+![](_page_11_Picture_0.jpeg)
+
+### 1.7 Course Timetable
+
+|  | 1 st Embedded Systems |  |  | Lecture Hall: LG1 LH2 |  |  |  |  |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+|  | 9-10 | 10-11 | 11-12 |  | 12-1 1-2 | 2-3 | 3-4 | 4-5 |
+| MON |  |  |  |  |  |  |  |  |
+| TUE |  |  | DBPJ |  |  |  | DBPJ LAB |  |
+| WED |  |  |  |  |  |  |  |  |
+| THU |  |  | DBPJ |  |  |  |  |  |
+| FRI |  |  |  |  |  |  |  |  |
+| SAT |  |  | DBPJ |  |  |  |  |  |
+
+![](_page_12_Picture_0.jpeg)
+
+1.8 Assessment Plan
+
+|  | COs | Marks |  | & Weightage |  |
+| --- | --- | --- | --- | --- | --- |
+| CO No. | CO Name | Mid semester | Assignment | End Semester | CO wise |
+|  |  | (Max. 50) | (Max. 20) | (Max. 100) | Weightage |
+| CO1 | Analyze the object-oriented programming concepts | 10 | 8 | 10 | 0.11 |
+| CO2 | Examine the various core java concepts | 30 | 5 | 40 | 0.44 |
+| CO3 | Appraise the various techniques used to develop a user interface (UI) application |  | 2 | 20 | 0.16 |
+| CO4 | Analyze the concepts of JDBC and SQL | 10 | 5 | 30 | 0.29 |
+|  | Marks (weightage) | 0.3 | 0.2 | 0.5 | 1.0 |
+
+Note:
+
+- In-semester Assessment is considered as the Internal Assessment (IA) in this course for 50 marks, which includes the performances in class participation, assignment work, class tests, mid-term tests, quizzes etc.
+- End-semester examination (ESE) for this course is conducted for a maximum of 100 and the same will be scaled down to 50.
+
+![](_page_13_Picture_0.jpeg)
+
+- End-semester marks for a maximum of 50 and IA marks for a maximum of 50 are added for a maximum of 100 marks to decide upon the grade in this course.
+Weightage for CO1 = (mid semester marks for CO1 / 1.6666 + Assignment marks for CO1/1.0 + ESE marks for CO1 / 2)/100
+
+### 1.9 Assessment Details
+
+The assessment tools to be used for the Current Academic Year (CAY) are as follows:
+
+| SI. | Tools | Weightage | Frequency | Details of Measurement (Weightage/Rubrics/Duration, etc.) |
+| --- | --- | --- | --- | --- |
+| No. |  |  |  |  |
+| 1 | Internal Test | 0.3 | 1 | • Performance is measured using internal test attainment level. • Reference: question paper and answer scheme. |
+|  |  |  |  | • Each internal test is assessed for a maximum of 50 marks and scaled down to 40 |
+|  |  |  |  | marks. |
+| 2 | Assignments | 0.2 | 2 | • Performance is measured using assignments/quiz attainment level. |
+|  |  |  |  | • Assignments/quiz are evaluated for a maximum of 10 marks. |
+| 3 | End semester | 0.5 | 1 | • Performance is measured using ESE attainment level. • Reference: question paper and answer scheme. |
+|  |  |  |  | • ESE is assessed for a maximum of 100 marks and scaled down to 50 marks. |
+
+![](_page_14_Picture_0.jpeg)
+
+### 1.10 Course Articulation Matrix
+
+| CO | PO1 | PO2 | PO3 | PO4 | PO5 |
+| --- | --- | --- | --- | --- | --- |
+| CO1 |  |  | Y | Y |  |
+| CO2 |  |  | Y | Y | Y |
+| CO3 |  |  | Y | Y |  |
+| CO4 |  |  | Y | Y |  |
+| Average Articulation Level |  |  | * | * | * |
+

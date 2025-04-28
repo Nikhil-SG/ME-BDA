@@ -1,0 +1,231 @@
+# **Master of Engineering - ME (Embedded Systems)**
+
+| Course Name | : | Microcontrollers and its Applications |
+| --- | --- | --- |
+| Course Code | : | ESD 5103 |
+| Academic Year | : | 2024 - 25 |
+| Semester | : | I |
+| Name of the Course Coordinator | : | Mr. RAGHUDATHESH G P |
+| Name of the Program Coordinator | : | Dr. Dinesh Rao |
+
+### **Course File**
+
+| //2025 | //2025 |
+| --- | --- |
+| Signature of Program Coordinator | Signature of Course Coordinator |
+| with Date | with Date |
+
+|  | Course Plan 5 | 1. |
+| --- | --- | --- |
+| 1.1 | Primary Information 5 |  |
+| 1.2 | Course Outcomes (COs) 6 |  |
+| 1.3 | Assessment Plan 6 |  |
+| 1.4 | Lesson Plan 8 |  |
+| 1.5 | References 10 |  |
+| 1.6 | Other Resources (Online, Text, Multimedia, etc.) 10 |  |
+| 1.7 | Course Outcomes (COs) Error! Bookmark not defined. |  |
+| 1.8 | Course Timetable 11 |  |
+| 1.9 | Assessment Plan 12 |  |
+| 1.10 | Assessment Details 13 |  |
+| 1.11 | Course Articulation Matrix 14 |  |
+
+## Program Education Objectives (PEOs)
+
+The overall objectives of the Learning Outcomes-based Curriculum Framework (LOCF) for **ME (Embedded Systems)**, program are as follows.
+
+| PEO No | Education Objective |
+| --- | --- |
+| PEO 1 | Enable to draw upon fundamental and advanced knowledge in order to apply analytical and computational approach to solve technological problems in embedded systems. |
+|  | Introduce state of art technologies in the area of embedded system and inculcate |
+| PEO 2 | ethical practices to make industry ready professional. |
+| PEO 3 | Promote scientific and societal advancement through research and entrepreneurship. |
+
+## Program Outcomes (POs)
+
+By the end of the postgraduate program in **ME (Embedded Systems)**, graduates will be able to:
+
+| PO1 | Acquire in-depth knowledge of embedded system domain, with an ability to discriminate, evaluate, analyze, synthesize the |
+| --- | --- |
+|  | existing and new knowledge, and integration of the same for enhancement of knowledge. |
+| PO2 | Analyze complex embedded system Eco System critically; apply independent judgement for synthesizing information to |
+|  | make intellectual and/or creative advances for conducting research in a wider theoretical, practical and policy context. |
+| PO3 | Think laterally and originally, conceptualize and solve embedded system Design problems, evaluate a wide range of |
+|  | potential solutions for those problems and arrive at feasible, optimal solutions after considering public health and safety, |
+|  | cultural, societal and environmental factors in the core areas of expertise. |
+| PO4 | Extract information pertinent to unfamiliar problems through literature survey and experiments, apply appropriate research |
+|  | methodologies, techniques and tools, design, conduct experiments, analyze and interpret data, demonstrate higher order |
+|  | skill and view things in a broader perspective, contribute individually/in group(s) to the development of |
+|  | scientific/technological knowledge in one or more domains of engineering. |
+| PO5 | Create, select, learn and apply appropriate techniques, resources, and modern engineering and IT tools, including prediction |
+|  | and modelling, to complex engineering activities with an understanding of the limitations. |
+
+## 1. Course Plan
+
+### 1.1 Primary Information
+
+| Course Name | : | Microcontrollers and its Applications [ESD 5103] |
+| --- | --- | --- |
+| L-T-P-C | : | 3-0-0-3 |
+| Contact Hours | : | 36 Hours |
+| Pre-requisite | : | Basic Programming with C |
+| Core/ PE/OE | : | Program Elective |
+
+### 1.2 Course Outcomes (COs), Program outcomes (POs) and Bloom's Taxonomy Mapping
+
+| CO | At the end of this course, the student should be able to: | No. of Contact | Program Outcomes | BL |
+| --- | --- | --- | --- | --- |
+|  |  | Hours | (PO's) |  |
+|  | Employ the knowledge of Microcontrollers to build | 14 | PO1 |  |
+| CO1 | embedded systems. |  |  | 3 |
+|  | Explain the concept of Programming Microcontrollers |  |  |  |
+| CO2 |  | 6 | PO2 | 2 |
+|  | using Assembly and Embedded C. |  |  |  |
+|  | Demonstrate Embedded Systems by interfacing Sensors |  |  |  |
+| CO3 | and Actuators. | 16 | PO3 | 3 |
+
+#### 1.3 Assessment Plan
+
+| Components | Internal Test 1 | Flexible Assessments | End semester/ Makeup |
+| --- | --- | --- | --- |
+|  |  | (2 – 3 in number) | examination |
+| Duration | 90 minutes | To be decided by the faculty. | 180 minutes |
+| Weightage | 0.3 | 0.2 | 0.5 |
+| Typology of questions | Applying; Analyzing. | Applying; Analyzing. | Applying; Analyzing; |
+|  |  | Understanding. | Understanding. |
+| Pattern | Answer all 5 questions of 10 marks | Assignment: (Programming on Embedded | Answer all 10 full questions of |
+|  | each. | C.) | 10 marks each. |
+| Schedule | As per academic calendar. | Assignment submission: November 2024 | As per academic calendar. |
+| Topics covered | Introduction – Microprocessor, |  |  |
+|  | microcontroller |  | Comprehensive examination |
+|  | Reset circuitry, LED inetrfacing | Programming on Embedded C. | covering the full syllabus. |
+|  | ARM microcontroller, timers, |  | Students are expected to |
+|  | Serial communication |  | answer all questions. |
+
+#### 1.4 Lesson Plan
+
+| L. No. | TOPICS | Course Outcome Addressed |
+| --- | --- | --- |
+| L0 | Course delivery plan, Course assessment plan, Course outcomes, Program outcomes, CO-PO mapping, reference books | --- |
+| L1 | Introduction to microprocessor and microcontroller comaparions | CO1 |
+| L2 | Introduction to embedded Board , application types, single and multiple task , applications | CO1 |
+| L3 | Introduction to ARM microcontroller LPC XXXX Features | CO2 |
+| L4 | Details of PIN configuration | CO2 |
+| L5 | ARM and Thumb information | CO2 |
+| L6 | RAM, ROM details | CO2 |
+| L7 | Memory Map | CO2 |
+| L8 | Interrupts concepts | CO2 |
+| L9 | Reset Circuitry | CO1 |
+| L10 | Crystals . circruits | CO1 |
+| L11 | GPIOs registers | CO1 |
+| L12 | Input output configuerations | CO1 |
+| L13 | Register concepts of pullup and down, intro timers | CO1 |
+| L14 | Interfacing lED, buttons, relays timer programming | CO1 |
+
+| L15 | Counter programming,configuration | CO1 |
+| --- | --- | --- |
+| L16 | LCD interfacing, stepper motor inroduction | CO1 |
+| L17 | Programming of LCD, stepper motors | CO1 |
+| L18 | Serial communication introduction | CO 3 |
+| L19 | Serial vs parallel terminology | CO3 |
+| L20 | Hand shaking concepts configurations | CO3 |
+| IT | Mid -test |  |
+| L21 | Regsiters of serials communications etc | CO3 |
+| L22 | Programming of serial communication protocols | CO3 |
+| L23 | UART programming | CO3 |
+| L24 | SPI and I2c protocol | CO3 |
+| L25 | Details discussion of protocols | CO3 |
+| L26 | Bitbanging | CO3 |
+| L27 | Interfacing with SPI | CO3 |
+| L28 | Interfacing with I2C devices | CO3 |
+| L29 | RTC | CO3 |
+| L30 | Introduction of ADC DAC | CO3 |
+| L31 | Types of of ADC , DAC chips | CO3 |
+| L32 | Registers , configurations | CO3 |
+| L33 | Programming of ADC | CO3 |
+| L34 | Programming of DAC | CO3 |
+
+| L35 | Interfacing of and programming and executions | CO3 |
+| --- | --- | --- |
+| L36 | Embedded devise applications | CO3 |
+
+#### 1.5 References
+
+William Hohl, Christopher Hinds,"ARM Assembly Language: Fundamentals and Techniques",2nd Edition, ISBN-13: 978-1482229851, ISBN-10: 1482229854
+
+Andrew Sloss, Dominic Symes, Chris Wright,"ARM System Developer's Guide: Designing and Optimizing System Software",1st Edition,The Morgan Kaufmann Series in Computer Architecture and Design, ISBN13: 978-1558608740, ISBN-10: 1558608745
+
+David Seal, "ARM Architecture Reference Manual", 2nd Edition, Addison-Wesley Professional.
+
+Steve Furber,"ARM System-on-Chip Architecture",2nd Edition,Addison-Wesley Professional, ISBN-13: 078- 5342675191,ISBN-10: 0201675196
+
+Douglas V. Hall,"Microprocessors and Interfacing",Mcgraw Hill Education ,ISBN-10 1259006158,ISBN-13 9781259006159,2012.
+
+Websites & Transaction Papers
+
+MOOC: https://www.coursera.org/learn/armv8-m-architecture-fundamentals#syllabus
+
+#### 1.6 Other Resources (Online, Text, Multimedia, etc.)
+
+- 1. Web Resources: Blog, Online tools and cloud resources.
+- 2. Journal Articles.
+
+#### 1.7 Course Timetable
+
+| st 1 | Semester Embedded |  |  | Room: LG1 LH10 |  | Lab: ES | Lab |  |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+|  | 8- 9 | 9 - 10 | 10 - 11 | 11 – 12 | 12 – 1 | 1-2 2 – 3 | 3 – 4 | 4 - 5 |
+| MON |  | DS |  | DS LAB |  | SEM | ACA |  |
+| TUE |  | RTOS | MCA | ELE |  |  | ELE LAB* |  |
+| WED |  | DS |  | RTOS LAB |  | SEM | ACA |  |
+| THU |  | RTOS | MCA | ELE |  |  | ACA LAB |  |
+| FRI |  | DS |  | MCA LAB |  | SEM | ACA |  |
+| SAT |  | RTOS | MCA | ELE |  |  | Mini Project |  |
+
+Advanced Computer Architecture – Ravikala, Data Structures and Algorithms – Dinesh Rao, Microcontrollers and its Applications – Raghudathesh G P Real Time Operating Systems – Keerthana Prasad, ELE - Internet of Things – Samar, ELE - Database Programming in Java – Sathyendranath Malli
+
+#### 1.8 Assessment Plan
+
+|  | COs |  | Marks | & Weightage |  |
+| --- | --- | --- | --- | --- | --- |
+| CO No. | CO Name | Mid semester | Assignment (Max. 20) | End Semester (Max. 100) | CO wise Weightage |
+|  |  | (Max. 50) |  |  |  |
+| CO1 | Employ the knowledge of Microcontrollers to build | 30 | - | 50 | 0.47 |
+|  | embedded systems. |  |  |  |  |
+| CO2 | Explain the concept of Programming Microcontrollers using Assembly and Embedded C. | 20 | 10 | 20 | 0.29 |
+| CO3 | Demonstrate Embedded Systems by interfacing | - | 10 | 30 | 0.23 |
+|  | Sensors and Actuators. |  |  |  |  |
+|  | Marks (weightage) | 0.29 | 0.11 | 0.588 | 1.0 |
+
+Note:
+
+- In-semester Assessment is considered as Midterm Assessment (IA) in this course for 50 marks which includes the performances in class participation, assignment work, mid-term tests, quizzes etc.
+- End-semester examination (ESE) for this course is conducted for a maximum of 100 and the same will be scaled down to 50.
+- End-semester marks for a maximum of 50 and IA marks for a maximum of 50 are added for a maximum of 100 marks to decide upon the grade in this course.
+
+Weightage for CO1 = (IT1 marks for CO1 / 2.5 + IT2 marks for CO1 / 2.5 + Assignment marks for CO1 + ESE marks for CO1 / 2)/100 = (25/2.5 + 0 + 0 + 20/ 2)/100 = 0.2
+
+#### 1.9 Assessment Details
+
+The assessment tools to be used for the Current Academic Year (CAY) are as follows:
+
+| SI. | Tools | Weightage | Frequency | Details of Measurement (Weightage/Rubrics/Duration, etc.) |
+| --- | --- | --- | --- | --- |
+| No. |  |  |  |  |
+| 1 | Internal Test | 0.3 | 1 | • Performance is measured using internal test attainment level. • Reference: question paper and answer scheme. |
+|  |  |  |  | • Each internal test is assessed for a maximum of 50 marks and scaled down to 30 |
+|  |  |  |  | marks. |
+| 2 | Assignments | 0.2 | 2 | • Performance is measured using assignments/quiz attainment level. |
+|  |  |  |  | • Assignments/quiz are evaluated for a maximum of 20 marks. |
+|  |  |  |  | • Performance is measured using ESE attainment level. |
+| 3 | ESE | 0.5 | 1 | • Reference: question paper and answer scheme. |
+|  |  |  |  | • ESE is assessed for a maximum of 100 marks and scaled down to 50 marks. |
+
+#### 1.10 Course Articulation Matrix
+
+| CO | PO1 | PO2 | PO3 | PO4 | PO5 |
+| --- | --- | --- | --- | --- | --- |
+| CO1 | Y |  |  |  |  |
+| CO2 |  | Y |  |  |  |
+| CO3 |  |  | Y |  |  |
+| Average Articulation Level | * | * | * |  |  |
+

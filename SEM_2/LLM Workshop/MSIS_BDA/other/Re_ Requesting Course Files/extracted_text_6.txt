@@ -1,0 +1,231 @@
+![](_page_0_Picture_0.jpeg)
+
+# **Master of Engineering - ME (Embedded Systems)**
+
+| Course Name | : | Microcontrollers and its Applications Lab |
+| --- | --- | --- |
+| Course Code | : | ESD 5153 |
+| Academic Year | : | 2024 - 25 |
+| Semester | : | I |
+| Name of the Course Coordinator | : | Mr. RAGHUDATHESH G P |
+| Name of the Program Coordinator | : | Dr. Dinesh Rao |
+
+### **Course File**
+
+| //2025 | //2025 |
+| --- | --- |
+| Signature of Program Coordinator | Signature of Course Coordinator |
+| with Date | with Date |
+
+|  |  | Table of Contents |
+| --- | --- | --- |
+|  | 1. Course | Plan 6 |
+| 1.1 |  | Primary Information 6 |
+| 1.2 |  | Course Outcomes (COs) 7 |
+| 1.3 |  | Assessment Plan 8 |
+| 1.4 |  | Lesson Plan 9 |
+| 1.5 |  | References 10 |
+| 1.6 |  | Other Resources (Online, Text, Multimedia, etc.) 10 |
+| 1.7 |  | Course Outcomes (COs) Error! Bookmark not defined. |
+| 1.8 |  | Course Timetable 11 |
+| 1.9 |  | Assessment Plan 12 |
+| 1.10 |  | Assessment Details 13 |
+| 1.11 |  | Course Articulation Matrix 14 |
+|  | 2. | Assessment Details Error! Bookmark not defined. |
+| 2.1 |  | Student Details: Error! Bookmark not defined. |
+| 2.2 |  | Assessment outcomes Error! Bookmark not defined. |
+
+| 2.3 | Analysis of Assessment outcomes | Error! Bookmark not defined. |  |
+| --- | --- | --- | --- |
+| 2.4 | Attainment of Course Outcomes (Direct) | Error! Bookmark not defined. |  |
+| 2.5 | Attainment of Course Outcomes (Indirect): Course End Survey (CES) Questionnaire | Error! Bookmark not defined. |  |
+| 2.6 | Attainment of Course Outcomes (Indirect): Analysis | Error! Bookmark not defined. |  |
+| 3. | CO-PO Assessment Error! Bookmark not defined. |  |  |
+| 4. | Observations and Comments Error! Bookmark not defined. |  |  |
+| 4.1 | Observations from Course Coordinator based on the direct and indirect assessments | Error! Bookmark not defined. |  |
+| 4.2 | Comments/Suggestions by the Course Coordinator |  | Error! Bookmark not defined. |
+
+![](_page_3_Picture_0.jpeg)
+
+# Program Education Objectives (PEOs)
+
+The overall objectives of the Learning Outcomes-based Curriculum Framework (LOCF) for **ME (Embedded Systems)**, program are as follows.
+
+| PEO No. | Education Objective |
+| --- | --- |
+| PEO 1 | Enable to draw upon fundamental and advanced knowledge in order to apply analytical and computational approach to solve technological problems in embedded systems. |
+| PEO 2 | Introduce state of art technologies in the area of embedded system and inculcate ethical practices to make industry ready professional. |
+| PEO 3 | Promote scientific and societal advancement through research and entrepreneurship. |
+
+![](_page_4_Picture_0.jpeg)
+
+## Program Outcomes (POs)
+
+By the end of the postgraduate program in **ME (Embedded Systems)**, graduates will be able to:
+
+| PO1 | Acquire in-depth knowledge of embedded system domain, with an ability to discriminate, evaluate, analyze, synthesize the |
+| --- | --- |
+|  | existing and new knowledge, and integration of the same for enhancement of knowledge. |
+| PO2 | Analyze complex embedded system Eco System critically; apply independent judgement for synthesizing information to |
+|  | make intellectual and/or creative advances for conducting research in a wider theoretical, practical and policy context. |
+| PO3 | Think laterally and originally, conceptualize and solve embedded system Design problems, evaluate a wide range of |
+|  | potential solutions for those problems and arrive at feasible, optimal solutions after considering public health and safety, |
+|  | cultural, societal and environmental factors in the core areas of expertise. |
+| PO4 | Extract information pertinent to unfamiliar problems through literature survey and experiments, apply appropriate research |
+|  | methodologies, techniques and tools, design, conduct experiments, analyze and interpret data, demonstrate higher order |
+|  | skill and view things in a broader perspective, contribute individually/in group(s) to the development of |
+|  | scientific/technological knowledge in one or more domains of engineering. |
+| PO5 | Create, select, learn and apply appropriate techniques, resources, and modern engineering and IT tools, including prediction |
+|  | and modelling, to complex engineering activities with an understanding of the limitations. |
+
+![](_page_5_Picture_0.jpeg)
+
+## 1. Course Plan
+
+#### 1.1 Primary Information
+
+| Course Name | : | Microcontrollers and its Applications [ESD 5153] |
+| --- | --- | --- |
+| L-T-P-C | : | 0-0-3-1 |
+| Contact Hours | : | 36 Hours |
+| Pre-requisite | : | Basic Programming with C |
+| Core/ PE/OE | : | Core |
+
+![](_page_6_Picture_0.jpeg)
+
+# 1.2 Course Outcomes (COs)
+
+| CO | At the end of this course, the student should be able | No. of Contact | Program Outcomes | BL |
+| --- | --- | --- | --- | --- |
+|  | to: | Hours | (PO's) |  |
+| CO1 | Implement the single tasking applications development | 12 | PO1 | 4 |
+|  | using ARM microcontroller. |  |  |  |
+| CO2 | Implement microcontroller applications using interface | 8 | PO2 | 3 |
+|  | device with ARM microcontrollers. |  |  |  |
+| CO3 | Implement microcontroller applications for Embedded | 16 | PO3 | 4 |
+|  | Communication Protocols. |  |  |  |
+
+![](_page_7_Picture_0.jpeg)
+
+### 1.3 Assessment Plan
+
+| Components | Lab Test | Flexible Assessments | End semester/ Makeup |
+| --- | --- | --- | --- |
+|  |  | (2 – 3 in number) | examination |
+| Duration | 90 minutes | To be decided by the faculty. | 180 minutes |
+| Weightage | 0.3 | 0.2 | 0.5 |
+| Typology of questions | Applying; Analyzing. | Applying; Analyzing. | Applying; Analyzing. |
+| Pattern | Answer all the questions. Maximum | Assignment: [To be decided by the faculty members. May be Assignments, Problem solving, | Answer all the questions. Maximum marks 50. |
+|  | marks 30. | etc.] |  |
+| Schedule | As per academic | Assignment submission: November | As per academic calendar. |
+|  | calendar. | 2024 |  |
+| Topics covered | Basic application | Single taks applications deices etc | Comprehensive examination |
+|  | building |  | covering the full syllabus. |
+
+![](_page_8_Picture_0.jpeg)
+
+#### 1.4 Lesson Plan
+
+| L. No. | TOPICS | Course Outcome Addressed |
+| --- | --- | --- |
+| L0 | Course delivery plan, Course assessment plan, Course outcomes, Program outcomes, CO-PO | --- |
+|  | mapping, reference books |  |
+| Lab1 | Understanding the tools and installations and specifications | CO1 |
+| Lab2 | Understanding the hardware layouts and connecting the basic device and running the | CO1 |
+|  | applications |  |
+| Lab3 | Applying the knowledge for single task application running. | CO1 |
+| Lab4 | Analyze the signle tasks | CO1 |
+| Lab5 | Analyze the performance of single tasks and its performaces | CO2 |
+| Lab6 | Analyze the performance of interfacing devices | CO2 |
+| IT1 | Internal lab test | CO1, CO2 |
+| Lab7 | Analyze the performance of interfacing the devices | CO2 |
+| Lab8 | Analyze the performance of communication protocols | CO3 |
+| Lab9 | Analyze the communication prototocols | CO3 |
+| Lab10 | Evaluate the performance communication protocols | CO3 |
+| Lab11 | Evaluate the performance embedded applications | CO3 |
+| Lab12 | Evaluate the performance of embedded applications | CO3 |
+
+![](_page_9_Picture_0.jpeg)
+
+### 1.5 References
+
+- 1. Website Scraping with Python: Using BeautifulSoup and Scrapy, Gábor & Hajba, APRESS Publications, 1st Edition, 2018.
+- 2. Web Scraping with Python: Collecting More Data from the Modern Web, Ryan Mitchell Shroff, O'Reilly, 2nd Edition, 2018.
+- 3. Designing Data Visualizations, Julie Steele and Noah Iliinsky; O'Reilly Media; 1st Edition, 2011.
+- 4. Python for Data Analysis, Wes McKinney; Shroff; O'Reilly; 2nd Edition, 2018.
+- 5. https://learn.microsoft.com/en-us/certifications/exams/pl-300/
+
+#### 1.6 Other Resources (Online, Text, Multimedia, etc.)
+
+- 1. Web Resources: Blog, Online tools and cloud resources.
+- 2. Journal Articles.
+
+![](_page_10_Picture_0.jpeg)
+
+#### 1.7 Course Timetable
+
+| 2. 1 | st Semester Embedded |  |  | Room: LG1 LH10 |  |  |  | Lab: ES | Lab |  |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+|  | 8- 9 | 9 - 10 | 10 - | 11 | 11 – 12 | 12 – 1 | 1-2 | 2 – 3 | 3 – 4 | 4 - 5 |
+| MON |  | DS |  |  | DS LAB |  |  | SEM | ACA |  |
+| TUE |  | RTOS | MCA |  | ELE |  |  |  | ELE LAB* |  |
+| WED |  | DS |  |  | RTOS LAB |  |  | SEM | ACA |  |
+| THU |  | RTOS | MCA |  | ELE |  |  |  | ACA LAB |  |
+| FRI |  | DS |  |  | MCA LAB |  |  | SEM | ACA |  |
+| SAT |  | RTOS | MCA |  | ELE |  |  |  | Mini Project |  |
+
+3. Advanced Computer Architecture – Ravikala, Data Structures and Algorithms – Dinesh Rao, Microcontrollers and its Applications – Raghudathesh G P
+
+4. Real Time Operating Systems – Keerthana Prasad, ELE - Internet of Things – Samar, ELE - Database Programming in Java – Sathyendranath Malli
+
+![](_page_11_Picture_0.jpeg)
+
+### 4.1 Assessment Plan
+
+|  | COs |  | Marks | & weightage |  |
+| --- | --- | --- | --- | --- | --- |
+| CO No. | CO Name | Lab Test | Assignment | End Semester | CO wise |
+|  |  | (Max. 30) | (Max. 20) | (Max. 50) | Weightage |
+| CO1 | Implement the single tasking applications development using ARM microcontroller. | 20 | - | 20 | 0.34 |
+| CO2 | Implement microcontroller applications using interface device with ARM microcontrollers. | 10 | - | 20 | 0.14 |
+| CO3 | Implement microcontroller applications for Embedded Communication Protocols. | - | 20 | 10 | 0.24 |
+|  | Marks (weightage) | 0.3 | 0.2 | 0.5 | 1 |
+
+Note:
+
+- In-semester Assessment is considered as the Internal Assessment (IA) in this course for 50 marks, which includes the performances in lab participation, assignment work, lab work, lab tests, quizzes etc.
+- End-semester examination (ESE) for this course is conducted for a maximum of 50.
+- End-semester marks for a maximum of 50 and IA marks for a maximum of 50 are added for a maximum of 100 marks to decide upon the grade in this course.
+
+Weightage for CO1 = (Lab Test marks for CO1 + Assignment marks for CO1 + ESE marks for CO1) /100
+
+= (5 + 2 +5)/100 = 0.12
+
+![](_page_12_Picture_0.jpeg)
+
+#### 4.2 Assessment Details
+
+The assessment tools to be used for the Current Academic Year (CAY) are as follows:
+
+| SI. No. | Tools | Weightage | Frequency | Details of Measurement (Weightage/Rubrics/Duration, etc.) |
+| --- | --- | --- | --- | --- |
+|  |  |  | • | Performance is measured using lab internal test attainment level. |
+| 1 | Lab Test | 0.3 | 1 • | Reference: question paper and answer scheme. |
+|  |  |  | • | Lab internal test is assessed for a maximum of 30 marks. |
+| 2 | Assignments | 0.2 | • 1 | Performance is measured using assignments attainment level. |
+|  |  |  | • | Assignment is evaluated for a maximum of 20 marks. |
+|  | ESE | 0.5 | • 1 • | Performance is measured using ESE attainment level. Reference: question paper and answer scheme. |
+| 3 |  |  |  |  |
+|  |  |  | • | ESE is assessed for a maximum of 50 marks. |
+
+![](_page_13_Picture_0.jpeg)
+
+### 4.3 Course Articulation Matrix
+
+| CO | PO1 | PO2 | PO3 | PO4 | PO5 |
+| --- | --- | --- | --- | --- | --- |
+| CO1 | Y |  |  |  |  |
+| CO2 |  | Y | Y |  |  |
+| CO3 |  |  | Y |  |  |
+| Average Articulation Level | * | * | * |  |  |
+

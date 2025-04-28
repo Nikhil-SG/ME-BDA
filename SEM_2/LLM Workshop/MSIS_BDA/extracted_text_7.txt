@@ -1,0 +1,214 @@
+![](_page_0_Picture_0.jpeg)
+
+# Master of Engineering - ME (Big Data Analytics)
+
+| Course Name | : | Principles of Data Visualization Lab |
+| --- | --- | --- |
+| Course Code | : | BDA 5182 |
+| Academic Year | : | 2024 - 25 |
+| Semester | : | I |
+| Name of the Course Coordinator | : | SATYANARAYAN SHENOY |
+| Name of the Program Coordinator | : | Dr. PRATHVIRAJ N |
+
+### Course File
+
+| Signature of Program Coordinator | Signature of Course Coordinator |
+| --- | --- |
+| with Date | with Date |
+
+|  | Table of Contents |
+| --- | --- |
+| 1. | Course Plan 6 |
+| 1.1 | Primary Information 6 |
+| 1.2 | Course Outcomes (COs), Program outcomes (POs) and Bloom's Taxonomy Mapping 7 |
+| 1.3 | Assessment Plan 8 |
+| 1.4 | Lesson Plan 9 |
+| 1.5 | References 10 |
+| 1.6 | Other Resources (Online, Text, Multimedia, etc.) 10 |
+| 1.7 | Course Timetable 11 |
+| 1.8 | Assessment Plan 12 |
+| 1.9 | Assessment Details 14 |
+| 1.10 | Course Articulation Matrix 15 |
+| 2. | Assessment Details 16 |
+| 2.1 | Student Details: 16 |
+| 2.2 | Assessment outcomes 18 |
+| 2.3 | Analysis of Assessment outcomes 20 |
+
+| 2.4 | Attainment of Course Outcomes (Direct) 21 |
+| --- | --- |
+| 2.5 | Attainment of Course Outcomes (Indirect): Course End Survey (CES) Questionnaire 22 |
+| 2.6 | Attainment of Course Outcomes (Indirect): Analysis 23 |
+| 3. | CO-PO Assessment 24 |
+| 4. | Observations and Comments 25 |
+| 4.1 | Observations from Course Coordinator based on the direct and indirect assessments 25 |
+| 4.2 | Comments/Suggestions by the Course Coordinator 26 |
+
+# Program Education Objectives (PEOs)
+
+The overall objectives of the Learning Outcomes-based Curriculum Framework (LOCF) for ME (Big Data Analytics), program are as follows.
+
+| PEO No. | Education Objective |
+| --- | --- |
+| PEO 1 | Develop in depth understanding of the key technologies in data engineering, data science and business analytics. |
+| PEO 2 | Practice problem analysis and decision-making using machine learning techniques. |
+| PEO 3 | Gain practical, hands-on experience with statistics, programming languages and big data tools through coursework and |
+|  | applied research experiences. |
+
+# Program Outcomes (POs)
+
+By the end of the postgraduate program in ME (Big Data Analytics), graduates will be able to:
+
+| PO1 | Independently carry out research /investigation and development work to solve practical problems. |
+| --- | --- |
+| PO2 | Write and present a substantial technical report/document. |
+| PO3 | Demonstrate a degree of mastery over the area as per the specialization of the program. The mastery should be at a level |
+|  | higher than the requirements in the appropriate bachelor program. |
+| PO4 | Develop and implement big data analysis strategies based on theoretical principles, ethical considerations, and detailed |
+|  | knowledge of the underlying data. |
+| PO5 | Demonstrate knowledge of the underlying principles and evaluation methods for analyzing data for decision-making. |
+
+![](_page_5_Picture_0.jpeg)
+
+# 1. Course Plan
+
+# 1.1 Primary Information
+
+| Course Name | : | Principles of Data Visualization Lab [BDA 5132] |
+| --- | --- | --- |
+| L-T-P-C | : | 0-0-3-1 |
+| Contact Hours | : | 36 Hours |
+| Pre-requisite | : | Programming with Python, Power BI |
+| Core/ PE/OE | : | Elective |
+
+![](_page_6_Picture_0.jpeg)
+
+# 1.2 Course Outcomes (COs), Program outcomes (POs) and Bloom's Taxonomy Mapping
+
+| CO | At the end of this course, the student should be able to: | No. of Contact | Program Outcomes | BL |
+| --- | --- | --- | --- | --- |
+|  |  | Hours | (PO's) |  |
+|  | Experiment web scrapping techniques to extract data from |  |  |  |
+| CO1 | websites. | 9 | PO4 | 4 |
+| CO2 | Implement NumPy and Pandas for data science operations with examples. | 6 | PO3 | 3 |
+| CO3 | Organize data for visualization using data manipulation techniques. | 6 | PO4 | 4 |
+| CO4 | Experiment different visualization techniques | 6 | PO4 | 4 |
+| CO5 | Use power BI for analytics and to manage workspace. | 9 | PO5 | 3 |
+
+![](_page_7_Picture_0.jpeg)
+
+## 1.3 Assessment Plan
+
+| Components | Lab Test | Flexible Assessments (2 – 3 in number) | End semester/ Makeup examination |
+| --- | --- | --- | --- |
+| Duration | 90 minutes | To be decided by the faculty. | 180 minutes |
+| Weightage | 0.3 | 0.2 | 0.5 |
+| Typology of questions | Applying; Analyzing. | Applying; Analyzing. | Applying; Analyzing. |
+| Pattern | Answer all the questions. Maximum marks 30. | Assignment: (Solving Use case using scraping and visualization techniques.) | Answer all the questions. Maximum marks 50 |
+| Schedule | As per academic calendar. | Assignment submission: November 2024 | As per academic calendar. |
+| Topics covered | Scraping tools, NumPy, Pandas, PowerBI |  | Comprehensive examination covering the full syllabus. |
+
+![](_page_8_Picture_0.jpeg)
+
+## 1.4 Lesson Plan
+
+| L. No. | TOPICS | Course Outcome Addressed |
+| --- | --- | --- |
+| L0 | Course delivery plan, Course assessment plan, Course outcomes, Program outcomes, CO-PO mapping, reference books | --- |
+| Lab 1 | Web scraping using Beautiful soups | CO1 |
+| Lab 2 | Web scraping using Scrapy framework | CO1 |
+| Lab 3 | Web scraping using Scrapy framework | CO1 |
+| Lab 4 | Panda, NumPy: Implement NumPy and Pandas for data science operations with examples. | CO2 |
+| Lab 5 | Panda, NumPy: Implement NumPy and Pandas for data science operations with examples. | CO2 |
+| Lab 6 | Data Wrangling - Clean, Transform, Merge, Reshape | CO3 |
+| IT1 | IT1 Internal lab test | CO1, CO2, CO3 |
+| Lab 7 | Data Aggregation and Group Operations. | CO3 |
+| Lab 8 | Visualization techniques: time series, statistical distributions. | CO4 |
+| Lab 9 | Visualization techniques: maps - Data visualization for web. | CO4 |
+| Lab 10 | Visualize data and analysis in Power BI | CO5 |
+| Lab 11 | Manage workspaces and datasets in Power BI. | CO5 |
+| Lab 12 | Create and use analytics reports with Power BI. | CO5 |
+
+# 1.5 References
+
+- 1. Website Scraping with Python: Using BeautifulSoup and Scrapy, Gábor & Hajba, APRESS Publications, 1st Edition, 2018.
+- 2. Web Scraping with Python: Collecting More Data from the Modern Web, Ryan Mitchell Shroff, O'Reilly, 2nd Edition, 2018.
+- 3. Designing Data Visualizations, Julie Steele and Noah Iliinsky; O'Reilly Media; 1st Edition, 2011.
+- 4. Python for Data Analysis, Wes McKinney; Shroff; O'Reilly; 2nd Edition, 2018.
+- 5. https://learn.microsoft.com/en-us/certifications/exams/pl-300/
+
+## 1.6 Other Resources (Online, Text, Multimedia, etc.)
+
+- 1. Web Resources: Blog, Online tools and cloud resources.
+- 2. Journal Articles.
+
+![](_page_10_Picture_0.jpeg)
+
+# 1.7 Course Timetable
+
+| 1 | st Semester Big Data Analytics |  |  |  | Room: LG1 LH 8 | Lab: Data Science Lab |  |  |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+|  | 9-10 | 10-11 | 11-12 | 12-1 | 1-2 | 2-3 | 3-4 | 4-5 |
+| MON |  |  |  |  |  |  |  |  |
+| TUE |  |  |  |  |  |  |  | PDV |
+| WED |  |  |  |  |  |  |  |  |
+| THU |  |  | PDV LAB |  |  |  |  | PDV |
+| FRI |  |  |  |  |  |  |  |  |
+| SAT |  |  | PDV |  |  |  |  |  |
+
+![](_page_11_Picture_0.jpeg)
+
+### 1.8 Assessment Plan
+
+|  | Cos |  | Marks & Weightage |  |  |
+| --- | --- | --- | --- | --- | --- |
+| CO No. | CO Name | Mid Semester | Assignment | End Semester | CO wise |
+|  |  | (Max. 50) | (Max. 20) | (Max. 100) | Weightage |
+| CO1 | Experiment web scrapping techniques to extract | 10 | 4 | 20 | 0.34 |
+|  | data from websites. |  |  |  |  |
+| CO2 | Implement NumPy and Pandas for data science | 10 | 4 | - | 0.14 |
+|  | operations with examples. |  |  |  |  |
+| CO3 | Organize data for visualization using data | - | 4 | 20 | 0.24 |
+|  | manipulation techniques. |  |  |  |  |
+| CO4 | Experiment different visualization techniques. | 10 | 4 | - | 0.14 |
+| CO5 | Use power BI for analytics and to manage | - | 4 | 10 | 0.14 |
+|  | workspace. |  |  |  |  |
+|  | Marks (weightage) | 0.3 | 0.2 | 0.5 | 1.0 |
+
+Note:
+
+- In-semester Assessment is considered as the Internal Assessment (IA) in this course for 50 marks, which includes the performances in lab participation, assignment work, lab work, lab tests, quizzes etc.
+- End-semester examination (ESE) for this course is conducted for a maximum of 50.
+- End-semester marks for a maximum of 50 and IA marks for a maximum of 50 are added for a maximum of 100 marks to decide upon the grade in this course.
+
+Weightage for CO1 = (Lab Test marks for CO1 + Assignment marks for CO1 + ESE marks for CO1) /100 = (5 + 2 +5)/100 = 0.12
+
+![](_page_13_Picture_0.jpeg)
+
+### 1.9 Assessment Details
+
+The assessment tools to be used for the Current Academic Year (CAY) are as follows:
+
+| SI. No. | Tools | Weightage | Frequency | Details of Measurement (Weightage/Rubrics/Duration, etc.) |
+| --- | --- | --- | --- | --- |
+|  |  |  |  | Performance is measured using lab internal test attainment level. |
+| 1 | Internal Test | 0.3 | 1  | Reference: question paper and answer scheme. |
+|  |  |  |  | Lab internal test is assessed for a maximum of 30 marks. |
+| 2 | Assignments | 0.2 |  1 | Performance is measured using assignments attainment level. |
+|  |  |  |  | Assignment is evaluated for a maximum of 20 marks. |
+|  |  |  |  | Performance is measured using ESE attainment level. |
+| 3 | ESE | 0.5 | 1  | Reference: question paper and answer scheme. |
+|  |  |  |  | ESE is assessed for a maximum of 50 marks. |
+
+![](_page_14_Picture_0.jpeg)
+
+# 1.10 Course Articulation Matrix
+
+| CO | PO1 | PO2 | PO3 | PO4 | PO5 |
+| --- | --- | --- | --- | --- | --- |
+| CO1 |  |  |  | Y |  |
+| CO2 |  |  | Y |  |  |
+| CO3 |  |  |  | Y |  |
+| CO4 |  |  |  | Y |  |
+| CO5 |  |  |  |  | Y |
+| Average Articulation Level |  |  | * | * | * |
+
